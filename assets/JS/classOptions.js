@@ -18,3 +18,5 @@ class Paladin {
         this.hp = 40
     }
 }
+
+export {Fighter, Wizard, Paladin}
