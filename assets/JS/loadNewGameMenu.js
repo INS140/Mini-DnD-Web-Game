@@ -1,11 +1,12 @@
 import loadMainMenu from "./loadMainMenu.js"
 import setPlayer from "./setPlayer.js"
+import playGame from "./startGame.js"
 
 // renders Create Game menu
 const loadNewGameMenu = () => {
     root.innerHTML = null
-    let menu = document.createElement('div')
-    menu.classList.add('menu', 'new-game')
+    const menu = document.createElement('div')
+    menu.classList.add('menu', 'newGame')
     menu.innerHTML = `
         <h2>New Game</h2>
         <hr>
@@ -28,7 +29,7 @@ const loadNewGameMenu = () => {
     
     document.querySelector('#start').onclick = () => {
         let player = setPlayer(input.value, select.value)
-        // startGame(player)  will be created later
+        playGame(player)
     }
 }
 

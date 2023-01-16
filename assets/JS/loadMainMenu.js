@@ -3,7 +3,7 @@ import loadNewGameMenu from "./loadNewGameMenu.js"
 // renders Main Menu
 const loadMainMenu = () => { 
     root.innerHTML = null
-    let menu = document.createElement('div')
+    const menu = document.createElement('div')
     menu.classList.add('menu')
     menu.innerHTML = `
         <h1>Dungeon Crawl</h1>
