@@ -4,7 +4,7 @@ const loadCombatWindow = () => {
     combatWindow.classList.add('combatWindow')
     combatWindow.innerHTML = `
         <div id="display"></div>
-        <div id="interface"></div>
+        <div id="controls"></div>
     `
     root.append(combatWindow)
 }

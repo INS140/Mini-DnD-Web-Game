@@ -16,6 +16,14 @@ h1 {
     margin-bottom: 0.9375rem;
 }
 
+p {
+    margin: 0 0 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 .menu {
     width: 25rem;
     height: 20rem;
@@ -59,6 +67,20 @@ h1 {
 }
 
 #controls {
+    color: white;
     height: 25%;
-    background-color: grey;
+    padding: 10px;
+    background: grey url('./images/controls-background.jpg');
+    box-sizing: border-box;
+}
+
+#controls button {
+    color: white;
+    background: transparent;
+    border: 1px solid white;
+}
+
+#continue {
+    position: absolute;
+    right: 10px;
 }

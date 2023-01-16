@@ -1,6 +1,6 @@
 import loadMainMenu from "./loadMainMenu.js"
 import setPlayer from "./setPlayer.js"
-import playGame from "./startGame.js"
+import playGame from "./playGame.js"
 
 // renders Create Game menu
 const loadNewGameMenu = () => {
