@@ -5,9 +5,8 @@ import setPlayer from "./setPlayer.js"
 const loadNewGameMenu = () => {
     root.innerHTML = null
     let menu = document.createElement('div')
-    menu.classList.add('container')
+    menu.classList.add('menu', 'new-game')
     menu.innerHTML = `
-        <button id="back" style="float: right;">Back</button>
         <h2>New Game</h2>
         <hr>
         <label for="name">Character Name</label><br>
@@ -19,6 +18,7 @@ const loadNewGameMenu = () => {
             <option value="paladin">Paladin</option>
         </select><br>
         <hr>
+        <button id="back">Back</button>
         <button id="start">Start Game</button>
     `
     root.append(menu)

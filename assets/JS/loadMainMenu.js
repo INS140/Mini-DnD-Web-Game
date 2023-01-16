@@ -4,13 +4,13 @@ import loadNewGameMenu from "./loadNewGameMenu.js"
 const loadMainMenu = () => { 
     root.innerHTML = null
     let menu = document.createElement('div')
-    menu.classList.add('container')
+    menu.classList.add('menu')
     menu.innerHTML = `
         <h1>Dungeon Crawl</h1>
         <hr>
-        <button id="playNow">Play Now</button>
-        <button id="newGame">New Game</button>
-        <button id="loadGame">Load Game</button>
+        <button id="playNow">Play Now</button><br>
+        <button id="newGame">New Game</button><br>
+        <button id="loadGame">Load Game</button><br>
         <button id="options">Options</button>
     `
     root.append(menu)

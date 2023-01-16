@@ -1,21 +1,29 @@
 class Fighter {
     constructor(name) {
         this.name = name
-        this.hp = 50
+        this.hp = 100
+        this.ac = 15
+        this.init = 11
     }
 }
 
 class Wizard {
     constructor(name) {
         this.name = name
-        this.hp = 30
+        this.hp = 60
+        this.ac = 12
+        this.init = 13
+        this.sp = 20
     }
 }
 
 class Paladin {
     constructor(name) {
         this.name = name
-        this.hp = 40
+        this.hp = 80
+        this.ac = 14
+        this.init = 12
+        this.sp = 10
     }
 }
 

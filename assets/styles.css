@@ -5,10 +5,44 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url('./images/menu-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.container {
-    border: 1px solid black;
-    width: 400px;
-    padding: 10px;
+hr {
+    border: 0.0625rem solid brown;
+}
+
+h1 {
+    margin-bottom: 0.9375rem;
+}
+
+.menu {
+    width: 25rem;
+    height: 20rem;
+    padding: 3.25rem 2.5rem 2.5rem 1.875rem;
+    text-align: center;
+    background-image: url('./images/menu-scroll.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+}
+
+.menu button {
+    width: 100%;
+    margin-bottom: 0.3125rem;
+    border: 0.15625rem double brown;
+    background-color: transparent;
+}
+
+.menu input, .menu select {
+    border: none;
+    border-bottom: 1px solid brown;
+    background-color: transparent;
+    outline: none;
+}
+
+.new-game button {
+    width: 49%;
 }
