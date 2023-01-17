@@ -1,3 +1,5 @@
+import levelOne from "./levelOne.js"
+
 const introText = element => {
     element.innerHTML = `
     <p>You come across an old abandoned tomb that smells of adventure. 
@@ -5,7 +7,7 @@ const introText = element => {
     <button id="continue">Continue</button>
     `
 
-    // document.querySelector('#continue').onclick = levelOne
+    document.querySelector('#continue').onclick = levelOne
 }
 
 export default introText
