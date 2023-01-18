@@ -5,6 +5,12 @@ class Fighter {
         this.ac = 15
         this.init = 11
     }
+
+    loadActions(element) {
+        element.innerHTML = `
+            <
+        `
+    }
 }
 
 class Wizard {
@@ -15,6 +21,12 @@ class Wizard {
         this.init = 13
         this.sp = 20
     }
+
+    loadActions(element) {
+        element.innerHTML = `
+        
+        `
+    }
 }
 
 class Paladin {
@@ -24,6 +36,12 @@ class Paladin {
         this.ac = 14
         this.init = 12
         this.sp = 10
+    }
+
+    loadActions(element) {
+        element.innerHTML = `
+        
+        `
     }
 }
 
