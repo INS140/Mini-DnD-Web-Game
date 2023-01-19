@@ -27,7 +27,7 @@ button:hover {
 .menu {
     width: 25rem;
     height: 20rem;
-    padding: 3.25rem 2.5rem 2.5rem 1.875rem;
+    padding: 3.25rem 2.25rem 2.5rem 1.875rem;
     text-align: center;
     background: url('./images/menu-scroll.png') center/cover no-repeat;
     box-sizing: border-box;
@@ -82,12 +82,19 @@ button:hover {
 #controls button {
     color: white;
     background: transparent;
-    border: 1px solid white;
+    border: 0.15625rem double white;
 }
 
 #continue {
     position: absolute;
     right: 10px;
+}
+
+.btn-4 {
+    height: 100%;
+    display: grid;
+    grid: 1fr 1fr/1fr 1fr;
+    gap: 10px;
 }
 
 .monsterImages {

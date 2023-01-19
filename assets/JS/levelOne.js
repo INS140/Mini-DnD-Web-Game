@@ -44,14 +44,14 @@ const levelOne = {
         
         monsterImages.classList.add('monsterImages')
 
-        levelOne.monsters.forEach(monster => {
-            let img = document.createElement('img')
-            img.src = monster.url
-            img.width = monster.imgWidth
-            img.id = `${monster.name}${idNum}`
-            img.alt = monster.name
+        levelOne.monsters.forEach((monster, index) => {
+            monster.img = document.createElement('img')
+            monster.img.src = monster.url
+            monster.img.width = monster.imgWidth
+            monster.img.id = `${monster.name}${idNum}`
+            monster.img.alt = monster.name
             idNum++
-            monsterImages.append(img)
+            monsterImages.append(monster.img)
         })
 
         levelOne.display.append(monsterImages)

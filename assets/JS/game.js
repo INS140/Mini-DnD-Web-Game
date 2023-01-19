@@ -8,6 +8,8 @@ const root = document.querySelector('#root')
 const game = {
     player: null,
 
+    currentLevel: null,
+
     loadMainMenu: () => {
         root.innerHTML = null
         const menu = document.createElement('div')
@@ -21,6 +23,12 @@ const game = {
             <button id="options">Options</button>
         `
         root.append(menu)
+
+        document.querySelector('#playNow').onclick = () => {
+            game.player = new Fighter('Butcher')
+            game.startNewGame()
+        }
+
         document.querySelector('#newGame').onclick = game.loadNewGameMenu
     },
 
@@ -76,15 +84,15 @@ const game = {
 
     loadControls: () => {
         controls.innerHTML = `
-            <button id="actions">Actions</button>
-            <button id="inventory">Inventory</button>
-            <button id="options">Options</button>
-            <button id="quit">Quit</button>
+            <div class="btn-4">
+                <button id="actions">Actions</button>
+                <button id="inventory">Inventory</button>
+                <button id="options">Options</button>
+                <button id="quit">Quit</button>
+            </div>
         `
 
-        document.querySelector('#actions').onclick = () => {
-            game.player.loadActions(controls)
-        }
+        document.querySelector('#actions').onclick = game.loadActions
 
         document.querySelector('#quit').onclick = () => {
             levelOne.controls.innerHTML = `
@@ -104,8 +112,26 @@ const game = {
         }
     },
 
+    loadActions: () => {
+        levelOne.controls.innerHTML = `
+            <div class="btn-4">
+                <button id="attack">Attack</button>
+                <button id="defend">Defend</button>
+                <button id="heal">Heal</button>
+                <button id="cancel">Cancel</button>
+            </div>
+        `
+        document.querySelector('#attack').onclick = game.player.attack
+
+        document.querySelector('#cancel').onclick = () => {
+            game.loadControls()
+        }
+    },
+
     startNewGame: () => {
         game.loadCombatWindow()
+
+        game.currentLevel = levelOne
 
         document.querySelector('#controls').innerHTML = `
             <p>You come across an old abandoned tomb that smells of adventure. 
