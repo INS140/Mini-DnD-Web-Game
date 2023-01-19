@@ -21,7 +21,7 @@ const game = {
             <button id="options">Options</button>
         `
         root.append(menu)
-        document.querySelector('#newGame').onclick = game.loadNewGameMenu //despite my many attempts to use 'this', I keep getting errors that it is undefined
+        document.querySelector('#newGame').onclick = game.loadNewGameMenu
     },
 
     loadNewGameMenu: () => {
