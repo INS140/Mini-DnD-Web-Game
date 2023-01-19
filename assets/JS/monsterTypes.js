@@ -5,7 +5,7 @@ class Kobold {
         this.hp = 10
         this.ac = 8
         this.init = 8
-        this.url = '../assets/images/kobold.png'
+        this.url = './assets/images/kobold.png'
         this.imgWidth = 100
     }
 }
@@ -16,7 +16,7 @@ class Slime {
         this.hp = 15
         this.ac = 12
         this.init = 5
-        this.url = '../assets/images/slime.png'
+        this.url = './assets/images/slime.png'
         this.imgWidth = 200
     }
 }
@@ -27,7 +27,7 @@ class Skeleton {
         this.hp = 8
         this.ac = 10
         this.init = 10
-        this.url = '../assets/images/skeleton.png'
+        this.url = './assets/images/skeleton.png'
         this.imgWidth = 150
     }
 }
@@ -38,7 +38,7 @@ class Zombie {
         this.hp = 12
         this.ac = 8
         this.init = 0
-        this.url = '../assets/images/zombie.png'
+        this.url = './assets/images/zombie.png'
         this.imgWidth = 150
     }
 }
