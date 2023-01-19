@@ -1,5 +1,5 @@
 import getMonsters from "./getMonsters.js"
-import loadControls from "./loadControls.js"
+import game from "./game.js"
 
 const levelOne = player => {
     const display = document.querySelector('#display')
@@ -29,10 +29,11 @@ const levelOne = player => {
     `
 
     document.querySelector('#continue').onclick = () => {
-        loadControls()
-        // document.querySelector('#actions').onclick = () => {
-        //     player.loadActions(controls)
-        // }
+        game.loadControls()
+        
+        document.querySelector('#actions').onclick = () => {
+            game.player.loadActions(controls)
+        }
     }
 
     

@@ -4,12 +4,18 @@ class Fighter {
         this.hp = 100
         this.ac = 15
         this.init = 11
+        this.atkDmg = 10
     }
 
     loadActions(element) {
         element.innerHTML = `
-            <
+            <button id="attack">Attack</button>
+            <button id="defend">Defend</button>
+            <button id="heal">Heal</button>
         `
+        document.querySelector('#attack').onclick = () => {
+            
+        }
     }
 }
 
