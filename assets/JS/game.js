@@ -73,6 +73,27 @@ const game = {
             <button id="options">Options</button>
             <button id="quit">Quit</button>
         `
+
+        document.querySelector('#actions').onclick = () => {
+            game.player.loadActions(controls)
+        }
+
+        document.querySelector('#quit').onclick = () => {
+            levelOne.controls.innerHTML = `
+                <h2>Are you sure you want to quit?</h2>
+                <button id="quit">Quit</button>
+                <button id="cancel">Cancel</button>
+            `
+
+            document.querySelector('#quit').onclick = () => {
+                game.loadMainMenu()
+                levelOne.reset()
+            }
+
+            document.querySelector('#cancel').onclick = () => {
+                game.loadControls()
+            }
+        }
     },
 
     startNewGame: () => {
