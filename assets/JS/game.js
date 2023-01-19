@@ -8,9 +8,7 @@ const root = document.querySelector('#root')
 const game = {
     player: null,
 
-    monsters: null,
-
-    loadMainMenu() {
+    loadMainMenu: () => {
         root.innerHTML = null
         const menu = document.createElement('div')
         menu.classList.add('menu')
@@ -23,10 +21,10 @@ const game = {
             <button id="options">Options</button>
         `
         root.append(menu)
-        document.querySelector('#newGame').onclick = this.loadNewGameMenu
+        document.querySelector('#newGame').onclick = game.loadNewGameMenu //despite my many attempts to use 'this', I keep getting errors that it is undefined
     },
 
-    loadNewGameMenu() {
+    loadNewGameMenu: () => {
         root.innerHTML = null
         const menu = document.createElement('div')
         menu.classList.add('menu', 'newGame')
@@ -46,7 +44,7 @@ const game = {
             <button id="start">Start Game</button>
         `
         root.append(menu)
-        document.querySelector('#back').onclick = this.loadMainMenu
+        document.querySelector('#back').onclick = game.loadMainMenu
 
         let input = document.querySelector('#name'),
             select = document.querySelector('#classSelect')
@@ -57,7 +55,7 @@ const game = {
         }
     },
 
-    loadCombatWindow() {
+    loadCombatWindow: () => {
         root.innerHTML = null
         const combatWindow = document.createElement('div')
         combatWindow.classList.add('combatWindow')
@@ -68,7 +66,7 @@ const game = {
         root.append(combatWindow)
     },
 
-    loadControls() {
+    loadControls: () => {
         controls.innerHTML = `
             <button id="actions">Actions</button>
             <button id="inventory">Inventory</button>
@@ -77,30 +75,28 @@ const game = {
         `
     },
 
-    startNewGame() {
-        this.loadCombatWindow()
+    startNewGame: () => {
+        game.loadCombatWindow()
 
-        const controls = document.querySelector('#controls')
-
-        controls.innerHTML = `
+        document.querySelector('#controls').innerHTML = `
             <p>You come across an old abandoned tomb that smells of adventure. 
             Of course you can not resist the temptation of riches, so you brave the deep unknown ...</p>
             <button id="continue">Continue</button>
         `
 
-        document.querySelector('#continue').onclick = levelOne
+        document.querySelector('#continue').onclick = levelOne.start
     },
 
-    setPlayer(name, classType) {
+    setPlayer: (name, classType) => {
         switch (classType) {
             case 'fighter':
-                this.player = new Fighter(name)
+                game.player = new Fighter(name)
                 break;
             case 'wizard':
-                this.player = new Wizard(name)
+                game.player = new Wizard(name)
                 break;
             case 'paladin':
-                this.player = new Paladin(name)
+                game.player = new Paladin(name)
                 break;
         }
     }
