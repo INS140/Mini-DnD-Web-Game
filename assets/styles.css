@@ -44,8 +44,15 @@ button:hover {
     border: none;
     border-bottom: 1px solid brown;
     text-align: center;
-    background-color: transparent;
+    background: transparent;
     outline: none;
+}
+
+#submit {
+    width: 49%;
+    margin-bottom: 0.3125rem;
+    border: 0.15625rem double brown;
+    background-color: transparent;
 }
 
 .newGame button {

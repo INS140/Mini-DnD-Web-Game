@@ -50,8 +50,16 @@ const game = {
             select = document.querySelector('#classSelect')
         
         document.querySelector('#start').onclick = () => {
-            game.setPlayer(input.value, select.value)
-            game.startNewGame()
+            if (input.value !== '') {
+                game.setPlayer(input.value, select.value)
+                game.startNewGame()
+            } else {
+                menu.innerHTML = `
+                    <p style="margin-top: 80px;"><b>Please enter a name for your character</b></p>
+                    <button id="okay">Okay</button>
+                `
+                document.querySelector('#okay').onclick = game.loadNewGameMenu
+            }
         }
     },
 
