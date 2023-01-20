@@ -1,5 +1,3 @@
 import game from "./game.js"
 
-window.onload = () => {
-    game.loadMainMenu()
-}
+window.onload = game.loadMainMenu

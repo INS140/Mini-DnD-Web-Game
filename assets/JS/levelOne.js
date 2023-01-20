@@ -5,13 +5,14 @@ const levelOne = {
 
     monsters: [],
 
+    numberOfEnemies: 0,
 
     //Level Functionality
     getMonsters: () => {
-        let d100 = Math.floor(Math.random()*101)
+        let d100 = 95 //Math.floor(Math.random()*101)
 
         if (d100 > 75) {
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 2; i++) {
                 levelOne.monsters.push(new Kobold())
             }
         } else if (d100 > 50) {
@@ -27,14 +28,7 @@ const levelOne = {
                 levelOne.monsters.push(new Zombie())
             }
         }
-    },
-
-    monsterAttackPhase: async () => {
-        game.controls.innerHTML = `<h2></h2>`
-
-        let text = `The ${levelOne.monsters[0].name}${levelOne.monsters.length > 1 ? 's': ''} are attacking ...`
-
-        await game.textDisplay(text, document.querySelector('h2'))
+        levelOne.numberOfEnemies = levelOne.monsters.length
     },
 
     /////////////////////////

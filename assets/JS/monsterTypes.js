@@ -1,49 +1,41 @@
+class Monster {
+    constructor(name, hp, ac, init, url, imgWidth) {
+        //combat properties
+        this.name = name
+        this.hp = hp
+        this.ac = ac
+        this.init = init
+        this.atkDmg = 3
+
+        //display properties
+        this.img = null
+        this.url = url
+        this.imgWidth = imgWidth
+    }
+}
+
 // Low level
-class Kobold {
+class Kobold extends Monster {
     constructor() {
-        this.name = 'kobold'
-        this.hp = 10
-        this.ac = 8
-        this.init = 8
-        this.img = null
-        this.url = './assets/images/kobold.png'
-        this.imgWidth = 100
+        super('kobold', 10, 10, 8, './assets/images/kobold.png', 100)
     }
 }
 
-class Slime {
+class Slime extends Monster {
     constructor() {
-        this.name = 'slime'
-        this.hp = 15
-        this.ac = 12
-        this.init = 5
-        this.img = null
-        this.url = './assets/images/slime.png'
-        this.imgWidth = 200
+        super('slime', 15, 12, 5, './assets/images/slime.png', 200)
     }
 }
 
-class Skeleton {
+class Skeleton extends Monster {
     constructor() {
-        this.name = 'skeleton'
-        this.hp = 8
-        this.ac = 10
-        this.init = 10
-        this.img = null
-        this.url = './assets/images/skeleton.png'
-        this.imgWidth = 150
+        super('skeleton', 8, 10, 10, './assets/images/skeleton.png', 150)
     }
 }
 
-class Zombie {
+class Zombie extends Monster{
     constructor() {
-        this.name = 'zombie'
-        this.hp = 12
-        this.ac = 8
-        this.init = 0
-        this.img = null
-        this.url = './assets/images/zombie.png'
-        this.imgWidth = 150
+        super('zombie', 12, 8, 0, './assets/images/zombie.png', 150)
     }
 }
 

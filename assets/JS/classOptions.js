@@ -8,8 +8,6 @@ class Fighter {
         this.init = 11
         this.atkDmg = 10
     }
-
-    
 }
 
 class Wizard {

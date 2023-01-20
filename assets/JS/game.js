@@ -159,6 +159,16 @@ const game = {
         await game.textDisplay(text, document.querySelector('p'))
     },
 
+    gameOver: () => {
+        root.innerHTML = `
+                    <div class="game-over">
+                        <h3>GAME OVER</h3>
+                        <button id="continue">Continue?</button>
+                    </div>`
+
+        document.querySelector('#continue').onclick = game.loadMainMenu
+    },
+
     setPlayer: (name, classType) => {
         switch (classType) {
             case 'fighter':
@@ -205,6 +215,10 @@ const game = {
 
         game.currentLevel.monsters.forEach(monster => {
             monster.img.onclick = async () => {
+                game.currentLevel.monsters.forEach(monster => {
+                    monster.img.onclick = null
+                })
+
                 let atkRoll = game.rollDice(1, 20)
                 console.log(atkRoll)
 
@@ -221,8 +235,10 @@ const game = {
 
                     monster.hp -= game.player.atkDmg
                     console.log(monster.hp)
+
                     if (monster.hp <= 0) {
                         monster.img.remove()
+                        game.currentLevel.numberOfEnemies--
                     }
                 } else {
                     await new Promise(res => setTimeout(res, 500)).then(() => {
@@ -232,17 +248,36 @@ const game = {
                     })
                 }
 
-                game.currentLevel.monsters.forEach(monster => {
-                    monster.img.onclick = null
+                await new Promise(res => setTimeout(res, 500)).then(() => {
+                    game.monsterAttackPhase()
                 })
-
-                game.currentLevel.monsterAttackPhase()
-                // await new Promise(res => setTimeout(res, 500)).then(() => {
-                //     game.loadControls()
-                // })
             }
         })
-    }
+    },
+
+    monsterAttackPhase: async () => {
+        game.controls.innerHTML = `<h2></h2>`
+
+        let text = `The ${game.currentLevel.monsters[0].name}${game.currentLevel.numberOfEnemies > 1 ? 's are': ' is'} attacking ...`
+
+        await game.textDisplay(text, document.querySelector('h2'))
+
+        game.currentLevel.monsters.forEach(monster => {
+            let atkRoll = game.rollDice(1, 20)
+            console.log(atkRoll)
+
+            if (atkRoll >= game.player.ac) {
+                game.player.hp -= monster.atkDmg
+                console.log(game.player.hp)
+
+                if (game.player.hp <= 0) {
+                    game.gameOver()
+                }
+            }
+        })
+
+        game.loadControls()
+    },
 }
 
 export default game
