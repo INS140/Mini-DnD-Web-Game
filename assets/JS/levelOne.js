@@ -5,6 +5,8 @@ const levelOne = {
 
     monsters: [],
 
+
+    //Level Functionality
     getMonsters: () => {
         let d100 = Math.floor(Math.random()*101)
 
@@ -27,7 +29,18 @@ const levelOne = {
         }
     },
 
-    start: () => {
+    monsterAttackPhase: async () => {
+        game.controls.innerHTML = `<h2></h2>`
+
+        let text = `The ${levelOne.monsters[0].name}${levelOne.monsters.length > 1 ? 's': ''} are attacking ...`
+
+        await game.textDisplay(text, document.querySelector('h2'))
+    },
+
+    /////////////////////////
+    //Level Display Methods//
+    /////////////////////////
+    start: async () => {
         game.controls.innerHTML = null
 
         levelOne.getMonsters()
@@ -49,13 +62,15 @@ const levelOne = {
 
         game.display.append(monsterImages)
         game.controls.innerHTML = `
-            <p>After a short venture into the tomb, you are attacked by a group of ${levelOne.monsters[0].name}s! Prepare for battle!</p>
+            <p></p>
             <button id="continue">Continue</button>
         `
 
-        document.querySelector('#continue').onclick = () => {
-            game.loadControls()
-        }
+        let text = `After a short venture into the tomb, you are attacked by a group of ${levelOne.monsters[0].name}s! Prepare for battle!`
+        
+        document.querySelector('#continue').onclick = game.loadControls
+
+        await game.textDisplay(text, document.querySelector('p'))
     },
 
     reset: () => {

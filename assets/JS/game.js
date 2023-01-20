@@ -14,9 +14,9 @@ const game = {
 
     controls: null,
 
-    /////////////////////
-    //Display Functions//
-    /////////////////////
+    ///////////////////
+    //Display Methods//
+    ///////////////////
     loadMainMenu: () => {
         root.innerHTML = null
         const menu = document.createElement('div')
@@ -131,7 +131,7 @@ const game = {
                 <button id="cancel">Cancel</button>
             </div>
         `
-        document.querySelector('#attack').onclick = game.player.attack
+        document.querySelector('#attack').onclick = game.attack
 
         document.querySelector('#cancel').onclick = () => {
             game.loadControls()
@@ -190,6 +190,58 @@ const game = {
         })
 
         return Promise.all(promises)
+    },
+
+    //////////////////
+    //Combat Methods//
+    //////////////////
+    attack: () => {
+        game.controls.innerHTML = `
+            <h2>Select a target</h2>
+            <button id="cancel">Cancel</button>
+        `
+
+        document.querySelector('#cancel').onclick = game.loadActions
+
+        game.currentLevel.monsters.forEach(monster => {
+            monster.img.onclick = async () => {
+                let atkRoll = game.rollDice(1, 20)
+                console.log(atkRoll)
+
+                game.controls.innerHTML = `
+                    <h2>Rolling dice ...</h2>
+                `
+
+                if (atkRoll >= monster.ac) {
+                    await new Promise(res => setTimeout(res, 500)).then(() => {
+                        game.controls.innerHTML = `
+                            <h2>You hit ${monster.name} for ${game.player.atkDmg}!</h2>
+                        `
+                    })
+
+                    monster.hp -= game.player.atkDmg
+                    console.log(monster.hp)
+                    if (monster.hp <= 0) {
+                        monster.img.remove()
+                    }
+                } else {
+                    await new Promise(res => setTimeout(res, 500)).then(() => {
+                        game.controls.innerHTML = `
+                            <h2>You missed!</h2>
+                        `
+                    })
+                }
+
+                game.currentLevel.monsters.forEach(monster => {
+                    monster.img.onclick = null
+                })
+
+                game.currentLevel.monsterAttackPhase()
+                // await new Promise(res => setTimeout(res, 500)).then(() => {
+                //     game.loadControls()
+                // })
+            }
+        })
     }
 }
 

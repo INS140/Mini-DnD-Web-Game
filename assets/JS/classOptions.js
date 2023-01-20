@@ -9,35 +9,7 @@ class Fighter {
         this.atkDmg = 10
     }
 
-    attack() {
-        game.controls.innerHTML = `
-            <h2>Select a target</h2>
-            <button id="cancel">Cancel</button>
-        `
-
-        document.querySelector('#cancel').onclick = game.loadActions
-
-        game.currentLevel.monsters.forEach(monster => {
-            monster.img.onclick = () => {
-                let atkRoll = game.rollDice(1, 20)
-                console.log(atkRoll)
-
-                if (atkRoll >= monster.ac) {
-                    monster.hp -= game.player.atkDmg
-                    console.log(monster.hp)
-                    if (monster.hp <= 0) {
-                        monster.img.remove()
-                    }
-                }
-
-                game.currentLevel.monsters.forEach(monster => {
-                    monster.img.onclick = null
-                })
-
-                game.loadControls()
-            }
-        })
-    }
+    
 }
 
 class Wizard {
