@@ -14,6 +14,8 @@ const game = {
 
     controls: null,
 
+    playerStatsBlock: null,
+
     ///////////////////
     //Display Methods//
     ///////////////////
@@ -122,6 +124,15 @@ const game = {
         }
     },
 
+    loadPlayerStats: () => {
+        game.playerStatsBlock = document.createElement('div')
+        game.playerStatsBlock.id = 'player-stats'
+
+        document.querySelector('.combatWindow').append(game.playerStatsBlock)
+
+        game.setPlayerStats()
+    },
+
     loadActions: () => {
         game.controls.innerHTML = `
             <div class="btn-4">
@@ -180,6 +191,19 @@ const game = {
             case 'paladin':
                 game.player = new Paladin(name)
                 break;
+        }
+    },
+
+    setPlayerStats: () => {
+        if (game.player instanceof Fighter) {
+            game.playerStatsBlock.innerHTML = `
+                <h3 id="player-hp">HP: ${game.player.hp}</h3>
+            `
+        } else {
+            game.playerStatsBlock.innerHTML = `
+                <h3 id="player-hp">HP: ${game.player.hp}</h3>
+                <h3 id="player-sp">SP: ${game.player.sp}</h3>
+            `
         }
     },
 
@@ -263,15 +287,19 @@ const game = {
         await game.textDisplay(text, document.querySelector('h2'))
 
         game.currentLevel.monsters.forEach(monster => {
-            let atkRoll = game.rollDice(1, 20)
-            console.log(atkRoll)
+            if (monster.hp > 0) {
+                let atkRoll = game.rollDice(1, 20)
+                console.log(atkRoll)
 
-            if (atkRoll >= game.player.ac) {
-                game.player.hp -= monster.atkDmg
-                console.log(game.player.hp)
+                if (atkRoll >= game.player.ac) {
+                    game.player.hp -= monster.atkDmg
+                    console.log(game.player.hp)
 
-                if (game.player.hp <= 0) {
-                    game.gameOver()
+                    game.setPlayerStats()
+
+                    if (game.player.hp <= 0) {
+                        game.gameOver()
+                    }
                 }
             }
         })

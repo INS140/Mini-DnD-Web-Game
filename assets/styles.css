@@ -77,17 +77,34 @@ button:hover {
     padding: 10px;
     background: grey url('./images/controls-background.jpg');
     box-sizing: border-box;
+    border-top: 0.15625rem double white;
 }
 
 #controls button {
     color: white;
     background: transparent;
     border: 0.15625rem double white;
+    font-size: 2rem;
+}
+
+#player-stats {
+    color: white;
+    background: url('./images/controls-background.jpg');
+    border: 0.15625rem double white;
+    border-top: none;
+    border-right: none;
+    padding: 10px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 50%;
+    box-sizing: border-box;
 }
 
 #continue {
     position: absolute;
     right: 10px;
+    font-size: 1rem !important;
 }
 
 .btn-4 {

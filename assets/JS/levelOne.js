@@ -62,7 +62,10 @@ const levelOne = {
 
         let text = `After a short venture into the tomb, you are attacked by a group of ${levelOne.monsters[0].name}s! Prepare for battle!`
         
-        document.querySelector('#continue').onclick = game.loadControls
+        document.querySelector('#continue').onclick = () => {
+            game.loadPlayerStats()
+            game.loadControls()
+        }
 
         await game.textDisplay(text, document.querySelector('p'))
     },
