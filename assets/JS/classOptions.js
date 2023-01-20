@@ -1,5 +1,4 @@
 import game from "./game.js"
-import levelOne from "./levelOne.js"
 
 class Fighter {
     constructor(name) {
@@ -19,13 +18,23 @@ class Fighter {
         document.querySelector('#cancel').onclick = game.loadActions
 
         game.currentLevel.monsters.forEach(monster => {
-            monster.img.addEventListener('click', () => {
-                monster.hp -= game.player.atkDmg
-                console.log(monster.hp)
-                if (monster.hp <= 0) {
-                    monster.img.remove()
+            monster.img.onclick = () => {
+                let atkRoll = game.rollDice(1, 20)
+
+                if (atkRoll >= monster.ac) {
+                    monster.hp -= game.player.atkDmg
+                    console.log(monster.hp)
+                    if (monster.hp <= 0) {
+                        monster.img.remove()
+                    }
                 }
-            })
+
+                game.currentLevel.monsters.forEach(monster => {
+                    monster.img.onclick = null
+                })
+
+                game.loadControls()
+            }
         })
     }
 }

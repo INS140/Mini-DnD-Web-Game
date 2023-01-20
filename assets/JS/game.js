@@ -10,6 +10,9 @@ const game = {
 
     currentLevel: null,
 
+    /////////////////////
+    //Display Functions//
+    /////////////////////
     loadMainMenu: () => {
         root.innerHTML = null
         const menu = document.createElement('div')
@@ -128,6 +131,9 @@ const game = {
         }
     },
 
+    //////////////////////
+    //Game Functionality//
+    //////////////////////
     startNewGame: () => {
         game.loadCombatWindow()
 
@@ -154,6 +160,14 @@ const game = {
                 game.player = new Paladin(name)
                 break;
         }
+    },
+
+    rollDice: (numOfRolls, sides) => {
+        let total = 0
+        for (let i = 0; i < numOfRolls; i++) {
+            total += Math.floor(Math.random()*sides) + 1
+        }
+        return total
     }
 }
 
