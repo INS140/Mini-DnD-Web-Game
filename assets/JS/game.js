@@ -10,6 +10,10 @@ const game = {
 
     currentLevel: null,
 
+    display: null,
+
+    controls: null,
+
     /////////////////////
     //Display Functions//
     /////////////////////
@@ -83,10 +87,13 @@ const game = {
             <div id="controls"></div>
         `
         root.append(combatWindow)
+
+        game.display = document.querySelector('#display')
+        game.controls = document.querySelector('#controls')
     },
 
     loadControls: () => {
-        controls.innerHTML = `
+        game.controls.innerHTML = `
             <div class="btn-4">
                 <button id="actions">Actions</button>
                 <button id="inventory">Inventory</button>
@@ -98,7 +105,7 @@ const game = {
         document.querySelector('#actions').onclick = game.loadActions
 
         document.querySelector('#quit').onclick = () => {
-            levelOne.controls.innerHTML = `
+            game.controls.innerHTML = `
                 <h2>Are you sure you want to quit?</h2>
                 <button id="quit">Quit</button>
                 <button id="cancel">Cancel</button>
@@ -116,7 +123,7 @@ const game = {
     },
 
     loadActions: () => {
-        levelOne.controls.innerHTML = `
+        game.controls.innerHTML = `
             <div class="btn-4">
                 <button id="attack">Attack</button>
                 <button id="defend">Defend</button>

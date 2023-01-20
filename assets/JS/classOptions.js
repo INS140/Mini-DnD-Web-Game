@@ -10,7 +10,7 @@ class Fighter {
     }
 
     attack() {
-        game.currentLevel.controls.innerHTML = `
+        game.controls.innerHTML = `
             <h2>Select a target</h2>
             <button id="cancel">Cancel</button>
         `
@@ -20,6 +20,7 @@ class Fighter {
         game.currentLevel.monsters.forEach(monster => {
             monster.img.onclick = () => {
                 let atkRoll = game.rollDice(1, 20)
+                console.log(atkRoll)
 
                 if (atkRoll >= monster.ac) {
                     monster.hp -= game.player.atkDmg

@@ -5,10 +5,6 @@ const levelOne = {
 
     monsters: [],
 
-    display: null,
-
-    controls: null,
-
     getMonsters: () => {
         let d100 = Math.floor(Math.random()*101)
 
@@ -32,10 +28,7 @@ const levelOne = {
     },
 
     start: () => {
-        levelOne.display = document.querySelector('#display')
-        levelOne.controls = document.querySelector('#controls')
-
-        levelOne.controls.innerHTML = null
+        game.controls.innerHTML = null
 
         levelOne.getMonsters()
         
@@ -44,7 +37,7 @@ const levelOne = {
         
         monsterImages.classList.add('monsterImages')
 
-        levelOne.monsters.forEach((monster, index) => {
+        levelOne.monsters.forEach(monster => {
             monster.img = document.createElement('img')
             monster.img.src = monster.url
             monster.img.width = monster.imgWidth
@@ -54,8 +47,8 @@ const levelOne = {
             monsterImages.append(monster.img)
         })
 
-        levelOne.display.append(monsterImages)
-        levelOne.controls.innerHTML = `
+        game.display.append(monsterImages)
+        game.controls.innerHTML = `
             <p>After a short venture into the tomb, you are attacked by a group of ${levelOne.monsters[0].name}s! Prepare for battle!</p>
             <button id="continue">Continue</button>
         `
@@ -67,8 +60,8 @@ const levelOne = {
 
     reset: () => {
         levelOne.monsters = []
-        levelOne.controls = null
-        levelOne.display = null 
+        game.controls = null
+        game.display = null 
     }
 }
 
