@@ -141,18 +141,22 @@ const game = {
     //////////////////////
     //Game Functionality//
     //////////////////////
-    startNewGame: () => {
+    startNewGame: async () => {
         game.loadCombatWindow()
 
         game.currentLevel = levelOne
 
+        let text = `You come across an old abandoned tomb that smells of adventure. 
+        Of course you can not resist the temptation of riches, so you brave the deep unknown . . .`
+
         document.querySelector('#controls').innerHTML = `
-            <p>You come across an old abandoned tomb that smells of adventure. 
-            Of course you can not resist the temptation of riches, so you brave the deep unknown ...</p>
+            <p></p>
             <button id="continue">Continue</button>
         `
 
         document.querySelector('#continue').onclick = levelOne.start
+
+        await game.textDisplay(text, document.querySelector('p'))
     },
 
     setPlayer: (name, classType) => {
@@ -175,6 +179,17 @@ const game = {
             total += Math.floor(Math.random()*sides) + 1
         }
         return total
+    },
+
+    textDisplay: (text, element) => {
+        let promises = []
+
+        text.split('').forEach((char, i) => {
+            let promise = new Promise (res => setTimeout(res, (i+1)*40))
+            promises.push(promise.then(() => element.innerHTML += char))
+        })
+
+        return Promise.all(promises)
     }
 }
 
