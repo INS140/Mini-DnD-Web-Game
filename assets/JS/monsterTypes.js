@@ -5,7 +5,7 @@ class Monster {
         this.hp = hp
         this.ac = ac
         this.init = init
-        this.atkDmg = 3
+        this.atkDmg = 10
 
         //display properties
         this.img = null

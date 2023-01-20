@@ -7,12 +7,14 @@ const levelOne = {
 
     numberOfEnemies: 0,
 
-    //Level Functionality
+    ///////////////////////
+    //Level Functionality//
+    ///////////////////////
     getMonsters: () => {
-        let d100 = 95 //Math.floor(Math.random()*101)
+        let d100 = Math.floor(Math.random()*101)
 
         if (d100 > 75) {
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < 4; i++) {
                 levelOne.monsters.push(new Kobold())
             }
         } else if (d100 > 50) {

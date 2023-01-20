@@ -17,6 +17,7 @@ class Wizard {
         this.ac = 12
         this.init = 13
         this.sp = 20
+        this.atkDmg = 15
     }
 }
 

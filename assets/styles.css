@@ -122,3 +122,13 @@ button:hover {
     position: absolute;
     bottom: 200px;
 }
+
+.game-over {
+    color: black;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.game-over #continue {
+    position: static;
+}

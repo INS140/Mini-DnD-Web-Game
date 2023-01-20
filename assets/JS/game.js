@@ -177,6 +177,8 @@ const game = {
                         <button id="continue">Continue?</button>
                     </div>`
 
+        game.currentLevel.monsters = []
+
         document.querySelector('#continue').onclick = game.loadMainMenu
     },
 
@@ -216,11 +218,17 @@ const game = {
     },
 
     textDisplay: (text, element) => {
+        element.innerHTML = null
+
         let promises = []
 
-        text.split('').forEach((char, i) => {
-            let promise = new Promise (res => setTimeout(res, (i+1)*40))
+        text.split('').forEach((char, i, arr) => {
+            let promise = new Promise(res => setTimeout(res, (i+1)*40))
             promises.push(promise.then(() => element.innerHTML += char))
+
+            if (i === arr.length - 1) {
+                promises.push(new Promise(res => setTimeout(res, 500+(i+1)*40)))
+            }
         })
 
         return Promise.all(promises)
@@ -246,16 +254,19 @@ const game = {
                 let atkRoll = game.rollDice(1, 20)
                 console.log(atkRoll)
 
-                game.controls.innerHTML = `
-                    <h2>Rolling dice ...</h2>
-                `
+                game.controls.innerHTML = `<h2></h2>`
+                let h2 = document.querySelector('h2')
+
+                await game.textDisplay(`Rolling dice ...`, h2)
 
                 if (atkRoll >= monster.ac) {
-                    await new Promise(res => setTimeout(res, 500)).then(() => {
-                        game.controls.innerHTML = `
-                            <h2>You hit ${monster.name} for ${game.player.atkDmg}!</h2>
-                        `
-                    })
+                    await game.textDisplay(`You hit ${monster.name} for ${game.player.atkDmg}!`, h2)
+
+                    // await new Promise(res => setTimeout(res, 500)).then(() => {
+                    //     game.controls.innerHTML = `
+                    //         <h2>You hit ${monster.name} for ${game.player.atkDmg}!</h2>
+                    //     `
+                    // })
 
                     monster.hp -= game.player.atkDmg
                     console.log(monster.hp)
@@ -281,10 +292,13 @@ const game = {
 
     monsterAttackPhase: async () => {
         game.controls.innerHTML = `<h2></h2>`
+        let h2 = document.querySelector('h2')
 
         let text = `The ${game.currentLevel.monsters[0].name}${game.currentLevel.numberOfEnemies > 1 ? 's are': ' is'} attacking ...`
 
-        await game.textDisplay(text, document.querySelector('h2'))
+        await game.textDisplay(text, h2)
+
+        let gameOver = false
 
         game.currentLevel.monsters.forEach(monster => {
             if (monster.hp > 0) {
@@ -299,12 +313,13 @@ const game = {
 
                     if (game.player.hp <= 0) {
                         game.gameOver()
+                        gameOver = true
                     }
                 }
             }
         })
 
-        game.loadControls()
+         if (!gameOver) game.loadControls()
     },
 }
 
