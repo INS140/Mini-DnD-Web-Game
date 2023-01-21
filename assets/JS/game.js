@@ -201,6 +201,10 @@ const game = {
             game.playerStatsBlock.innerHTML = `
                 <h3 id="player-hp">HP:</h3><span id="hp-bar">${game.player.hp}/${game.player.hpMax}</span>
             `
+            
+            document.querySelector('#player-stats').style.grid = '1fr / 1fr 9fr'
+
+            game.setHpBar()
         } else {
             game.playerStatsBlock.innerHTML = `
                 <h3 id="player-hp">HP:</h3>
@@ -208,7 +212,43 @@ const game = {
                 <h3 id="player-sp">SP:</h3>
                 <span id="sp-bar">${game.player.sp}/${game.player.spMax}</span>
             `
+
+            game.setHpBar()
+            game.setSpBar()
         }
+    },
+
+    setHpBar: () => {
+        const hpBar = document.querySelector('#hp-bar')
+
+        const {hp, hpMax} = game.player
+
+        hpBar.style.width = Math.floor(hp/hpMax*100) + '%'
+
+        if (hp > hpMax*60/100) {
+            hpBar.style.backgroundColor = 'green'
+        } else if (hp > hpMax*20/100) {
+            hpBar.style.backgroundColor = 'yellow'
+            hpBar.style.color = 'black'
+        } else {
+            hpBar.style.backgroundColor = 'red'
+        }
+    },
+
+    setSpBar: () => {
+        const spBar = document.querySelector('#sp-bar')
+
+            const {sp, spMax} = game.player
+
+            spBar.style.width = Math.floor(sp/spMax*100) + '%'
+
+            if (sp > spMax*60/100) {
+                spBar.style.backgroundColor = 'blue'
+            } else if (sp > spMax*20/100) {
+                spBar.style.backgroundColor = 'purple'
+            } else {
+                spBar.style.backgroundColor = 'red'
+            }
     },
 
     rollDice: (numOfRolls, sides) => {
@@ -302,12 +342,12 @@ const game = {
 
                     game.player.hp -= monster.atkDmg
 
-                    game.setPlayerStats()
-
                     if (game.player.hp <= 0) {
                         game.gameOver()
                         gameOver = true
                     }
+
+                    if (!gameOver) game.setPlayerStats()
                 } else {
                     await game.textDisplay(`${monster.name} missed . . .`, h2)
                 }

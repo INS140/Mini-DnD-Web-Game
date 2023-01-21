@@ -21,13 +21,13 @@ class Fighter extends Player {
 
 class Wizard extends Player {
     constructor(name) {
-        super(name, 60, 12, 13, 20, 15)
+        super(name, 60, 12, 20, 13, 15)
     }
 }
 
 class Paladin extends Player {
     constructor(name) {
-        super(name, 80, 14, 12, 10, 12)
+        super(name, 80, 14, 10, 12, 12)
     }
 }
 
