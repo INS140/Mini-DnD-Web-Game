@@ -17,25 +17,25 @@ class Monster {
 // Low level
 class Kobold extends Monster {
     constructor() {
-        super('kobold', 10, 10, 8, './assets/images/kobold.png', 100)
+        super('Kobold', 10, 10, 8, './assets/images/kobold.png', 100)
     }
 }
 
 class Slime extends Monster {
     constructor() {
-        super('slime', 15, 12, 5, './assets/images/slime.png', 200)
+        super('Slime', 15, 12, 5, './assets/images/slime.png', 200)
     }
 }
 
 class Skeleton extends Monster {
     constructor() {
-        super('skeleton', 8, 10, 10, './assets/images/skeleton.png', 150)
+        super('Skeleton', 8, 10, 10, './assets/images/skeleton.png', 150)
     }
 }
 
 class Zombie extends Monster{
     constructor() {
-        super('zombie', 12, 8, 0, './assets/images/zombie.png', 150)
+        super('Zombie', 12, 8, 0, './assets/images/zombie.png', 150)
     }
 }
 

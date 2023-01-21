@@ -217,21 +217,14 @@ const game = {
         return total
     },
 
-    textDisplay: (text, element) => {
+    textDisplay: async (text, element) => {
         element.innerHTML = null
 
-        let promises = []
+        for (const char of text.split('')) {
+            await new Promise(res => setTimeout(res, 40)).then(() => element.innerHTML += char)
+        }
 
-        text.split('').forEach((char, i, arr) => {
-            let promise = new Promise(res => setTimeout(res, (i+1)*40))
-            promises.push(promise.then(() => element.innerHTML += char))
-
-            if (i === arr.length - 1) {
-                promises.push(new Promise(res => setTimeout(res, 500+(i+1)*40)))
-            }
-        })
-
-        return Promise.all(promises)
+        await new Promise(res => setTimeout(res, 500))
     },
 
     //////////////////
@@ -257,30 +250,21 @@ const game = {
                 game.controls.innerHTML = `<h2></h2>`
                 let h2 = document.querySelector('h2')
 
-                await game.textDisplay(`Rolling dice ...`, h2)
+                await game.textDisplay(`Rolling dice . . .`, h2)
 
                 if (atkRoll >= monster.ac) {
                     await game.textDisplay(`You hit ${monster.name} for ${game.player.atkDmg}!`, h2)
-
-                    // await new Promise(res => setTimeout(res, 500)).then(() => {
-                    //     game.controls.innerHTML = `
-                    //         <h2>You hit ${monster.name} for ${game.player.atkDmg}!</h2>
-                    //     `
-                    // })
 
                     monster.hp -= game.player.atkDmg
                     console.log(monster.hp)
 
                     if (monster.hp <= 0) {
+                        await game.textDisplay(`${monster.name} died!`, h2)
                         monster.img.remove()
                         game.currentLevel.numberOfEnemies--
                     }
                 } else {
-                    await new Promise(res => setTimeout(res, 500)).then(() => {
-                        game.controls.innerHTML = `
-                            <h2>You missed!</h2>
-                        `
-                    })
+                    await game.textDisplay(`You missed . . .`, h2)
                 }
 
                 await new Promise(res => setTimeout(res, 500)).then(() => {
@@ -300,14 +284,17 @@ const game = {
 
         let gameOver = false
 
-        game.currentLevel.monsters.forEach(monster => {
+        for (const monster of game.currentLevel.monsters) {
             if (monster.hp > 0) {
                 let atkRoll = game.rollDice(1, 20)
                 console.log(atkRoll)
 
+                await game.textDisplay('Rolling Dice . . .', h2)
+
                 if (atkRoll >= game.player.ac) {
+                    await game.textDisplay(`${monster.name} hits you for ${monster.atkDmg}!`, h2)
+
                     game.player.hp -= monster.atkDmg
-                    console.log(game.player.hp)
 
                     game.setPlayerStats()
 
@@ -315,11 +302,13 @@ const game = {
                         game.gameOver()
                         gameOver = true
                     }
+                } else {
+                    await game.textDisplay(`${monster.name} missed . . .`, h2)
                 }
             }
-        })
+        }
 
-         if (!gameOver) game.loadControls()
+        if (!gameOver) game.loadControls()
     },
 }
 
