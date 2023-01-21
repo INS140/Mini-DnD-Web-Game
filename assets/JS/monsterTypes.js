@@ -1,3 +1,5 @@
+import game from "./game.js"
+
 class Monster {
     constructor(name, hp, ac, init, url, imgWidth) {
         //combat properties
@@ -5,12 +7,19 @@ class Monster {
         this.hp = hp
         this.ac = ac
         this.init = init
-        this.atkDmg = 10
 
         //display properties
         this.img = null
         this.url = url
         this.imgWidth = imgWidth
+    }
+
+    getDmg() {
+        return game.rollDice(1, 6)
+    }
+
+    getCritDmg() {
+        return game.rollDice(2, 6)
     }
 }
 

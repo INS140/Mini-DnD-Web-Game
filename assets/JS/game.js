@@ -287,7 +287,6 @@ const game = {
                 })
 
                 let atkRoll = game.rollDice(1, 20)
-                console.log(atkRoll)
 
                 game.controls.innerHTML = `<h2></h2>`
                 let h2 = document.querySelector('h2')
@@ -298,7 +297,6 @@ const game = {
                     await game.textDisplay(`You hit ${monster.name} for ${game.player.atkDmg}!`, h2)
 
                     monster.hp -= game.player.atkDmg
-                    console.log(monster.hp)
 
                     if (monster.hp <= 0) {
                         await game.textDisplay(`${monster.name} died!`, h2)
@@ -338,9 +336,11 @@ const game = {
                 await game.textDisplay('Rolling Dice . . .', h2)
 
                 if (atkRoll >= game.player.ac) {
-                    await game.textDisplay(`${monster.name} hit you for ${monster.atkDmg}!`, h2)
+                    let dmg = (atkRoll === 20) ? monster.getCritDmg() : monster.getDmg()
 
-                    game.player.hp -= monster.atkDmg
+                    await game.textDisplay(`${monster.name} hit you for ${dmg}!`, h2)
+
+                    game.player.hp -= dmg
 
                     if (game.player.hp <= 0) {
                         game.gameOver()
