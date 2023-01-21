@@ -1,10 +1,13 @@
 import game from "./game.js"
 
 class Player {
-    constructor(name, hp, ac, init, atkDmg) {
+    constructor(name, hp, ac, sp, init, atkDmg) {
         this.name = name
         this.hp = hp
+        this.hpMax = hp
         this.ac = ac
+        this.sp = sp
+        this.spMax = sp
         this.init = init
         this.atkDmg = atkDmg
     }
@@ -12,7 +15,7 @@ class Player {
 
 class Fighter extends Player {
     constructor(name) {
-        super(name, 100, 15, 11, 10)
+        super(name, 100, 15, 0, 11, 10)
     }
 }
 
@@ -24,7 +27,7 @@ class Wizard extends Player {
 
 class Paladin extends Player {
     constructor(name) {
-        super(name, 80, 14, 12, 10)
+        super(name, 80, 14, 12, 10, 12)
     }
 }
 

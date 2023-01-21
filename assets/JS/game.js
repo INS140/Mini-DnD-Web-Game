@@ -199,12 +199,14 @@ const game = {
     setPlayerStats: () => {
         if (game.player instanceof Fighter) {
             game.playerStatsBlock.innerHTML = `
-                <h3 id="player-hp">HP: ${game.player.hp}</h3>
+                <h3 id="player-hp">HP:</h3><span id="hp-bar">${game.player.hp}/${game.player.hpMax}</span>
             `
         } else {
             game.playerStatsBlock.innerHTML = `
-                <h3 id="player-hp">HP: ${game.player.hp}</h3>
-                <h3 id="player-sp">SP: ${game.player.sp}</h3>
+                <h3 id="player-hp">HP:</h3>
+                <span id="hp-bar">${game.player.hp}/${game.player.hpMax}</span>
+                <h3 id="player-sp">SP:</h3>
+                <span id="sp-bar">${game.player.sp}/${game.player.spMax}</span>
             `
         }
     },
@@ -224,7 +226,7 @@ const game = {
             await new Promise(res => setTimeout(res, 40)).then(() => element.innerHTML += char)
         }
 
-        await new Promise(res => setTimeout(res, 500))
+        await new Promise(res => setTimeout(res, 250))
     },
 
     //////////////////
@@ -267,9 +269,13 @@ const game = {
                     await game.textDisplay(`You missed . . .`, h2)
                 }
 
-                await new Promise(res => setTimeout(res, 500)).then(() => {
-                    game.monsterAttackPhase()
-                })
+                if (game.currentLevel.numberOfEnemies === 0) {
+                    await game.textDisplay('You Win!!!', h2)
+                } else {
+                    await new Promise(res => setTimeout(res, 500)).then(() => {
+                        game.monsterAttackPhase()
+                    })
+                }
             }
         })
     },
@@ -278,7 +284,7 @@ const game = {
         game.controls.innerHTML = `<h2></h2>`
         let h2 = document.querySelector('h2')
 
-        let text = `The ${game.currentLevel.monsters[0].name}${game.currentLevel.numberOfEnemies > 1 ? 's are': ' is'} attacking ...`
+        let text = `The ${game.currentLevel.monsters[0].name}${game.currentLevel.numberOfEnemies > 1 ? 's are': ' is'} attacking . . .`
 
         await game.textDisplay(text, h2)
 
@@ -292,7 +298,7 @@ const game = {
                 await game.textDisplay('Rolling Dice . . .', h2)
 
                 if (atkRoll >= game.player.ac) {
-                    await game.textDisplay(`${monster.name} hits you for ${monster.atkDmg}!`, h2)
+                    await game.textDisplay(`${monster.name} hit you for ${monster.atkDmg}!`, h2)
 
                     game.player.hp -= monster.atkDmg
 
