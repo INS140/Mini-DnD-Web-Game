@@ -10,6 +10,8 @@ class Player {
         this.spMax = sp
         this.init = init
         this.atkDmg = atkDmg
+        this.defBoost = 2
+        this.defending = false
     }
 }
 

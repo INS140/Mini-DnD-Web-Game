@@ -39,24 +39,8 @@ const levelOne = {
     start: async () => {
         game.controls.innerHTML = null
 
-        levelOne.getMonsters()
-        
-        let monsterImages = document.createElement('div'),
-            idNum = 0
-        
-        monsterImages.classList.add('monsterImages')
+        game.loadMonsterImages()
 
-        levelOne.monsters.forEach(monster => {
-            monster.img = document.createElement('img')
-            monster.img.src = monster.url
-            monster.img.width = monster.imgWidth
-            monster.img.id = `${monster.name}${idNum}`
-            monster.img.alt = monster.name
-            idNum++
-            monsterImages.append(monster.img)
-        })
-
-        game.display.append(monsterImages)
         game.controls.innerHTML = `
             <p></p>
             <button id="continue">Continue</button>

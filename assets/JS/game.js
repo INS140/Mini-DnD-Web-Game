@@ -143,10 +143,32 @@ const game = {
             </div>
         `
         document.querySelector('#attack').onclick = game.attack
+        document.querySelector('#defend').onclick = game.defend
 
         document.querySelector('#cancel').onclick = () => {
             game.loadControls()
         }
+    },
+
+    loadMonsterImages: () => {
+        game.currentLevel.getMonsters()
+        
+        let monsterImages = document.createElement('div'),
+            idNum = 0
+        
+        monsterImages.classList.add('monsterImages')
+
+        game.currentLevel.monsters.forEach(monster => {
+            monster.img = document.createElement('img')
+            monster.img.src = monster.url
+            monster.img.width = monster.imgWidth
+            monster.img.id = `${monster.name}${idNum}`
+            monster.img.alt = monster.name
+            idNum++
+            monsterImages.append(monster.img)
+        })
+
+        game.display.append(monsterImages)
     },
 
     //////////////////////
@@ -318,6 +340,18 @@ const game = {
         })
     },
 
+    defend: async () => {
+        game.controls.innerHTML = `<h2></h2>`
+        let h2 = document.querySelector('h2')
+
+        await game.textDisplay(`${game.player.name} prepares for an attack . . .`, h2)
+
+        game.player.ac += game.player.defBoost
+        game.player.defending = true
+
+        game.monsterAttackPhase()
+    },
+
     monsterAttackPhase: async () => {
         game.controls.innerHTML = `<h2></h2>`
         let h2 = document.querySelector('h2')
@@ -331,7 +365,6 @@ const game = {
         for (const monster of game.currentLevel.monsters) {
             if (monster.hp > 0) {
                 let atkRoll = game.rollDice(1, 20)
-                console.log(atkRoll)
 
                 await game.textDisplay('Rolling Dice . . .', h2)
 
@@ -354,7 +387,13 @@ const game = {
             }
         }
 
-        if (!gameOver) game.loadControls()
+        if (!gameOver) {
+            if (game.player.defending) game.player.ac -= game.player.defBoost
+
+            game.player.defending = false
+
+            game.loadControls()
+        }
     },
 }
 
