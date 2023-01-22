@@ -1,16 +1,11 @@
 # Todo
-- collect images for dice, monsters, weapons, etc
+- create inventory
+- create heal mechanic
 
-- create game menu and options
-    - 'New Game' first, then other menus come later
+- randomize player damage based on class
 
-- design base classes (dnd classes)
-    - setup base stats and weapons
-    - define attacks/spells
-    - create methods (i.e. attack, defend, heal)
+- create level 2 and 3
 
+- add save and load mechanic
 
-- define weapons and spells available
-- create monster options
-
-- game loop - in progress
+- add combat modifiers, maybe you won't miss so much anymore ...

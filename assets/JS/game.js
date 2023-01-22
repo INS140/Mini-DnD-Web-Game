@@ -26,32 +26,32 @@ const game = {
         menu.innerHTML = `
             <h1>Dungeon Crawl</h1>
             <hr>
-            <button id="playNow">Play Now</button><br>
-            <button id="newGame">New Game</button><br>
-            <button id="loadGame">Load Game</button><br>
+            <button id="play-now">Play Now</button><br>
+            <button id="new-game">New Game</button><br>
+            <button id="load-game">Load Game</button><br>
             <button id="options">Options</button>
         `
         root.append(menu)
 
-        document.querySelector('#playNow').onclick = () => {
+        document.querySelector('#play-now').onclick = () => {
             game.player = new Fighter('Butcher')
             game.startNewGame()
         }
 
-        document.querySelector('#newGame').onclick = game.loadNewGameMenu
+        document.querySelector('#new-game').onclick = game.loadNewGameMenu
     },
 
     loadNewGameMenu: () => {
         root.innerHTML = null
         const menu = document.createElement('div')
-        menu.classList.add('menu', 'newGame')
+        menu.classList.add('menu', 'new-game')
         menu.innerHTML = `
             <h2>New Game</h2>
             <hr>
             <label for="name">Character Name</label><br>
             <input type="text" name="name" id="name" /><br>
-            <label for="classSelect">Select Class</label><br>
-            <select id="classSelect" name="classSelect">
+            <label for="class-select">Select Class</label><br>
+            <select id="class-select" name="class-select">
                 <option value="fighter">Fighter</option>
                 <option value="wizard">Wizard</option>
                 <option value="paladin">Paladin</option>
@@ -64,7 +64,7 @@ const game = {
         document.querySelector('#back').onclick = game.loadMainMenu
 
         let input = document.querySelector('#name'),
-            select = document.querySelector('#classSelect')
+            select = document.querySelector('#class-select')
         
         document.querySelector('#start').onclick = () => {
             if (input.value !== '') {
@@ -83,7 +83,7 @@ const game = {
     loadCombatWindow: () => {
         root.innerHTML = null
         const combatWindow = document.createElement('div')
-        combatWindow.classList.add('combatWindow')
+        combatWindow.classList.add('combat-window')
         combatWindow.innerHTML = `
             <div id="display"></div>
             <div id="controls"></div>
@@ -128,7 +128,7 @@ const game = {
         game.playerStatsBlock = document.createElement('div')
         game.playerStatsBlock.id = 'player-stats'
 
-        document.querySelector('.combatWindow').append(game.playerStatsBlock)
+        document.querySelector('.combat-window').append(game.playerStatsBlock)
 
         game.setPlayerStats()
     },
@@ -155,7 +155,7 @@ const game = {
         
         let monsterImages = document.createElement('div')
         
-        monsterImages.classList.add('monsterImages')
+        monsterImages.classList.add('monster-images')
 
         game.currentLevel.monsters.forEach((monster, index) => {
             monster.img = document.createElement('div')
@@ -328,6 +328,8 @@ const game = {
                     await game.textDisplay(`You hit ${monster.name} for ${game.player.atkDmg}!`, h2)
 
                     monster.hp -= game.player.atkDmg
+
+                    monster.hp = (monster.hp < 0) ? 0 : monster.hp
 
                     game.setMonsterHp()
 
