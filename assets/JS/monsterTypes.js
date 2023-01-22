@@ -13,7 +13,7 @@ class Monster {
         //display properties
         this.img = null
         this.url = url
-        this.imgWidth = imgWidth
+        this.imgWidth = imgWidth + 'px'
     }
 
     getDmg() {

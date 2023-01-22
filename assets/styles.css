@@ -152,6 +152,10 @@ button:hover {
     text-align: center;
 }
 
+.monster-images img {
+    width: 100%;
+}
+
 .game-over {
     color: black;
     text-align: center;

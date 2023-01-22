@@ -9,3 +9,5 @@
 - add save and load mechanic
 
 - add combat modifiers, maybe you won't miss so much anymore ...
+
+- implement mobile layouts - in progress

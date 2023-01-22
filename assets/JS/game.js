@@ -152,6 +152,7 @@ const game = {
 
     loadMonsterImages: () => {
         game.currentLevel.getMonsters()
+        game.setMonsterImgWidth()
         
         let monsterImages = document.createElement('div')
         
@@ -159,9 +160,10 @@ const game = {
 
         game.currentLevel.monsters.forEach((monster, index) => {
             monster.img = document.createElement('div')
+            monster.img.style.width = monster.imgWidth
             monster.img.innerHTML = `
                 <span id="${monster.name}${index}-hp-bar">${monster.hp}/${monster.hpMax}</span>
-                <img id="${monster.name}${index}" src="${monster.url}" width="${monster.imgWidth}" alt="${monster.name}"/>
+                <img id="${monster.name}${index}" src="${monster.url}" alt="${monster.name}"/>
             `
 
             monsterImages.append(monster.img)
@@ -237,6 +239,12 @@ const game = {
             game.setHpBar(game.player, document.querySelector('#hp-bar'))
             game.setSpBar()
         }
+    },
+
+    setMonsterImgWidth: () => {
+        game.currentLevel.monsters.forEach((monster, i, arr) => {
+            monster.imgWidth = (window.innerWidth <= 400) ? Math.floor(100/arr.length) + '%' : monster.imgWidth
+        })
     },
 
     setMonsterHp: () => {

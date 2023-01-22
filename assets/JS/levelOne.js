@@ -11,7 +11,7 @@ const levelOne = {
     //Level Functionality//
     ///////////////////////
     getMonsters: () => {
-        let d100 = Math.floor(Math.random()*101)
+        let d100 = Math.floor(Math.random()*100) + 1
 
         if (d100 > 75) {
             for (let i = 0; i < 4; i++) {
