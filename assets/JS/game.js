@@ -94,62 +94,6 @@ const game = {
         game.controls = document.querySelector('#controls')
     },
 
-    loadControls: () => {
-        game.controls.innerHTML = `
-            <div class="btn-4">
-                <button id="actions">Actions</button>
-                <button id="inventory">Inventory</button>
-                <button id="options">Options</button>
-                <button id="quit">Quit</button>
-            </div>
-        `
-
-        document.querySelector('#actions').onclick = game.loadActions
-
-        document.querySelector('#quit').onclick = () => {
-            game.controls.innerHTML = `
-                <h2>Are you sure you want to quit?</h2>
-                <button id="quit">Quit</button>
-                <button id="cancel">Cancel</button>
-            `
-
-            document.querySelector('#quit').onclick = () => {
-                game.loadMainMenu()
-                levelOne.reset()
-            }
-
-            document.querySelector('#cancel').onclick = () => {
-                game.loadControls()
-            }
-        }
-    },
-
-    loadPlayerStats: () => {
-        game.playerStatsBlock = document.createElement('div')
-        game.playerStatsBlock.id = 'player-stats'
-
-        document.querySelector('.combat-window').append(game.playerStatsBlock)
-
-        game.setPlayerStats()
-    },
-
-    loadActions: () => {
-        game.controls.innerHTML = `
-            <div class="btn-4">
-                <button id="attack">Attack</button>
-                <button id="defend">Defend</button>
-                <button id="heal">Heal</button>
-                <button id="cancel">Cancel</button>
-            </div>
-        `
-        document.querySelector('#attack').onclick = game.attack
-        document.querySelector('#defend').onclick = game.defend
-
-        document.querySelector('#cancel').onclick = () => {
-            game.loadControls()
-        }
-    },
-
     loadMonsterImages: () => {
         game.currentLevel.getMonsters()
         game.setMonsterImgWidth()
@@ -170,6 +114,64 @@ const game = {
         })
 
         game.display.append(monsterImages)
+    },
+
+    loadControls: () => {
+        game.controls.innerHTML = `
+            <div class="grid-4">
+                <button id="actions">Actions</button>
+                <button id="inventory">Inventory</button>
+                <button id="options">Options</button>
+                <button id="quit">Quit</button>
+            </div>
+        `
+
+        document.querySelector('#actions').onclick = game.loadActions
+        document.querySelector('#inventory').onclick = game.loadInventory
+        // document.querySelector('#options').onclick = game.loadCombatOptions
+        document.querySelector('#quit').onclick = game.quitGame
+    },
+
+    loadPlayerStats: () => {
+        game.playerStatsBlock = document.createElement('div')
+        game.playerStatsBlock.id = 'player-stats'
+
+        document.querySelector('.combat-window').append(game.playerStatsBlock)
+
+        game.setPlayerStats()
+    },
+
+    loadActions: () => {
+        game.controls.innerHTML = `
+            <div class="grid-4">
+                <button id="attack">Attack</button>
+                <button id="defend">Defend</button>
+                <button id="heal">Heal</button>
+                <button id="cancel">Cancel</button>
+            </div>
+        `
+        document.querySelector('#attack').onclick = game.attack
+        document.querySelector('#defend').onclick = game.defend
+
+        document.querySelector('#cancel').onclick = game.loadControls
+    },
+
+    loadInventory: () => {
+        game.controls.innerHTML = `
+            <div id="inventory-box" class="grid-4"></div>
+            <button id="back">Back</button>
+        `
+
+        const inventoryBox = document.querySelector('#inventory-box')
+
+        game.player.inventory.forEach(item => {
+            const div = document.createElement('div')
+            div.innerHTML = `${item.name}${(item.quantity > 1) ? 's' : ''}: ${item.quantity}`
+
+            inventoryBox.append(div)
+        })
+
+        document.querySelector('#back').onclick = game.loadControls
     },
 
     //////////////////////
@@ -203,6 +205,23 @@ const game = {
         game.currentLevel.monsters = []
 
         document.querySelector('#continue').onclick = game.loadMainMenu
+    },
+
+    quitGame: () => {
+        game.controls.innerHTML = `
+            <h2>Are you sure you want to quit?</h2>
+            <button id="quit">Quit</button>
+            <button id="cancel">Cancel</button>
+        `
+
+        document.querySelector('#quit').onclick = () => {
+            game.loadMainMenu()
+            game.currentLevel.reset()
+        }
+
+        document.querySelector('#cancel').onclick = () => {
+            game.loadControls()
+        }
     },
 
     setPlayer: (name, classType) => {
