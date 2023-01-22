@@ -5,8 +5,10 @@ class Monster {
         //combat properties
         this.name = name
         this.hp = hp
+        this.hpMax = hp
         this.ac = ac
         this.init = init
+        this.dead = false
 
         //display properties
         this.img = null

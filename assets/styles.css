@@ -136,6 +136,23 @@ button:hover {
     bottom: 200px;
 }
 
+.monsterImages div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+.monsterImages span {
+    visibility: hidden;
+    color: white;
+    background: green;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
 .game-over {
     color: black;
     text-align: center;

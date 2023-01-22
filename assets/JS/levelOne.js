@@ -51,6 +51,11 @@ const levelOne = {
         document.querySelector('#continue').onclick = () => {
             game.loadPlayerStats()
             game.loadControls()
+
+            game.currentLevel.monsters.forEach((monster, index) => {
+                const hpBar = document.querySelector(`#${monster.name}${index}-hp-bar`)
+                hpBar.style.visibility = 'visible'
+            })
         }
 
         await game.textDisplay(text, document.querySelector('p'))

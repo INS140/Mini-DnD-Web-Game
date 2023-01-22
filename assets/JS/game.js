@@ -153,18 +153,17 @@ const game = {
     loadMonsterImages: () => {
         game.currentLevel.getMonsters()
         
-        let monsterImages = document.createElement('div'),
-            idNum = 0
+        let monsterImages = document.createElement('div')
         
         monsterImages.classList.add('monsterImages')
 
-        game.currentLevel.monsters.forEach(monster => {
-            monster.img = document.createElement('img')
-            monster.img.src = monster.url
-            monster.img.width = monster.imgWidth
-            monster.img.id = `${monster.name}${idNum}`
-            monster.img.alt = monster.name
-            idNum++
+        game.currentLevel.monsters.forEach((monster, index) => {
+            monster.img = document.createElement('div')
+            monster.img.innerHTML = `
+                <span id="${monster.name}${index}-hp-bar">${monster.hp}/${monster.hpMax}</span>
+                <img id="${monster.name}${index}" src="${monster.url}" width="${monster.imgWidth}" alt="${monster.name}"/>
+            `
+
             monsterImages.append(monster.img)
         })
 
@@ -226,7 +225,7 @@ const game = {
             
             document.querySelector('#player-stats').style.grid = '1fr / 1fr 9fr'
 
-            game.setHpBar()
+            game.setHpBar(game.player, document.querySelector('#hp-bar'))
         } else {
             game.playerStatsBlock.innerHTML = `
                 <h3 id="player-hp">HP:</h3>
@@ -235,15 +234,25 @@ const game = {
                 <span id="sp-bar">${game.player.sp}/${game.player.spMax}</span>
             `
 
-            game.setHpBar()
+            game.setHpBar(game.player, document.querySelector('#hp-bar'))
             game.setSpBar()
         }
     },
 
-    setHpBar: () => {
-        const hpBar = document.querySelector('#hp-bar')
+    setMonsterHp: () => {
+        game.currentLevel.monsters.forEach((monster, index) => {
+            if (!monster.dead) {
+                const hpBar = document.querySelector(`#${monster.name}${index}-hp-bar`)
+                hpBar.innerHTML = `${monster.hp}/${monster.hpMax}`
+                game.setHpBar(monster, hpBar)
+            }
+        })
+    },
 
-        const {hp, hpMax} = game.player
+    setHpBar: (object, element) => {
+        const hpBar = element
+
+        const {hp, hpMax} = object
 
         hpBar.style.width = Math.floor(hp/hpMax*100) + '%'
 
@@ -320,9 +329,15 @@ const game = {
 
                     monster.hp -= game.player.atkDmg
 
+                    game.setMonsterHp()
+
                     if (monster.hp <= 0) {
                         await game.textDisplay(`${monster.name} died!`, h2)
+
+                        monster.dead = true
+
                         monster.img.remove()
+
                         game.currentLevel.numberOfEnemies--
                     }
                 } else {
@@ -363,7 +378,7 @@ const game = {
         let gameOver = false
 
         for (const monster of game.currentLevel.monsters) {
-            if (monster.hp > 0) {
+            if (!monster.dead) {
                 let atkRoll = game.rollDice(1, 20)
 
                 await game.textDisplay('Rolling Dice . . .', h2)
