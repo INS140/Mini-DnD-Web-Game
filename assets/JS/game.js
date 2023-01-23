@@ -219,9 +219,7 @@ const game = {
             game.currentLevel.reset()
         }
 
-        document.querySelector('#cancel').onclick = () => {
-            game.loadControls()
-        }
+        document.querySelector('#cancel').onclick = game.loadControls
     },
 
     setPlayer: (name, classType) => {
@@ -336,13 +334,14 @@ const game = {
             <button id="cancel">Cancel</button>
         `
 
-        document.querySelector('#cancel').onclick = game.loadActions
+        document.querySelector('#cancel').onclick = () => {
+            game.loadActions()
+            game.currentLevel.monsters.forEach(monster => monster.img.onclick = null)
+        }
 
         game.currentLevel.monsters.forEach(monster => {
             monster.img.onclick = async () => {
-                game.currentLevel.monsters.forEach(monster => {
-                    monster.img.onclick = null
-                })
+                game.currentLevel.monsters.forEach(monster => monster.img.onclick = null)
 
                 let atkRoll = game.rollDice(1, 20)
 
@@ -376,9 +375,7 @@ const game = {
                 if (game.currentLevel.numberOfEnemies === 0) {
                     await game.textDisplay('You Win!!!', h2)
                 } else {
-                    await new Promise(res => setTimeout(res, 500)).then(() => {
-                        game.monsterAttackPhase()
-                    })
+                    await new Promise(res => setTimeout(res, 500)).then(game.monsterAttackPhase)
                 }
             }
         })
