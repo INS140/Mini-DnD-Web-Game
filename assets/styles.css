@@ -8,23 +8,16 @@ body {
     background: url('./images/menu-background.jpg') center/cover no-repeat;
 }
 
-hr {
-    border: 0.0625rem solid brown;
-}
+hr { border: 0.0625rem solid brown; }
 
-h1 {
-    margin-bottom: 0.9375rem;
-}
+h1 { margin-bottom: 0.9375rem; }
 
-p {
-    margin: 0 0 5px;
-}
+p { margin: 0 0 5px; }
 
-button:hover {
-    cursor: pointer;
-}
+button:hover { cursor: pointer; }
 
 .menu {
+    color: black;
     width: 25rem;
     height: 20rem;
     padding: 3.25rem 2.25rem 2.5rem 1.875rem;
@@ -55,9 +48,7 @@ button:hover {
     background-color: transparent;
 }
 
-.new-game button {
-    width: 49%;
-}
+.new-game button { width: 49%; }
 
 .combat-window {
     background-color: white;
@@ -103,9 +94,7 @@ button:hover {
     box-sizing: border-box;
 }
 
-#player-stats h3, #player-stats span {
-    margin: 10px 10px 10px 0;
-}
+#player-stats h3, #player-stats span { margin: 10px 10px 10px 0; }
 
 #player-stats span {
     display: inline-block;
@@ -152,20 +141,32 @@ button:hover {
     text-align: center;
 }
 
-.monster-images img {
-    width: 100%;
-}
+.monster-images img { width: 100%; }
 
 #inventory-box {
-    width: 100%;
-    height: 65%;
+    color: white;
+    width: 25rem;
+    height: 20rem;
+    background: url('./images/controls-background.jpg');
     box-sizing: border-box;
-}
-
-#inventory-box div {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     border: 0.15625rem double white;
     padding: 10px;
 }
+
+#inventory-box div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 0.15625rem double white;
+    padding: 10px;
+}
+
+#inventory-box img { width: 35%;}
 
 .game-over {
     color: black;
@@ -173,6 +174,7 @@ button:hover {
     font-size: 2rem;
 }
 
-.game-over #continue {
-    position: static;
-}
+.game-over #continue { position: static; }
+
+/* fixes an error on mobile when displaying the inventory button */
+@media screen and (max-width: 600px) { #inventory { padding: 0 5px; } }

@@ -1,3 +1,5 @@
+import { HealingPotion, SpellPotion } from "./items.js"
+
 class Player {
     constructor(name, hp, ac, sp, init, atkDmg) {
         this.name = name
@@ -16,7 +18,11 @@ class Player {
 class Fighter extends Player {
     constructor(name) {
         super(name, 100, 15, 0, 11, 10)
-        this.inventory = [{name: 'Healing Potion', quantity: 3}]
+        this.inventory = [
+            new HealingPotion,
+            new HealingPotion,
+            new HealingPotion
+        ]
     }
 }
 
@@ -24,8 +30,9 @@ class Wizard extends Player {
     constructor(name) {
         super(name, 60, 12, 20, 13, 15)
         this.inventory = [
-            {name: 'Healing Potion', quantity: 3},
-            {name: 'Spell Potion', quantity: 2,}
+            new HealingPotion,
+            new SpellPotion,
+            new SpellPotion
         ]
     }
 }
@@ -34,10 +41,11 @@ class Paladin extends Player {
     constructor(name) {
         super(name, 80, 14, 10, 12, 12)
         this.inventory = [
-            {name: 'Healing Potion', quantity: 3},
-            {name: 'Spell Potion', quantity: 1,}
+            new HealingPotion,
+            new HealingPotion,
+            new SpellPotion
         ]
     }
 }
 
-export {Fighter, Wizard, Paladin}
+export { Fighter, Wizard, Paladin }

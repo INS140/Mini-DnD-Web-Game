@@ -146,32 +146,44 @@ const game = {
             <div class="grid-4">
                 <button id="attack">Attack</button>
                 <button id="defend">Defend</button>
-                <button id="heal">Heal</button>
+                <button id="item">Item</button>
                 <button id="cancel">Cancel</button>
             </div>
         `
         document.querySelector('#attack').onclick = game.attack
         document.querySelector('#defend').onclick = game.defend
-
+        document.querySelector('#item').onclick = game.useItem
         document.querySelector('#cancel').onclick = game.loadControls
     },
 
-    loadInventory: () => {
+    loadInventory: async () => {
         game.controls.innerHTML = `
-            <div id="inventory-box" class="grid-4"></div>
+            <h2></h2>
             <button id="back">Back</button>
         `
 
-        const inventoryBox = document.querySelector('#inventory-box')
+        const inventoryBox = document.createElement('div')
+        inventoryBox.id = 'inventory-box'
+        inventoryBox.classList.add('grid-4')
 
         game.player.inventory.forEach(item => {
             const div = document.createElement('div')
-            div.innerHTML = `${item.name}${(item.quantity > 1) ? 's' : ''}: ${item.quantity}`
+            div.innerHTML = `
+                <img src="${item.url}" alt="${item.name}" title="${item.name}"/>
+                <p>${item.name}</p>
+            `
 
             inventoryBox.append(div)
         })
 
-        document.querySelector('#back').onclick = game.loadControls
+        document.querySelector('.combat-window').append(inventoryBox)
+        
+        document.querySelector('#back').onclick = () => {
+            game.loadControls()
+            inventoryBox.remove()
+        }
+
+        await game.textDisplay(`${game.player.name}'s Inventory`, document.querySelector('h2'))
     },
 
     //////////////////////
@@ -328,14 +340,15 @@ const game = {
     //////////////////
     //Combat Methods//
     //////////////////
-    attack: () => {
+    attack: async () => {
         game.controls.innerHTML = `
-            <h2>Select a target</h2>
+            <h2></h2>
             <button id="cancel">Cancel</button>
         `
 
         document.querySelector('#cancel').onclick = () => {
             game.loadActions()
+
             game.currentLevel.monsters.forEach(monster => monster.img.onclick = null)
         }
 
@@ -379,6 +392,9 @@ const game = {
                 }
             }
         })
+
+        // This line needs to go last so experienced players may skip the text loading
+        await game.textDisplay('Select a target', document.querySelector('h2'))
     },
 
     defend: async () => {
@@ -393,6 +409,40 @@ const game = {
         game.monsterAttackPhase()
     },
 
+    useItem: async () => {
+        game.loadInventory()
+
+        game.controls.innerHTML = `
+            <h2></h2>
+            <button id="back">Back</button>
+        `
+
+        document.querySelector('#back').onclick = () => {
+            game.loadActions()
+            document.querySelector('#inventory-box').remove()
+        }
+
+        document.querySelectorAll('#inventory-box div').forEach((itemBox, index) => {
+            itemBox.onclick = async () => {
+                game.controls.innerHTML = `<h2></h2>`
+
+                document.querySelector('#inventory-box').remove()
+
+                const item = game.player.inventory[index]
+
+                await game.textDisplay(`${game.player.name} uses a ${item.name}!`, document.querySelector('h2'))
+
+                await item.useEffect()
+
+                game.player.inventory.splice(index, 1)
+
+                game.monsterAttackPhase()
+            }
+        })
+
+        await game.textDisplay('Choose an item to use', document.querySelector('h2'))
+    },
+
     monsterAttackPhase: async () => {
         game.controls.innerHTML = `<h2></h2>`
         let h2 = document.querySelector('h2')
@@ -405,7 +455,7 @@ const game = {
 
         for (const monster of game.currentLevel.monsters) {
             if (!monster.dead) {
-                let atkRoll = game.rollDice(1, 20)
+                let atkRoll = 20 //game.rollDice(1, 20)
 
                 await game.textDisplay('Rolling Dice . . .', h2)
 
