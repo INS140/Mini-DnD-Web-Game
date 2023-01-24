@@ -1,13 +1,12 @@
 import game from "./game.js"
 
 class Monster {
-    constructor(name, hp, ac, init, url, imgWidth) {
+    constructor(name, hp, ac, url, imgWidth) {
         //combat properties
         this.name = name
         this.hp = hp
         this.hpMax = hp
         this.ac = ac
-        this.init = init
         this.dead = false
 
         //display properties
@@ -28,54 +27,60 @@ class Monster {
 // Low level
 class Kobold extends Monster {
     constructor() {
-        super('Kobold', 10, 10, 8, './assets/images/kobold.png', 100)
+        super('Kobold', 10, 10, './assets/images/kobold.png', 100)
     }
 }
 
 class Slime extends Monster {
     constructor() {
-        super('Slime', 15, 12, 5, './assets/images/slime.png', 200)
+        super('Slime', 15, 12, './assets/images/slime.png', 200)
     }
 }
 
 class Skeleton extends Monster {
     constructor() {
-        super('Skeleton', 8, 10, 10, './assets/images/skeleton.png', 150)
+        super('Skeleton', 8, 10, './assets/images/skeleton.png', 150)
     }
 }
 
 class Zombie extends Monster{
     constructor() {
-        super('Zombie', 12, 8, 0, './assets/images/zombie.png', 150)
+        super('Zombie', 12, 8, './assets/images/zombie.png', 150)
     }
 }
 
 //Mid level
 
-class Elemental {
+class Elemental extends Monster {
     constructor() {
-        this.hp = 10
-        this.ac = 10
-        this.init = 0
-        this.url = null
+        super('Elemental', 25, 13, null, 150)
+    }
+
+    setImage() {
+        const d100 = game.rollDice(1, 100)
+
+        if (d100 > 75) {
+            this.url = './assets/images/fire-elemental.png'
+        } else if (d100 > 50) {
+            this.url = './assets/images/water-elemental.png'
+        } else if (d100 > 25) {
+            this.url = './assets/images/earth-elemental.png'
+        } else {
+            this.url = './assets/images/air-elemental.png'
+            this.imgWidth = 125 + 'px'
+        }
     }
 }
 
-class Armor {
+class Armor extends Monster {
     constructor() {
-        this.hp = 10
-        this.ac = 10
-        this.init = 0
-        this.url = '../images/armor.png'
+        super('Animated-Armor', 35, 15, './assets/images/armor.png', 150)
     }
 }
 
-class Gnoll {
+class Gnoll extends Monster {
     constructor() {
-        this.hp = 10
-        this.ac = 10
-        this.init = 0
-        this.url = '../images/gnoll.png'
+        super('Gnoll', 22, 12, './assets/images/gnoll.png', 150)
     }
 }
 
@@ -108,4 +113,4 @@ class Tarrasque {
     }
 }
 
-export {Kobold, Slime, Skeleton, Zombie}
+export {Kobold, Slime, Skeleton, Zombie, Elemental, Armor, Gnoll, Lich, Dragon, Tarrasque}

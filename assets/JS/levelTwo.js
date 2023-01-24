@@ -1,7 +1,9 @@
 import game from "./game.js"
-import { Kobold, Slime, Skeleton, Zombie } from "./monsterTypes.js"
+import levelOne from "./levelOne.js"
+import { Armor, Elemental, Gnoll } from "./monsterTypes.js"
 
-const levelOne = {
+
+const levelTwo = {
 
     monsters: [],
 
@@ -11,26 +13,26 @@ const levelOne = {
     //Level Functionality//
     ///////////////////////
     getMonsters: () => {
-        let d100 = game.rollDice(1, 100)
+        let d99 = game.rollDice(1, 99)
 
-        if (d100 > 75) {
-            for (let i = 0; i < 4; i++) {
-                levelOne.monsters.push(new Kobold)
-            }
-        } else if (d100 > 50) {
+        if (d99 > 66) {
             for (let i = 0; i < 3; i++) {
-                levelOne.monsters.push(new Slime)
+                const elemental = new Elemental
+
+                elemental.setImage()
+
+                levelTwo.monsters.push(elemental)
             }
-        } else if (d100 > 25) {
-            for (let i = 0; i < 4; i++) {
-                levelOne.monsters.push(new Skeleton)
+        } else if (d99 > 33) {
+            for (let i = 0; i < 2; i++) {
+                levelTwo.monsters.push(new Armor)
             }
         } else {
-            for (let i = 0; i < 4; i++) {
-                levelOne.monsters.push(new Zombie)
+            for (let i = 0; i < 3; i++) {
+                levelTwo.monsters.push(new Gnoll)
             }
         }
-        levelOne.numberOfEnemies = levelOne.monsters.length
+        levelTwo.numberOfEnemies = levelTwo.monsters.length
     },
 
     /////////////////////////
@@ -46,7 +48,7 @@ const levelOne = {
             <button id="continue">Continue</button>
         `
 
-        let text = `After a short venture into the tomb, you are attacked by a group of ${levelOne.monsters[0].name}s! Prepare for battle!`
+        let text = `After a short venture into the tomb, you are attacked by a group of ${levelTwo.monsters[0].name}s! Prepare for battle!`
         
         document.querySelector('#continue').onclick = () => {
             game.loadPlayerStats()
@@ -63,9 +65,10 @@ const levelOne = {
 
     reset: () => {
         levelOne.monsters = []
+        levelTwo.monsters = []
         game.controls = null
         game.display = null 
     }
 }
 
-export default levelOne
+export default levelTwo

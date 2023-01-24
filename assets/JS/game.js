@@ -1,5 +1,6 @@
 import { Fighter, Wizard, Paladin } from "./classOptions.js"
 import levelOne from "./levelOne.js"
+import levelTwo from "./levelTwo.js"
 
 // root element
 const root = document.querySelector('#root')
@@ -104,7 +105,9 @@ const game = {
 
         game.currentLevel.monsters.forEach((monster, index) => {
             monster.img = document.createElement('div')
+
             monster.img.style.width = monster.imgWidth
+
             monster.img.innerHTML = `
                 <span id="${monster.name}${index}-hp-bar">${monster.hp}/${monster.hpMax}</span>
                 <img id="${monster.name}${index}" src="${monster.url}" alt="${monster.name}"/>
@@ -192,7 +195,7 @@ const game = {
     startNewGame: async () => {
         game.loadCombatWindow()
 
-        game.currentLevel = levelOne
+        game.currentLevel = levelTwo
 
         let text = `You come across an old abandoned tomb that smells of adventure. 
         Of course you can not resist the temptation of riches, so you brave the deep unknown . . .`
@@ -202,10 +205,14 @@ const game = {
             <button id="continue">Continue</button>
         `
 
-        document.querySelector('#continue').onclick = levelOne.start
+        document.querySelector('#continue').onclick = game.currentLevel.start
 
         await game.textDisplay(text, document.querySelector('p'))
     },
+
+    // setLevel: () => {
+        
+    // },
 
     gameOver: () => {
         root.innerHTML = `
