@@ -27,6 +27,7 @@ button:hover { cursor: pointer; }
 }
 
 .menu button {
+    color: black; /* Hoping this will fix blue buttons on ios15 */
     width: 100%;
     margin-bottom: 0.3125rem;
     border: 0.15625rem double brown;
@@ -174,7 +175,9 @@ button:hover { cursor: pointer; }
     font-size: 2rem;
 }
 
-.game-over #continue { position: static; }
+.game-over #continue {
+    position: static;
+}
 
 /* fixes an error on mobile when displaying the inventory button */
 @media screen and (max-width: 600px) { #inventory { padding: 0 5px; } }

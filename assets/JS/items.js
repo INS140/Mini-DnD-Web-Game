@@ -31,10 +31,17 @@ class SpellPotion extends Item {
         super('Spell Potion', './assets/images/spell-potion.png')
     }
 
-    useEffect() {
-        game.player.sp += Math.ceil(game.player.spMax/2)
+    async useEffect() {
+        game.controls.innerHTML = `<h2></h2>`
 
-        if (game.player.sp > game.player.spMax) game.player.sp = game.player.spMax
+        const heal = Math.min(game.player.spMax-game.player.sp, Math.ceil(game.player.spMax/2))
+        console.log(heal)
+
+        await game.textDisplay(`${game.player.name} heals for ${heal}sp!`, document.querySelector('h2'))
+
+        game.player.sp += heal
+
+        game.setPlayerStats()
     }
 }
 
