@@ -1,5 +1,5 @@
 import game from "./game.js"
-import { Armor, Elemental, Gnoll } from "./monsterTypes.js"
+import { Armor, Elemental, Gnoll } from "./monster-types.js"
 
 
 const levelTwo = {

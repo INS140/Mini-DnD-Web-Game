@@ -1,7 +1,7 @@
-import { Fighter, Wizard, Paladin } from "./classOptions.js"
-import levelOne from "./levelOne.js"
-import levelTwo from "./levelTwo.js"
-import bossFight from "./bossFight.js"
+import { Fighter, Wizard, Paladin } from "./class-options.js"
+import levelOne from "./level-one.js"
+import levelTwo from "./level-two.js"
+import bossFight from "./boss-fight.js"
 
 // root element
 const root = document.querySelector('#root')
@@ -463,9 +463,12 @@ const game = {
                 }
 
                 if (game.currentLevel.numberOfEnemies === 0) {
-                    await game.textDisplay(`You defeated the last ${monster.name}!`, h2)
-
-                    game.setLevel()
+                    if (game.currentLevel !== bossFight) {
+                        await game.textDisplay(`You defeated the last ${monster.name}!`, h2)
+                        game.setLevel()
+                    } else {
+                        game.win()
+                    }
                 } else {
                     await new Promise(res => setTimeout(res, 500)).then(game.monsterAttackPhase)
                 }
@@ -565,6 +568,13 @@ const game = {
             game.loadControls()
         }
     },
+
+    ////////////////////
+    //The Win Function//
+    ////////////////////
+    win: async () => {
+        
+    }
 }
 
 export default game
