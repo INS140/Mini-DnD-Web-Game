@@ -508,11 +508,11 @@ const game = {
             document.querySelector('.display-box').remove()
         }
 
-        document.querySelectorAll('#inventory-box div').forEach((itemBox, index) => {
+        document.querySelectorAll('.display-box div').forEach((itemBox, index) => {
             itemBox.onclick = async () => {
                 game.controls.innerHTML = `<h2></h2>`
 
-                document.querySelector('#inventory-box').remove()
+                document.querySelector('.display-box').remove()
 
                 const item = game.player.inventory[index]
 

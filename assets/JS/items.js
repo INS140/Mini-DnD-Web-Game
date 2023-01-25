@@ -16,7 +16,6 @@ class HealingPotion extends Item {
         game.controls.innerHTML = `<h2></h2>`
 
         const heal = Math.min(game.player.hpMax-game.player.hp, Math.ceil(game.player.hpMax/2))
-        console.log(heal)
 
         await game.textDisplay(`${game.player.name} heals for ${heal}hp!`, document.querySelector('h2'))
 
@@ -35,9 +34,8 @@ class SpellPotion extends Item {
         game.controls.innerHTML = `<h2></h2>`
 
         const heal = Math.min(game.player.spMax-game.player.sp, Math.ceil(game.player.spMax/2))
-        console.log(heal)
 
-        await game.textDisplay(`${game.player.name} heals for ${heal}sp!`, document.querySelector('h2'))
+        await game.textDisplay(`${game.player.name} restores ${heal}sp!`, document.querySelector('h2'))
 
         game.player.sp += heal
 
