@@ -1,6 +1,7 @@
 import { Fighter, Wizard, Paladin } from "./classOptions.js"
 import levelOne from "./levelOne.js"
 import levelTwo from "./levelTwo.js"
+import bossFight from "./bossFight.js"
 
 // root element
 const root = document.querySelector('#root')
@@ -189,6 +190,17 @@ const game = {
         await game.textDisplay(`${game.player.name}'s Inventory`, document.querySelector('h2'))
     },
 
+    loadCombatDisplayElements: () => {
+        game.loadControls()
+
+        game.currentLevel.monsters.forEach((monster, index) => {
+            const hpBar = document.querySelector(`#${monster.name}${index}-hp-bar`)
+            hpBar.style.visibility = 'visible'
+        })
+
+        document.querySelector('#player-stats').style.visibility = 'visible'
+    },
+
     intermissionOne: async () => {
         document.querySelector('#player-stats').style.visibility = 'hidden'
 
@@ -199,7 +211,28 @@ const game = {
 
         const text = `After defeating the ${levelOne.monsters[0].name}s, you continue your journey deeper into the tomb.`
 
-        document.querySelector('#continue').onclick = game.currentLevel.start
+        document.querySelector('#continue').onclick = () => {
+            game.currentLevel.start()
+        }
+
+        await game.textDisplay(text, document.querySelector('p'))
+    },
+
+    intermissionTwo: async () => {
+        document.querySelector('#player-stats').style.visibility = 'hidden'
+
+        game.display.style.backgroundImage = './assets/images/boss-background.webp'
+
+        game.controls.innerHTML = `
+            <p></p>
+            <button id="continue">Continue</button>
+        `
+
+        const text = `You have defeated the ${levelTwo.monsters[0].name}s and can sense that the end is drawing near.`
+
+        document.querySelector('#continue').onclick = () => {
+            game.currentLevel.start()
+        }
 
         await game.textDisplay(text, document.querySelector('p'))
     },
@@ -233,6 +266,7 @@ const game = {
                 break
             case levelTwo:
                 game.currentLevel = bossFight
+                game.intermissionTwo()
                 break
             default:
                 game.currentLevel = levelOne
@@ -261,10 +295,20 @@ const game = {
 
         document.querySelector('#quit').onclick = () => {
             game.loadMainMenu()
-            game.currentLevel.reset()
+            game.resetGame()
         }
 
         document.querySelector('#cancel').onclick = game.loadControls
+    },
+
+    resetGame: () => {
+        levelOne.monsters = []
+        levelTwo.monsters = []
+        bossFight.monsters = []
+
+        game.currentLevel = null
+        game.controls = null
+        game.display = null 
     },
 
     setPlayer: (name, classType) => {

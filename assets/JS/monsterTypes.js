@@ -86,30 +86,21 @@ class Gnoll extends Monster {
 
 // BBEG
 
-class Lich {
+class Lich extends Monster{
     constructor() {
-        this.hp = 10
-        this.ac = 10
-        this.init = 0
-        this.url = '../images/lich.png'
+        super('Lich', 80, 10, './assets/images/lich.png', 250)
     }
 }
 
-class Dragon {
+class Dragon extends Monster{
     constructor() {
-        this.hp = 100
-        this.ac = 10
-        this.init = 0
-        this.url = '../images/dragon.png'
+        super('Dragon', 100, 10, './assets/images/dragon.png', 350)
     }
 }
 
-class Tarrasque {
+class Tarrasque extends Monster {
     constructor() {
-        this.hp = 1000
-        this.ac = 10
-        this.init = 0
-        this.url = '../images/tarrasque.png'
+        super('Tarrasque', 1000, 10, './assets/images/tarrasque.png', 400)
     }
 }
 

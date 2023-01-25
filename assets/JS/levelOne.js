@@ -1,5 +1,4 @@
 import game from "./game.js"
-import levelTwo from "./levelTwo.js"
 import { Kobold, Slime, Skeleton, Zombie } from "./monsterTypes.js"
 
 const levelOne = {
@@ -31,6 +30,7 @@ const levelOne = {
                 levelOne.monsters.push(new Zombie)
             }
         }
+        
         levelOne.numberOfEnemies = levelOne.monsters.length
     },
 
@@ -51,24 +51,11 @@ const levelOne = {
         
         document.querySelector('#continue').onclick = () => {
             game.loadPlayerStats()
-            game.loadControls()
-
-            game.currentLevel.monsters.forEach((monster, index) => {
-                const hpBar = document.querySelector(`#${monster.name}${index}-hp-bar`)
-                hpBar.style.visibility = 'visible'
-            })
+            game.loadCombatDisplayElements()
         }
 
         await game.textDisplay(text, document.querySelector('p'))
     },
-
-    reset: () => {
-        levelOne.monsters = []
-        levelTwo.monsters = []
-        game.currentLevel = null
-        game.controls = null
-        game.display = null 
-    }
 }
 
 export default levelOne

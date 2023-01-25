@@ -1,5 +1,4 @@
 import game from "./game.js"
-import levelOne from "./levelOne.js"
 import { Armor, Elemental, Gnoll } from "./monsterTypes.js"
 
 
@@ -32,6 +31,7 @@ const levelTwo = {
                 levelTwo.monsters.push(new Gnoll)
             }
         }
+
         levelTwo.numberOfEnemies = levelTwo.monsters.length
     },
 
@@ -48,27 +48,10 @@ const levelTwo = {
 
         const text = `You feel a presence ahead, and come across a group of ${levelTwo.monsters[0].name}s.`
         
-        document.querySelector('#continue').onclick = () => {
-            game.loadControls()
-
-            document.querySelector('#player-stats').style.visibility = 'visible'
-
-            game.currentLevel.monsters.forEach((monster, index) => {
-                const hpBar = document.querySelector(`#${monster.name}${index}-hp-bar`)
-                hpBar.style.visibility = 'visible'
-            })
-        }
+        document.querySelector('#continue').onclick = game.loadCombatDisplayElements
 
         await game.textDisplay(text, document.querySelector('p'))
     },
-
-    reset: () => {
-        levelOne.monsters = []
-        levelTwo.monsters = []
-        game.currentLevel = null
-        game.controls = null
-        game.display = null 
-    }
 }
 
 export default levelTwo
