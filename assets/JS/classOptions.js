@@ -16,7 +16,7 @@ class Player {
 
 class Fighter extends Player {
     constructor(name) {
-        super(name, 100, 15, 0, 10)
+        super(name, 100, 15, 0, 100)
         this.inventory = [
             new HealingPotion,
             new HealingPotion,

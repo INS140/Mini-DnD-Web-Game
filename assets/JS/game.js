@@ -195,7 +195,7 @@ const game = {
     startNewGame: async () => {
         game.loadCombatWindow()
 
-        game.currentLevel = levelTwo
+        game.setLevel()
 
         let text = `You come across an old abandoned tomb that smells of adventure. 
         Of course you can not resist the temptation of riches, so you brave the deep unknown . . .`
@@ -210,9 +210,19 @@ const game = {
         await game.textDisplay(text, document.querySelector('p'))
     },
 
-    // setLevel: () => {
-        
-    // },
+    setLevel: () => {
+        switch (game.currentLevel) {
+            case levelOne:
+                game.currentLevel = levelTwo
+                break
+            case levelTwo:
+                game.currentLevel = bossFight
+                break
+            default:
+                game.currentLevel = levelOne
+                break
+        }
+    },
 
     gameOver: () => {
         root.innerHTML = `
@@ -338,7 +348,7 @@ const game = {
         element.innerHTML = null
 
         for (const char of text.split('')) {
-            await new Promise(res => setTimeout(res, 40)).then(() => element.innerHTML += char)
+            await new Promise(res => setTimeout(res, 30)).then(() => element.innerHTML += char)
         }
 
         await new Promise(res => setTimeout(res, 250))
@@ -363,7 +373,7 @@ const game = {
             monster.img.onclick = async () => {
                 game.currentLevel.monsters.forEach(monster => monster.img.onclick = null)
 
-                let atkRoll = game.rollDice(1, 20)
+                let atkRoll = 20 //game.rollDice(1, 20)
 
                 game.controls.innerHTML = `<h2></h2>`
                 let h2 = document.querySelector('h2')
@@ -393,7 +403,11 @@ const game = {
                 }
 
                 if (game.currentLevel.numberOfEnemies === 0) {
-                    await game.textDisplay('You Win!!!', h2)
+                    await game.textDisplay(`You defeated the last ${monster.name}!`, h2)
+
+                    game.setLevel()
+
+                    game.currentLevel.start()
                 } else {
                     await new Promise(res => setTimeout(res, 500)).then(game.monsterAttackPhase)
                 }

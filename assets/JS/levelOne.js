@@ -1,4 +1,5 @@
 import game from "./game.js"
+import levelTwo from "./levelTwo.js"
 import { Kobold, Slime, Skeleton, Zombie } from "./monsterTypes.js"
 
 const levelOne = {
@@ -63,6 +64,8 @@ const levelOne = {
 
     reset: () => {
         levelOne.monsters = []
+        levelTwo.monsters = []
+        game.currentLevel = null
         game.controls = null
         game.display = null 
     }

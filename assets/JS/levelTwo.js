@@ -39,20 +39,21 @@ const levelTwo = {
     //Level Display Methods//
     /////////////////////////
     start: async () => {
-        game.controls.innerHTML = null
-
         game.loadMonsterImages()
+
+        document.querySelector('#player-stats').style.visibility = 'hidden'
 
         game.controls.innerHTML = `
             <p></p>
             <button id="continue">Continue</button>
         `
 
-        let text = `After a short venture into the tomb, you are attacked by a group of ${levelTwo.monsters[0].name}s! Prepare for battle!`
+        let text = `After defeating the ${levelOne.monsters[0].name}s, you continue your journey deeper into the tomb.`
         
         document.querySelector('#continue').onclick = () => {
-            game.loadPlayerStats()
             game.loadControls()
+
+            document.querySelector('#player-stats').style.visibility = 'visible'
 
             game.currentLevel.monsters.forEach((monster, index) => {
                 const hpBar = document.querySelector(`#${monster.name}${index}-hp-bar`)
@@ -66,6 +67,7 @@ const levelTwo = {
     reset: () => {
         levelOne.monsters = []
         levelTwo.monsters = []
+        game.currentLevel = null
         game.controls = null
         game.display = null 
     }
