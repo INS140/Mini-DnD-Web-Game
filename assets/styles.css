@@ -52,7 +52,7 @@ button:hover { cursor: pointer; }
 .new-game button { width: 49%; }
 
 .combat-window {
-    background-color: white;
+    background-color: black;
     width: 100vw;
     height: 100vh;
 }
@@ -175,8 +175,37 @@ button:hover { cursor: pointer; }
     font-size: 2rem;
 }
 
-.game-over #continue {
-    position: static;
+.game-over #continue { position: static; }
+
+#win-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: url('./images/win-background.webp') center/cover no-repeat;
+}
+
+#win-screen h2 {
+    font-size: 3rem;
+    margin-top: 0;
+}
+
+#win-screen button {
+    color: white;
+    font-size: 1rem;
+    padding: 10px;
+    background: url('./images/controls-background.jpg');
+    border: 0.15625rem double white;
+    visibility: hidden;
+}
+
+#win-screen div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* fixes an error on mobile when displaying the inventory button */

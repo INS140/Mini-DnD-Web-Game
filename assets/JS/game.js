@@ -243,7 +243,7 @@ const game = {
     startNewGame: async () => {
         game.loadCombatWindow()
 
-        game.setLevel()
+        game.currentLevel = bossFight//setLevel()
 
         let text = `You come across an old abandoned tomb that smells of adventure. 
         Of course you can not resist the temptation of riches, so you brave the deep unknown . . .`
@@ -404,11 +404,11 @@ const game = {
         return total
     },
 
-    textDisplay: async (text, element) => {
+    textDisplay: async (text, element, time=30) => {
         element.innerHTML = null
 
         for (const char of text.split('')) {
-            await new Promise(res => setTimeout(res, 30)).then(() => element.innerHTML += char)
+            await new Promise(res => setTimeout(res, time)).then(() => element.innerHTML += char)
         }
 
         await new Promise(res => setTimeout(res, 250))
@@ -569,11 +569,39 @@ const game = {
         }
     },
 
-    ////////////////////
-    //The Win Function//
-    ////////////////////
+    /////////////////////
+    //The Win Functions//
+    /////////////////////
     win: async () => {
+        game.controls.innerHTML = `<h2></h2>`
+
+        const text = `${game.player.name} has defeated the ${bossFight.monsters[0].name}!     `
+
+        await game.textDisplay(text, document.querySelector('h2'), 50)
         
+        root.innerHTML = `
+            <div id="win-screen">
+                <h2 class=".win-text"></h2>
+            </div>
+        `
+
+        await game.textDisplay(`Congratulations`, document.querySelector('h2'), 100)
+
+        const div = document.createElement('div')
+        div.innerHTML = `
+            <h2 id="you-win"></h2>
+            <button id="play-again">Play Again</button>
+        `
+
+        document.querySelector('#win-screen').append(div)
+
+        await game.textDisplay(`You Win`, document.querySelector('#you-win'), 100)
+                  .then(() => document.querySelector('#play-again').style.visibility = 'visible')
+        
+        document.querySelector('#play-again').onclick = () => {
+            game.loadMainMenu()
+            game.resetGame()
+        }
     }
 }
 
