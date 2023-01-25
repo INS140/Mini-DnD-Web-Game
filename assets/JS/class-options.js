@@ -1,5 +1,6 @@
 import game from "./game.js"
 import { HealingPotion, SpellPotion } from "./items.js"
+import { Frostbolt, Fireball, LightningBolt, Smite, HolyFire } from "./spells.js"
 
 class Player {
     constructor(name, hp, ac, sp, atkDmg) {
@@ -28,18 +29,49 @@ class SpellCaster extends Player {
                 <button id="melee">Melee</button>
                 <button id="spell">Spell</button>
             </div>
-            <button id="back">Back</button>
+            <button id="cancel">Cancel</button>
         `
 
         document.querySelector('#melee').onclick = game.attack
         document.querySelector('#spell').onclick = this.loadSpells
-        document.querySelector('#back').onclick = game.loadActions
+        document.querySelector('#cancel').onclick = game.loadActions
 
         await game.textDisplay(`Select an attack type`, document.querySelector('h2'))
     }
 
-    loadSpells() {
-        game
+    async loadSpells() {
+        game.controls.innerHTML = `
+            <h2 id="text"></h2>
+            <button id="cancel">Cancel</button>
+        `
+
+        let spellWindow = document.createElement('div')
+        spellWindow.classList.add('display-box', 'grid-4', 'fixed-center')
+        
+
+        game.player.spells.forEach(spell => {
+            let spellCard = document.createElement('div')
+            spellCard.classList.add('spell-card')
+            spellCard.innerHTML = `
+                <h2>${spell.name}</h2>
+                <h4>SP Cost: ${spell.spCost}</h4>
+            `
+
+            spellWindow.append(spellCard)
+
+            spellCard.onclick = () => {
+                
+            }
+        })
+
+        document.querySelector('.combat-window').append(spellWindow)
+
+        document.querySelector('#cancel').onclick = () => {
+            game.loadActions()
+            spellWindow.remove()
+        }
+
+        await game.textDisplay(`Choose a spell to cast`, document.querySelector('#text'))
     }
 }
 
@@ -62,6 +94,11 @@ class Wizard extends SpellCaster {
             new SpellPotion,
             new SpellPotion
         ]
+        this.spells = [
+            new Frostbolt,
+            new Fireball,
+            new LightningBolt
+        ]
     }
 }
 
@@ -72,6 +109,10 @@ class Paladin extends SpellCaster {
             new HealingPotion,
             new HealingPotion,
             new SpellPotion
+        ]
+        this.spells = [
+            new Smite,
+            new HolyFire
         ]
     }
 }

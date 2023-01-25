@@ -61,11 +61,11 @@ const game = {
                 <option value="paladin">Paladin</option>
             </select><br>
             <hr>
-            <button id="back">Back</button>
+            <button id="cancel">Cancel</button>
             <button id="start">Start Game</button>
         `
         root.append(menu)
-        document.querySelector('#back').onclick = game.loadMainMenu
+        document.querySelector('#cancel').onclick = game.loadMainMenu
 
         let input = document.querySelector('#name'),
             select = document.querySelector('#class-select')
@@ -168,26 +168,25 @@ const game = {
     loadInventory: async () => {
         game.controls.innerHTML = `
             <h2></h2>
-            <button id="back">Back</button>
+            <button id="cancel">Cancel</button>
         `
 
         const inventoryBox = document.createElement('div')
-        inventoryBox.id = 'inventory-box'
-        inventoryBox.classList.add('grid-4')
+        inventoryBox.classList.add('display-box', 'grid-4', 'fixed-center')
 
         game.player.inventory.forEach(item => {
-            const div = document.createElement('div')
-            div.innerHTML = `
+            const itemCard = document.createElement('div')
+            itemCard.innerHTML = `
                 <img src="${item.url}" alt="${item.name}" title="${item.name}"/>
                 <p>${item.name}</p>
             `
 
-            inventoryBox.append(div)
+            inventoryBox.append(itemCard)
         })
 
         document.querySelector('.combat-window').append(inventoryBox)
         
-        document.querySelector('#back').onclick = () => {
+        document.querySelector('#cancel').onclick = () => {
             game.loadControls()
             inventoryBox.remove()
         }
@@ -501,12 +500,12 @@ const game = {
 
         game.controls.innerHTML = `
             <h2></h2>
-            <button id="back">Back</button>
+            <button id="cancel">Cancel</button>
         `
 
-        document.querySelector('#back').onclick = () => {
+        document.querySelector('#cancel').onclick = () => {
             game.loadActions()
-            document.querySelector('#inventory-box').remove()
+            document.querySelector('.display-box').remove()
         }
 
         document.querySelectorAll('#inventory-box div').forEach((itemBox, index) => {
@@ -519,7 +518,7 @@ const game = {
 
                 await game.textDisplay(`${game.player.name} uses a ${item.name}!`, document.querySelector('h2'))
 
-                await item.useEffect()
+                await item.use()
 
                 game.player.inventory.splice(index, 1)
 

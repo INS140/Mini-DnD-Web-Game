@@ -12,7 +12,7 @@ class HealingPotion extends Item {
         super('Healing Potion', './assets/images/healing-potion.png')
     }
 
-    async useEffect() {
+    async use() {
         game.controls.innerHTML = `<h2></h2>`
 
         const heal = Math.min(game.player.hpMax-game.player.hp, Math.ceil(game.player.hpMax/2))
@@ -31,7 +31,7 @@ class SpellPotion extends Item {
         super('Spell Potion', './assets/images/spell-potion.png')
     }
 
-    async useEffect() {
+    async use() {
         game.controls.innerHTML = `<h2></h2>`
 
         const heal = Math.min(game.player.spMax-game.player.sp, Math.ceil(game.player.spMax/2))

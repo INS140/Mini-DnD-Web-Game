@@ -125,6 +125,13 @@ button:hover { cursor: pointer; }
     box-sizing: border-box;
 }
 
+.fixed-center {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 #spell-h2 { margin: 10px 0; }
 
 .monster-images {
@@ -155,21 +162,17 @@ button:hover { cursor: pointer; }
 
 .monster-images img { width: 100%; }
 
-#inventory-box {
+.display-box {
     color: white;
-    width: 25rem;
-    height: 20rem;
+    width: 20rem;
+    height: auto;
     background: url('./images/controls-background.jpg');
     box-sizing: border-box;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     border: 0.15625rem double white;
     padding: 10px;
 }
 
-#inventory-box div {
+.display-box div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -178,7 +181,11 @@ button:hover { cursor: pointer; }
     padding: 10px;
 }
 
-#inventory-box img { width: 35%;}
+.display-box img { width: 35%;}
+
+.spell-card h2 , .spell-card h4 {
+    margin: 10px 0;
+}
 
 .game-over {
     color: black;
