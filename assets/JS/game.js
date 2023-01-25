@@ -36,11 +36,13 @@ const game = {
         root.append(menu)
 
         document.querySelector('#play-now').onclick = () => {
-            game.player = new Fighter('Butcher')
+            game.player = new Wizard('Butcher')
             game.startNewGame()
         }
 
         document.querySelector('#new-game').onclick = game.loadNewGameMenu
+        // document.querySelector('#load-game').onclick = game.loadLoadGameMenu
+        // document.querySelector('#options').onclick = game.loadGameOptions
     },
 
     loadNewGameMenu: () => {
@@ -154,7 +156,10 @@ const game = {
                 <button id="cancel">Cancel</button>
             </div>
         `
-        document.querySelector('#attack').onclick = game.attack
+        document.querySelector('#attack').onclick = () => {
+            (game.player instanceof Fighter) ? game.attack() : game.player.loadAttackOptions()
+        }
+        
         document.querySelector('#defend').onclick = game.defend
         document.querySelector('#item').onclick = game.useItem
         document.querySelector('#cancel').onclick = game.loadControls
@@ -243,7 +248,7 @@ const game = {
     startNewGame: async () => {
         game.loadCombatWindow()
 
-        game.currentLevel = bossFight//setLevel()
+        game.setLevel()
 
         let text = `You come across an old abandoned tomb that smells of adventure. 
         Of course you can not resist the temptation of riches, so you brave the deep unknown . . .`
@@ -433,7 +438,7 @@ const game = {
             monster.img.onclick = async () => {
                 game.currentLevel.monsters.forEach(monster => monster.img.onclick = null)
 
-                let atkRoll = 20 //game.rollDice(1, 20)
+                let atkRoll = game.rollDice(1, 20)
 
                 game.controls.innerHTML = `<h2></h2>`
                 let h2 = document.querySelector('h2')
