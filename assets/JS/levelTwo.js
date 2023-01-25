@@ -41,14 +41,12 @@ const levelTwo = {
     start: async () => {
         game.loadMonsterImages()
 
-        document.querySelector('#player-stats').style.visibility = 'hidden'
-
         game.controls.innerHTML = `
             <p></p>
             <button id="continue">Continue</button>
         `
 
-        let text = `After defeating the ${levelOne.monsters[0].name}s, you continue your journey deeper into the tomb.`
+        const text = `You feel a presence ahead, and come across a group of ${levelTwo.monsters[0].name}s.`
         
         document.querySelector('#continue').onclick = () => {
             game.loadControls()

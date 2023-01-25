@@ -189,6 +189,21 @@ const game = {
         await game.textDisplay(`${game.player.name}'s Inventory`, document.querySelector('h2'))
     },
 
+    intermissionOne: async () => {
+        document.querySelector('#player-stats').style.visibility = 'hidden'
+
+        game.controls.innerHTML = `
+            <p></p>
+            <button id="continue">Continue</button>
+        `
+
+        const text = `After defeating the ${levelOne.monsters[0].name}s, you continue your journey deeper into the tomb.`
+
+        document.querySelector('#continue').onclick = game.currentLevel.start
+
+        await game.textDisplay(text, document.querySelector('p'))
+    },
+
     //////////////////////
     //Game Functionality//
     //////////////////////
@@ -214,6 +229,7 @@ const game = {
         switch (game.currentLevel) {
             case levelOne:
                 game.currentLevel = levelTwo
+                game.intermissionOne()
                 break
             case levelTwo:
                 game.currentLevel = bossFight
@@ -406,8 +422,6 @@ const game = {
                     await game.textDisplay(`You defeated the last ${monster.name}!`, h2)
 
                     game.setLevel()
-
-                    game.currentLevel.start()
                 } else {
                     await new Promise(res => setTimeout(res, 500)).then(game.monsterAttackPhase)
                 }
