@@ -1,13 +1,16 @@
 # Todo
-- create inventory
-- create heal mechanic
-
-- randomize player damage based on class
-
-- create level 2 and 3
+- refactor monster attack damage
 
 - add save and load mechanic
 
-- add combat modifiers, maybe you won't miss so much anymore ...
+- implement React.js
 
-- implement mobile layouts - in progress
+- add more weapons, spells, monsters, etc.
+
+- update responsiveness
+
+- fix text bugs and clear timers on continue
+
+- develop intermission choose upgrade/item
+
+- defeat the Tarrasque

@@ -27,7 +27,7 @@ button:hover { cursor: pointer; }
 }
 
 .menu button {
-    color: black; /* Hoping this will fix blue buttons on ios15 */
+    color: black; /* Fixes blue buttons on ios15 */
     width: 100%;
     margin-bottom: 0.3125rem;
     border: 0.15625rem double brown;
@@ -35,6 +35,7 @@ button:hover { cursor: pointer; }
 }
 
 .menu input, .menu select {
+    color: black;
     border: none;
     border-bottom: 1px solid brown;
     text-align: center;

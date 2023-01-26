@@ -36,7 +36,7 @@ const game = {
         root.append(menu)
 
         document.querySelector('#play-now').onclick = () => {
-            game.player = new Wizard('Butcher')
+            game.player = new Fighter('Butcher')
             game.startNewGame()
         }
 
