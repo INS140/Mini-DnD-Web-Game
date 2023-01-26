@@ -13,20 +13,20 @@ const levelOne = {
     getMonsters: () => {
         let d100 = game.rollDice(1, 100)
 
-        if (d100 > 75) {
-            for (let i = 0; i < 4; i++) {
+        if (d100 > 90) {
+            for (let i = 0; i < 5; i++) {
                 levelOne.monsters.push(new Kobold)
             }
-        } else if (d100 > 50) {
-            for (let i = 0; i < 3; i++) {
-                levelOne.monsters.push(new Slime)
-            }
-        } else if (d100 > 25) {
+        } else if (d100 > 60) {
             for (let i = 0; i < 4; i++) {
                 levelOne.monsters.push(new Skeleton)
             }
+        } else if (d100 > 30) {
+            for (let i = 0; i < 3; i++) {
+                levelOne.monsters.push(new Slime)
+            }
         } else {
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 3; i++) {
                 levelOne.monsters.push(new Zombie)
             }
         }

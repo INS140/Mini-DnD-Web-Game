@@ -43,7 +43,7 @@ class LightningBolt extends Spell {
 //////////////////
 class Smite extends Spell {
     constructor() {
-        super('Smite', 2, 1, 8)
+        super('Smite', 2, 2, 8)
     }
 
     getDmg() {

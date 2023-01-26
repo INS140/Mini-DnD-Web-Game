@@ -12,23 +12,23 @@ const levelTwo = {
     //Level Functionality//
     ///////////////////////
     getMonsters: () => {
-        let d99 = game.rollDice(1, 99)
+        let d100 = game.rollDice(1, 100)
 
-        if (d99 > 66) {
+        if (d100 > 60) {
+            for (let i = 0; i < 4; i++) {
+                levelTwo.monsters.push(new Gnoll)
+            }
+        } else if (d100 > 20) {
             for (let i = 0; i < 3; i++) {
+                levelTwo.monsters.push(new Armor)
+            }
+        } else {
+            for (let i = 0; i < 2; i++) {
                 const elemental = new Elemental
 
                 elemental.setImage()
 
                 levelTwo.monsters.push(elemental)
-            }
-        } else if (d99 > 33) {
-            for (let i = 0; i < 2; i++) {
-                levelTwo.monsters.push(new Armor)
-            }
-        } else {
-            for (let i = 0; i < 3; i++) {
-                levelTwo.monsters.push(new Gnoll)
             }
         }
 

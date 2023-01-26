@@ -1,12 +1,14 @@
 import game from "./game.js"
 
 class Monster {
-    constructor(name, hp, ac, url, imgWidth) {
+    constructor(name, hp, ac, atkMod, dmgMod, url, imgWidth) {
         //combat properties
         this.name = name
         this.hp = hp
         this.hpMax = hp
         this.ac = ac
+        this.atkMod = atkMod
+        this.dmgMod = dmgMod
         this.dead = false
 
         //display properties
@@ -27,25 +29,25 @@ class Monster {
 // Low level
 class Kobold extends Monster {
     constructor() {
-        super('Kobold', 10, 10, './assets/images/kobold.png', 100)
+        super('Kobold', Math.max(game.rollDice(2, 6) -2, 5), 12, 2, 2, './assets/images/kobold.png', 80)
     }
 }
 
 class Slime extends Monster {
     constructor() {
-        super('Slime', 15, 12, './assets/images/slime.png', 200)
+        super('Slime', Math.max(game.rollDice(3, 8) + 9, 22), 8, 3, 1, './assets/images/slime.png', 200)
     }
 }
 
 class Skeleton extends Monster {
     constructor() {
-        super('Skeleton', 8, 10, './assets/images/skeleton.png', 150)
+        super('Skeleton', Math.max(game.rollDice(2, 8) + 4, 13), 13, 4, 2, './assets/images/skeleton.png', 150)
     }
 }
 
 class Zombie extends Monster{
     constructor() {
-        super('Zombie', 12, 8, './assets/images/zombie.png', 150)
+        super('Zombie', Math.max(game.rollDice(3, 8) + 9, 22), 8, 3, 1, './assets/images/zombie.png', 150)
     }
 }
 
@@ -53,7 +55,7 @@ class Zombie extends Monster{
 
 class Elemental extends Monster {
     constructor() {
-        super('Elemental', 25, 13, null, 150)
+        super('Elemental', Math.max(game.rollDice(8, 10) + 20, 64), 14, 6, 3, null, 200)
     }
 
     setImage() {
@@ -67,20 +69,20 @@ class Elemental extends Monster {
             this.url = './assets/images/earth-elemental.png'
         } else {
             this.url = './assets/images/air-elemental.png'
-            this.imgWidth = 125 + 'px'
+            this.imgWidth = '160px'
         }
     }
 }
 
 class Armor extends Monster {
     constructor() {
-        super('Animated-Armor', 35, 15, './assets/images/armor.png', 150)
+        super('Animated-Armor', Math.max(game.rollDice(6, 8) + 6, 33), 18, 4, 2, './assets/images/armor.png', 150)
     }
 }
 
 class Gnoll extends Monster {
     constructor() {
-        super('Gnoll', 22, 12, './assets/images/gnoll.png', 150)
+        super('Gnoll', Math.max(game.rollDice(5, 8), 22), 12, 4, 2, './assets/images/gnoll.png', 150)
     }
 }
 
@@ -88,19 +90,19 @@ class Gnoll extends Monster {
 
 class Lich extends Monster{
     constructor() {
-        super('Lich', 80, 10, './assets/images/lich.png', 250)
+        super('Lich', Math.max(game.rollDice(18, 8) + 54, 135), 17, 12, 0, './assets/images/lich.png', 300)
     }
 }
 
 class Dragon extends Monster{
     constructor() {
-        super('Dragon', 100, 10, './assets/images/dragon.png', 350)
+        super('Dragon', Math.max(game.rollDice(17, 12) + 85, 195), 19, 11, 6, './assets/images/dragon.png', 500)
     }
 }
 
 class Tarrasque extends Monster {
     constructor() {
-        super('Tarrasque', 1000, 10, './assets/images/tarrasque.png', 400)
+        super('Tarrasque', Math.max(game.rollDice(33, 20) + 330, 676), 25, 19, 10, './assets/images/tarrasque.png', 350)
     }
 }
 

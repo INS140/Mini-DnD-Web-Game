@@ -440,14 +440,16 @@ const game = {
             monster.img.onclick = async () => {
                 game.currentLevel.monsters.forEach(monster => monster.img.onclick = null)
 
-                let atkRoll = 19 //game.rollDice(1, 20)
+                const atkMod = (game.player.casting) ? game.player.spellMod : game.player.atkMod
+
+                const atkRoll = game.rollDice(1, 20)
 
                 game.controls.innerHTML = `<h2></h2>`
                 let h2 = document.querySelector('h2')
 
                 await game.textDisplay(`Rolling dice . . .`, h2)
 
-                if (atkRoll >= monster.ac) {
+                if (atkRoll + atkMod >= monster.ac || atkRoll === 20) {
                     const dmg = (atkRoll === 20) ? game.player.getCritDmg() 
                                 : (atkRoll === 20 && game.player.casting) ? game.player.spellChoise.getCritDmg()
                                 : (game.player.casting) ? game.player.spellChoise.getDmg()

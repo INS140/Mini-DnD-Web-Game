@@ -3,30 +3,32 @@ import { HealingPotion, SpellPotion } from "./items.js"
 import { Frostbolt, Fireball, LightningBolt, Smite, HolyFire } from "./spells.js"
 
 class Player {
-    constructor(name, hp, ac, sp, atkDmg) {
+    constructor(name, hp, ac, sp, atkMod, dmgMod) {
         this.name = name
         this.hp = hp
         this.hpMax = hp
         this.ac = ac
         this.sp = sp
         this.spMax = sp
-        this.atkDmg = atkDmg
+        this.atkMod = atkMod
+        this.dmgMod = dmgMod
         this.defBoost = 2
         this.defending = false
     }
 
     getDmg() {
-        return game.rollDice(1, 8)
+        return game.rollDice(1, 8) + this.dmgMod
     }
 
     getCritDmg() {
-        return game.rollDice(2, 8)
+        return game.rollDice(2, 8) + this.dmgMod
     }
 }
 
 class SpellCaster extends Player {
-    constructor(name, hp, ac, sp, atkDmg) {
-        super(name, hp, ac, sp, atkDmg)
+    constructor(name, hp, ac, sp, atkMod, dmgMod, spellMod) {
+        super(name, hp, ac, sp, atkMod, dmgMod)
+        this.spellMod = spellMod
         this.spells = []
         this.spellChoise = null
         this.casting = false
@@ -93,7 +95,7 @@ class SpellCaster extends Player {
 
 class Fighter extends Player {
     constructor(name) {
-        super(name, 100, 15, 0, 100)
+        super(name, 100, 16, 0, 7, 4)
         this.inventory = [
             new HealingPotion,
             new HealingPotion,
@@ -104,7 +106,7 @@ class Fighter extends Player {
 
 class Wizard extends SpellCaster {
     constructor(name) {
-        super(name, 60, 12, 20, 100)
+        super(name, 60, 12, 35, 3, -1, 7)
         this.inventory = [
             new HealingPotion,
             new SpellPotion,
@@ -122,7 +124,7 @@ class Wizard extends SpellCaster {
 
 class Paladin extends SpellCaster {
     constructor(name) {
-        super(name, 80, 14, 10, 12)
+        super(name, 80, 15, 15, 7, 3, 7)
         this.inventory = [
             new HealingPotion,
             new HealingPotion,
