@@ -37,10 +37,7 @@ const bossFight = {
 
         const text = `You have come to the end of the tomb and awaiting you is a ${bossFight.monsters[0].name}! It doesn't look very happy to see you .  .  .`
         
-        document.querySelector('#continue').onclick = () => {
-            game.loadPlayerStats()
-            game.loadCombatDisplayElements()
-        }
+        document.querySelector('#continue').onclick = game.loadCombatDisplayElements
 
         await game.textDisplay(text, document.querySelector('p'))
     },

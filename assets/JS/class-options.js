@@ -1,9 +1,10 @@
 import game from "./game.js"
 import { HealingPotion, SpellPotion } from "./items.js"
 import { Frostbolt, Fireball, LightningBolt, Smite, HolyFire } from "./spells.js"
+import { Greatsword, Quarterstaff, Warhammer } from "./weapons.js"
 
 class Player {
-    constructor(name, hp, ac, sp, atkMod, dmgMod) {
+    constructor(name, hp, ac, sp, atkMod, dmgMod, weapon) {
         this.name = name
         this.hp = hp
         this.hpMax = hp
@@ -14,20 +15,23 @@ class Player {
         this.dmgMod = dmgMod
         this.defBoost = 2
         this.defending = false
+        this.weapon = weapon
     }
 
     getDmg() {
-        return game.rollDice(1, 8) + this.dmgMod
+        console.log(game.player.weapon)
+        return game.player.weapon.getWeaponDmg() + this.dmgMod
     }
 
     getCritDmg() {
-        return game.rollDice(2, 8) + this.dmgMod
+        console.log('CRIT')
+        return game.player.weapon.getWeaponCrit() + this.dmgMod
     }
 }
 
 class SpellCaster extends Player {
-    constructor(name, hp, ac, sp, atkMod, dmgMod, spellMod) {
-        super(name, hp, ac, sp, atkMod, dmgMod)
+    constructor(name, hp, ac, sp, atkMod, dmgMod, spellMod, weapon) {
+        super(name, hp, ac, sp, atkMod, dmgMod, weapon)
         this.spellMod = spellMod
         this.spells = []
         this.spellChoise = null
@@ -95,7 +99,7 @@ class SpellCaster extends Player {
 
 class Fighter extends Player {
     constructor(name) {
-        super(name, 100, 16, 0, 7, 4)
+        super(name, 100, 16, 0, 7, 4, new Greatsword)
         this.inventory = [
             new HealingPotion,
             new HealingPotion,
@@ -106,7 +110,7 @@ class Fighter extends Player {
 
 class Wizard extends SpellCaster {
     constructor(name) {
-        super(name, 60, 12, 35, 3, -1, 7)
+        super(name, 60, 12, 35, 3, -1, 7, new Quarterstaff)
         this.inventory = [
             new HealingPotion,
             new SpellPotion,
@@ -124,7 +128,7 @@ class Wizard extends SpellCaster {
 
 class Paladin extends SpellCaster {
     constructor(name) {
-        super(name, 80, 15, 15, 7, 3, 7)
+        super(name, 80, 15, 15, 7, 3, 7, new Warhammer)
         this.inventory = [
             new HealingPotion,
             new HealingPotion,

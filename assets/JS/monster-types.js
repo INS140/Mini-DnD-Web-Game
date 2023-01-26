@@ -18,11 +18,11 @@ class Monster {
     }
 
     getDmg() {
-        return game.rollDice(1, 6)
+        return game.rollDice(1, 6) + this.dmgMod
     }
 
     getCritDmg() {
-        return game.rollDice(2, 6)
+        return game.rollDice(2, 6) + this.dmgMod
     }
 }
 

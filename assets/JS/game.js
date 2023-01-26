@@ -561,7 +561,7 @@ const game = {
 
         for (const monster of game.currentLevel.monsters) {
             if (!monster.dead) {
-                let atkRoll = game.rollDice(1, 20)
+                let atkRoll = game.rollDice(1, 20) + monster.atkMod
 
                 await game.textDisplay('Rolling Dice . . .', h2)
 
