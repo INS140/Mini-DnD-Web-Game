@@ -19,12 +19,10 @@ class Player {
     }
 
     getDmg() {
-        console.log(game.player.weapon)
-        return game.player.weapon.getWeaponDmg() + this.dmgMod
+        return Math.max(game.player.weapon.getWeaponDmg() + this.dmgMod, 1) // Ensures player does at least 1 damage on hit
     }
 
     getCritDmg() {
-        console.log('CRIT')
         return game.player.weapon.getWeaponCrit() + this.dmgMod
     }
 }
@@ -61,12 +59,12 @@ class SpellCaster extends Player {
             <button id="cancel">Cancel</button>
         `
 
-        let spellWindow = document.createElement('div')
+        const spellWindow = document.createElement('div')
         spellWindow.classList.add('display-box', 'grid-4', 'fixed-center')
         
 
         game.player.spells.forEach(spell => {
-            let spellCard = document.createElement('div')
+            const spellCard = document.createElement('div')
             spellCard.classList.add('spell-card')
             spellCard.innerHTML = `
                 <h2>${spell.name}</h2>
@@ -76,13 +74,17 @@ class SpellCaster extends Player {
             spellWindow.append(spellCard)
 
             spellCard.onclick = async () => {
-                spellWindow.remove()
+                if (game.player.sp >= spell.spCost) {
+                    spellWindow.remove()
 
-                game.player.spellChoise = spell
+                    game.player.spellChoise = spell
 
-                game.player.casting = true
+                    game.player.casting = true
 
-                game.attack()
+                    game.attack()
+                } else {
+                    await game.textDisplay(`You do not have enough spell points . . .`, document.querySelector('#text'))
+                }
             }
         })
 
