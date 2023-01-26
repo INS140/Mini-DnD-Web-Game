@@ -1,4 +1,4 @@
-import { Fighter, Wizard, Paladin } from "./class-options.js"
+import { Fighter, Wizard, Paladin, SpellCaster } from "./class-options.js"
 import levelOne from "./level-one.js"
 import levelTwo from "./level-two.js"
 import bossFight from "./boss-fight.js"
@@ -287,7 +287,10 @@ const game = {
 
         game.currentLevel.monsters = []
 
-        document.querySelector('#continue').onclick = game.loadMainMenu
+        document.querySelector('#continue').onclick = () => {
+            game.loadMainMenu()
+            game.resetGame()
+        }
     },
 
     quitGame: () => {
@@ -437,7 +440,7 @@ const game = {
             monster.img.onclick = async () => {
                 game.currentLevel.monsters.forEach(monster => monster.img.onclick = null)
 
-                let atkRoll = game.rollDice(1, 20)
+                let atkRoll = 19 //game.rollDice(1, 20)
 
                 game.controls.innerHTML = `<h2></h2>`
                 let h2 = document.querySelector('h2')
@@ -445,9 +448,14 @@ const game = {
                 await game.textDisplay(`Rolling dice . . .`, h2)
 
                 if (atkRoll >= monster.ac) {
-                    await game.textDisplay(`You hit ${monster.name} for ${game.player.atkDmg}!`, h2)
+                    const dmg = (atkRoll === 20) ? game.player.getCritDmg() 
+                                : (atkRoll === 20 && game.player.casting) ? game.player.spellChoise.getCritDmg()
+                                : (game.player.casting) ? game.player.spellChoise.getDmg()
+                                : game.player.getDmg()
 
-                    monster.hp -= game.player.atkDmg
+                    await game.textDisplay(`You hit ${monster.name} for ${dmg}!`, h2)
+
+                    monster.hp -= dmg
 
                     monster.hp = (monster.hp < 0) ? 0 : monster.hp
 
@@ -464,6 +472,16 @@ const game = {
                     }
                 } else {
                     await game.textDisplay(`You missed . . .`, h2)
+                }
+
+                if (game.player instanceof SpellCaster && game.player.casting) {
+                    game.player.sp -= game.player.spellChoise.spCost
+
+                    game.setPlayerStats()
+
+                    game.player.casting = false
+
+                    game.player.spellChoise = null
                 }
 
                 if (game.currentLevel.numberOfEnemies === 0) {

@@ -14,12 +14,22 @@ class Player {
         this.defBoost = 2
         this.defending = false
     }
+
+    getDmg() {
+        return game.rollDice(1, 8)
+    }
+
+    getCritDmg() {
+        return game.rollDice(2, 8)
+    }
 }
 
 class SpellCaster extends Player {
     constructor(name, hp, ac, sp, atkDmg) {
         super(name, hp, ac, sp, atkDmg)
         this.spells = []
+        this.spellChoise = null
+        this.casting = false
     }
 
     async loadAttackOptions() {
@@ -59,8 +69,14 @@ class SpellCaster extends Player {
 
             spellWindow.append(spellCard)
 
-            spellCard.onclick = () => {
-                
+            spellCard.onclick = async () => {
+                spellWindow.remove()
+
+                game.player.spellChoise = spell
+
+                game.player.casting = true
+
+                game.attack()
             }
         })
 
@@ -88,7 +104,7 @@ class Fighter extends Player {
 
 class Wizard extends SpellCaster {
     constructor(name) {
-        super(name, 60, 12, 20, 15)
+        super(name, 60, 12, 20, 100)
         this.inventory = [
             new HealingPotion,
             new SpellPotion,
@@ -100,6 +116,8 @@ class Wizard extends SpellCaster {
             new LightningBolt
         ]
     }
+
+    
 }
 
 class Paladin extends SpellCaster {
@@ -117,4 +135,4 @@ class Paladin extends SpellCaster {
     }
 }
 
-export { Fighter, Wizard, Paladin }
+export { Fighter, Wizard, Paladin, SpellCaster }
