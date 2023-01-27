@@ -156,9 +156,7 @@ const game = {
                 <button id="cancel">Cancel</button>
             </div>
         `
-        document.querySelector('#attack').onclick = () => {
-            (game.player instanceof Fighter) ? game.attack() : game.player.loadAttackOptions()
-        }
+        document.querySelector('#attack').onclick = (game.player instanceof Fighter) ? game.attack : game.player.loadAttackOptions
         
         document.querySelector('#defend').onclick = game.defend
         document.querySelector('#item').onclick = game.useItem
@@ -215,17 +213,13 @@ const game = {
 
         const text = `After defeating the ${levelOne.monsters[0].name}s, you continue your journey deeper into the tomb.`
 
-        document.querySelector('#continue').onclick = () => {
-            game.currentLevel.start()
-        }
+        document.querySelector('#continue').onclick = game.currentLevel.start
 
         await game.textDisplay(text, document.querySelector('p'))
     },
 
     intermissionTwo: async () => {
         document.querySelector('#player-stats').style.visibility = 'hidden'
-
-        game.display.style.backgroundImage = './assets/images/boss-background.webp'
 
         game.controls.innerHTML = `
             <p></p>
@@ -234,9 +228,7 @@ const game = {
 
         const text = `You have defeated the ${levelTwo.monsters[0].name}s and can sense that the end is drawing near.`
 
-        document.querySelector('#continue').onclick = () => {
-            game.currentLevel.start()
-        }
+        document.querySelector('#continue').onclick = game.currentLevel.start
 
         await game.textDisplay(text, document.querySelector('p'))
     },
@@ -278,14 +270,17 @@ const game = {
         }
     },
 
-    gameOver: () => {
+    gameOver: async () => {
         root.innerHTML = `
-                    <div class="game-over">
-                        <h3>GAME OVER</h3>
-                        <button id="continue">Continue?</button>
-                    </div>`
+            <div class="game-over">
+                <h3></h3>
+                <button id="continue">Continue?</button>
+            </div>
+        `
 
-        game.currentLevel.monsters = []
+        await game.textDisplay(`GAME OVER`, document.querySelector('h3'), 100)
+
+        document.querySelector('#continue').style.visibility = 'visible'
 
         document.querySelector('#continue').onclick = () => {
             game.loadMainMenu()
@@ -386,6 +381,7 @@ const game = {
             hpBar.style.color = 'black'
         } else {
             hpBar.style.backgroundColor = 'red'
+            hpBar.style.color = 'white'
         }
     },
 
@@ -435,6 +431,8 @@ const game = {
         document.querySelector('#cancel').onclick = () => {
             game.loadActions()
 
+            if (game.player instanceof SpellCaster) game.player.casting = false
+
             game.currentLevel.monsters.forEach(monster => monster.img.onclick = null)
         }
 
@@ -459,9 +457,7 @@ const game = {
 
                     await game.textDisplay(`You hit ${monster.name} for ${dmg}!`, h2)
 
-                    monster.hp -= dmg
-
-                    monster.hp = (monster.hp < 0) ? 0 : monster.hp
+                    monster.hp = Math.max(monster.hp - dmg, 0)
 
                     game.setMonsterHp()
 
@@ -553,9 +549,9 @@ const game = {
 
     monsterAttackPhase: async () => {
         game.controls.innerHTML = `<h2></h2>`
-        let h2 = document.querySelector('h2')
+        const h2 = document.querySelector('h2')
 
-        let text = `The ${game.currentLevel.monsters[0].name}${game.currentLevel.numberOfEnemies > 1 ? 's are': ' is'} attacking . . .`
+        const text = `The ${game.currentLevel.monsters[0].name}${game.currentLevel.numberOfEnemies > 1 ? 's are': ' is'} attacking . . .`
 
         await game.textDisplay(text, h2)
 
@@ -563,11 +559,11 @@ const game = {
 
         for (const monster of game.currentLevel.monsters) {
             if (!monster.dead) {
-                let atkRoll = game.rollDice(1, 20) + monster.atkMod
+                const atkRoll = game.rollDice(1, 20)
 
                 await game.textDisplay('Rolling Dice . . .', h2)
 
-                if (atkRoll >= game.player.ac) {
+                if (atkRoll + monster.atkMod >= game.player.ac) {
                     let dmg = (atkRoll === 20) ? monster.getCritDmg() : monster.getDmg()
 
                     await game.textDisplay(`${monster.name} hit you for ${dmg}!`, h2)
@@ -575,8 +571,9 @@ const game = {
                     game.player.hp -= dmg
 
                     if (game.player.hp <= 0) {
-                        game.gameOver()
                         gameOver = true
+                        game.gameOver()
+                        break
                     }
 
                     if (!gameOver) game.setPlayerStats()

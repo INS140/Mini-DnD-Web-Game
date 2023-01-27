@@ -194,7 +194,15 @@ button:hover { cursor: pointer; }
     font-size: 2rem;
 }
 
-.game-over #continue { position: static; }
+.game-over #continue {
+    position: static;
+    color: white;
+    font-size: 1rem;
+    padding: 10px;
+    background: url('./images/controls-background.jpg');
+    border: 0.15625rem double white;
+    visibility: hidden;
+}
 
 #win-screen {
     display: flex;
