@@ -133,7 +133,7 @@ button:hover { cursor: pointer; }
     transform: translate(-50%, -50%);
 }
 
-#spell-h2 { margin: 10px 0; }
+#spell-h2 { margin: 10px 0 0; }
 
 .monster-images {
     display: flex;

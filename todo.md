@@ -13,4 +13,10 @@
 
 - develop intermission choose upgrade/item
 
+- add inventory item/spell descriptions
+
+- add player menu
+
+- add animations for monsters
+
 - defeat the Tarrasque

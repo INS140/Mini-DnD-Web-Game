@@ -293,9 +293,9 @@ const game = {
         }
     },
 
-    quitGame: () => {
+    quitGame: async () => {
         game.controls.innerHTML = `
-            <h2>Are you sure you want to quit?</h2>
+            <h2></h2>
             <button id="quit">Quit</button>
             <button id="cancel">Cancel</button>
         `
@@ -306,6 +306,8 @@ const game = {
         }
 
         document.querySelector('#cancel').onclick = game.loadControls
+
+        await game.textDisplay('Are you sure you want to quit?', document.querySelector('h2'))
     },
 
     resetGame: () => {
@@ -593,9 +595,9 @@ const game = {
         }
     },
 
-    /////////////////////
-    //The Win Functions//
-    /////////////////////
+    ////////////////////
+    //The Win Function//
+    ////////////////////
     win: async () => {
         game.controls.innerHTML = `<h2></h2>`
 
