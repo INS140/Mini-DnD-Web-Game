@@ -106,6 +106,8 @@ const game = {
         
         monsterImages.classList.add('monster-images')
 
+        game.setMonsterImageHeight()
+
         game.currentLevel.monsters.forEach((monster, index) => {
             monster.img = document.createElement('div')
 
@@ -355,6 +357,16 @@ const game = {
         game.currentLevel.monsters.forEach((monster, i, arr) => {
             monster.imgWidth = (window.innerWidth <= 400) ? Math.floor(100/arr.length) + '%' : monster.imgWidth
         })
+    },
+
+    setMonsterImageHeight: () => {
+        const monsterImages = document.querySelector('.monster-images')
+
+        if (monsterImages) {
+            monsterImages.style.maxHeight = (game.player instanceof Fighter) 
+                                        ? `${window.innerHeight*3/4 - 75}px`
+                                        : `${window.innerHeight*3/4 - 116}px`
+        }
     },
 
     setMonsterHp: () => {
