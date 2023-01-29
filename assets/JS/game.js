@@ -100,13 +100,16 @@ const game = {
 
     loadMonsterImages: () => {
         game.currentLevel.getMonsters()
-        game.setMonsterImgWidth()
         
         let monsterImages = document.createElement('div')
         
         monsterImages.classList.add('monster-images')
 
-        game.setMonsterImageHeight()
+        game.display.append(monsterImages)
+
+        game.setMonsterImgMaxHeight()
+
+        game.setMonsterImgWidth()
 
         game.currentLevel.monsters.forEach((monster, index) => {
             monster.img = document.createElement('div')
@@ -120,8 +123,6 @@ const game = {
 
             monsterImages.append(monster.img)
         })
-
-        game.display.append(monsterImages)
     },
 
     loadControls: () => {
@@ -354,18 +355,24 @@ const game = {
     },
 
     setMonsterImgWidth: () => {
-        game.currentLevel.monsters.forEach((monster, i, arr) => {
-            monster.imgWidth = (window.innerWidth <= 400) ? Math.floor(100/arr.length) + '%' : monster.imgWidth
+        game.currentLevel.monsters.forEach(monster => {
+            monster.setImgWidth()
         })
     },
 
-    setMonsterImageHeight: () => {
+    setMonsterImgMaxHeight: () => {
         const monsterImages = document.querySelector('.monster-images')
 
-        if (monsterImages) {
-            monsterImages.style.maxHeight = (game.player instanceof Fighter) 
-                                        ? `${window.innerHeight*3/4 - 75}px`
-                                        : `${window.innerHeight*3/4 - 116}px`
+        if (monsterImages !== null) {
+            if (window.innerWidth < 450) {
+                monsterImages.style.height = (game.player instanceof Fighter) 
+                                            ? `${window.innerHeight*3/5 - 75}px`
+                                            : `${window.innerHeight*3/5 - 116}px`
+            } else {
+                monsterImages.style.height = (game.player instanceof Fighter) 
+                                            ? `${window.innerHeight*3/4 - 75}px`
+                                            : `${window.innerHeight*3/4 - 116}px`
+            }
         }
     },
 

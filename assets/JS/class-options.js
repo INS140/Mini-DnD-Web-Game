@@ -37,6 +37,8 @@ class SpellCaster extends Player {
     }
 
     async loadAttackOptions() {
+
+        console.log('hello')
         game.controls.innerHTML = `
             <h2 id="spell-h2"></h2>
             <div class="grid-2">
@@ -47,7 +49,7 @@ class SpellCaster extends Player {
         `
 
         document.querySelector('#melee').onclick = game.attack
-        document.querySelector('#spell').onclick = this.loadSpells
+        document.querySelector('#spell').onclick = game.player.loadSpells
         document.querySelector('#cancel').onclick = game.loadActions
 
         await game.textDisplay(`Select an attack type`, document.querySelector('h2'))

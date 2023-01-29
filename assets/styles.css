@@ -146,15 +146,16 @@ button:hover { cursor: pointer; }
     position: absolute;
     left: 0;
     bottom: 41%;
-    contain: content;
 }
 
 .monster-images div {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
     padding: 0 5px;
     box-sizing: border-box;
+    height: 100%;
 }
 
 .monster-images span {
@@ -220,7 +221,7 @@ button:hover { cursor: pointer; }
 }
 
 #win-screen h2 {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-top: 0;
 }
 
@@ -243,7 +244,11 @@ button:hover { cursor: pointer; }
 /* fixes an error on mobile when displaying the inventory button */
 @media screen and (max-width: 600px) { #inventory { padding: 0 5px; } }
 
-@media screen and (min-width: 400px) { .menu { width: 25rem; } }
+@media screen and (min-width: 400px) {
+    .menu { width: 25rem; }
+
+    #win-screen h2 { font-size: 3rem;}
+}
 
 @media screen and (min-width: 450px) {
     #display { height: 75%; }

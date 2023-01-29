@@ -24,6 +24,10 @@ class Monster {
     getCritDmg() {
         return game.rollDice(2, 6) + this.dmgMod
     }
+
+    setImgWidth() {
+        if (window.innerWidth <= 400) this.imgWidth = Math.floor(100/game.currentLevel.monsters.length) + '%'
+    }
 }
 
 // Low level
@@ -72,6 +76,14 @@ class Elemental extends Monster {
             this.imgWidth = '160px'
         }
     }
+
+    setImgWidth() {
+        if (this.url === './assets/images/air-elemental.png') {
+            this.imgWidth = Math.floor(100/game.currentLevel.monsters.length) - 10 + '%'
+        } else {
+            if (window.innerWidth <= 400) this.imgWidth = Math.floor(100/game.currentLevel.monsters.length) + '%'
+        }
+    }
 }
 
 class Armor extends Monster {
@@ -92,6 +104,14 @@ class Lich extends Monster{
     constructor() {
         super('Lich', Math.max(game.rollDice(18, 8) + 54, 135), 17, 12, 0, './assets/images/lich.png', 300)
     }
+
+    setImgWidth() {
+        if (window.innerWidth <= 400) {
+            const width = Math.floor(+document.querySelector('div.monster-images').style.height.split('px')[0] * 215 / 250 - 15)
+
+            this.imgWidth = `${width}px`
+        }
+    }
 }
 
 class Dragon extends Monster{
@@ -103,6 +123,14 @@ class Dragon extends Monster{
 class Tarrasque extends Monster {
     constructor() {
         super('Tarrasque', Math.max(game.rollDice(33, 20) + 330, 676), 25, 19, 10, './assets/images/tarrasque.png', 350)
+    }
+
+    setImgWidth() {
+        if (window.innerWidth <= 400) {
+            const width = Math.floor(+document.querySelector('div.monster-images').style.height.split('px')[0] * 483 / 500 - 15)
+            
+            this.imgWidth = `${width}px`
+        }
     }
 }
 
