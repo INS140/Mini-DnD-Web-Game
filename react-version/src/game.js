@@ -1,10 +1,15 @@
+// React Imports
+import React from "react"
+import components from "./react-components.js"
+import root from "./index.js"
+
+// Game Imports
 import { Fighter, Wizard, Paladin, SpellCaster } from "./class-options.js"
 import levelOne from "./level-one.js"
 import levelTwo from "./level-two.js"
 import bossFight from "./boss-fight.js"
 
 // root element
-const root = document.querySelector('#root')
 
 // game object
 const game = {
@@ -22,66 +27,78 @@ const game = {
     //Display Methods//
     ///////////////////
     loadMainMenu: () => {
-        root.innerHTML = null
-        const menu = document.createElement('div')
-        menu.classList.add('menu')
-        menu.innerHTML = `
-            <h1>Dungeon Crawl</h1>
-            <hr>
-            <button id="play-now">Play Now</button><br>
-            <button id="new-game">New Game</button><br>
-            <button id="load-game">Load Game</button><br>
-            <button id="options">Options</button>
-        `
-        root.append(menu)
+        // root.innerHTML = null
+        // const menu = document.createElement('div')
+        // menu.classList.add('menu')
+        // menu.innerHTML = `
+        //     <h1>Dungeon Crawl</h1>
+        //     <hr>
+        //     <button id="play-now">Play Now</button><br>
+        //     <button id="new-game">New Game</button><br>
+        //     <button id="load-game">Load Game</button><br>
+        //     <button id="options">Options</button>
+        // `
+        // root.append(menu)
 
-        document.querySelector('#play-now').onclick = () => {
-            game.player = new Fighter('Butcher')
-            game.startNewGame()
-        }
+        // document.querySelector('#play-now').onclick = () => {
+        //     game.player = new Fighter('Butcher')
+        //     game.startNewGame()
+        // }
 
-        document.querySelector('#new-game').onclick = game.loadNewGameMenu
+        // document.querySelector('#new-game').onclick = game.loadNewGameMenu
         // document.querySelector('#load-game').onclick = game.loadLoadGameMenu
         // document.querySelector('#options').onclick = game.loadGameOptions
+
+        root.render(
+          <React.StrictMode>
+            <components.mainMenu />
+          </React.StrictMode>
+        )
     },
 
     loadNewGameMenu: () => {
-        root.innerHTML = null
-        const menu = document.createElement('div')
-        menu.classList.add('menu', 'new-game')
-        menu.innerHTML = `
-            <h2>New Game</h2>
-            <hr>
-            <label for="name">Character Name</label><br>
-            <input type="text" name="name" id="name" /><br>
-            <label for="class-select">Select Class</label><br>
-            <select id="class-select" name="class-select">
-                <option value="fighter">Fighter</option>
-                <option value="wizard">Wizard</option>
-                <option value="paladin">Paladin</option>
-            </select><br>
-            <hr>
-            <button id="cancel">Cancel</button>
-            <button id="start">Start Game</button>
-        `
-        root.append(menu)
-        document.querySelector('#cancel').onclick = game.loadMainMenu
+        // root.innerHTML = null
+        // const menu = document.createElement('div')
+        // menu.classList.add('menu', 'new-game')
+        // menu.innerHTML = `
+        //     <h2>New Game</h2>
+        //     <hr>
+        //     <label for="name">Character Name</label><br>
+        //     <input type="text" name="name" id="name" /><br>
+        //     <label for="class-select">Select Class</label><br>
+        //     <select id="class-select" name="class-select">
+        //         <option value="fighter">Fighter</option>
+        //         <option value="wizard">Wizard</option>
+        //         <option value="paladin">Paladin</option>
+        //     </select><br>
+        //     <hr>
+        //     <button id="cancel">Cancel</button>
+        //     <button id="start">Start Game</button>
+        // `
+        // root.append(menu)
+        // document.querySelector('#cancel').onclick = game.loadMainMenu
 
-        let input = document.querySelector('#name'),
-            select = document.querySelector('#class-select')
+        // let input = document.querySelector('#name'),
+        //     select = document.querySelector('#class-select')
         
-        document.querySelector('#start').onclick = () => {
-            if (input.value !== '') {
-                game.setPlayer(input.value, select.value)
-                game.startNewGame()
-            } else {
-                menu.innerHTML = `
-                    <p style="margin-top: 80px;"><b>Please enter a name for your character</b></p>
-                    <button id="okay">Okay</button>
-                `
-                document.querySelector('#okay').onclick = game.loadNewGameMenu
-            }
-        }
+        // document.querySelector('#start').onclick = () => {
+        //     if (input.value !== '') {
+        //         game.setPlayer(input.value, select.value)
+        //         game.startNewGame()
+        //     } else {
+        //         menu.innerHTML = `
+        //             <p style="margin-top: 80px;"><b>Please enter a name for your character</b></p>
+        //             <button id="okay">Okay</button>
+        //         `
+        //         document.querySelector('#okay').onclick = game.loadNewGameMenu
+        //     }
+        // }
+
+        root.render(
+            <React.StrictMode>
+                <components.newGameMenu />
+            </React.StrictMode>
+        )
     },
 
     loadCombatWindow: () => {
@@ -219,7 +236,7 @@ const game = {
         document.querySelector('#continue').onclick = game.currentLevel.start
 
         await game.textDisplay(text, document.querySelector('p'))
-    },
+    },  
 
     intermissionTwo: async () => {
         document.querySelector('#player-stats').style.visibility = 'hidden'
@@ -255,6 +272,11 @@ const game = {
         document.querySelector('#continue').onclick = game.currentLevel.start
 
         await game.textDisplay(text, document.querySelector('p'))
+    },
+
+    playNow: () => {
+        game.player = new Fighter('Butcher')
+        game.startNewGame()
     },
 
     setLevel: () => {

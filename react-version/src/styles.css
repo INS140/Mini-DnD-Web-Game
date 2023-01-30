@@ -18,7 +18,7 @@ button:hover { cursor: pointer; }
 
 .menu {
     color: black;
-    width: 100%;
+    width: 20rem;
     height: 20rem;
     padding: 3.25rem 2.25rem 2.5rem 1.875rem;
     text-align: center;
@@ -43,12 +43,7 @@ button:hover { cursor: pointer; }
     outline: none;
 }
 
-#submit {
-    width: 49%;
-    margin-bottom: 0.3125rem;
-    border: 0.15625rem double brown;
-    background-color: transparent;
-}
+.new-game #cancel { margin-right: 5px; }
 
 .new-game button {
     width: 48%;
