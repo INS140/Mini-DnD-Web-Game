@@ -37,8 +37,6 @@ class SpellCaster extends Player {
     }
 
     async loadAttackOptions() {
-
-        console.log('hello')
         game.controls.innerHTML = `
             <h2 id="spell-h2"></h2>
             <div class="grid-2">

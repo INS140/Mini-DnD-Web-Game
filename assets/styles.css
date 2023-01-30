@@ -132,8 +132,8 @@ button:hover { cursor: pointer; }
 .fixed-center {
     position: fixed;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 41%;
+    transform: translate(-50%, 0);
 }
 
 #spell-h2 { margin: 10px 0 0; }
@@ -171,7 +171,7 @@ button:hover { cursor: pointer; }
 
 .display-box {
     color: white;
-    width: 20rem;
+    width: 19rem;
     height: auto;
     background: url('./images/controls-background.jpg');
     box-sizing: border-box;
@@ -190,9 +190,9 @@ button:hover { cursor: pointer; }
 
 .display-box img { width: 35%;}
 
-.spell-card h2 , .spell-card h4 {
-    margin: 10px 0;
-}
+.spell-card h2 { margin: 0 0 5px; }
+
+.spell-card h4 { margin: 0; }
 
 .game-over {
     color: black;
@@ -256,4 +256,11 @@ button:hover { cursor: pointer; }
     #controls { height: 25%; }
 
     .monster-images { bottom: 26%; }
+
+    .fixed-center {
+        bottom: 50%;
+        transform: translate(-50%, 50%);
+    }
+
+    .display-box { width: 20rem; }
 }
