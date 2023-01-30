@@ -16,15 +16,15 @@ const levelTwo = {
 
         if (d100 > 60) {
             for (let i = 0; i < 4; i++) {
-                levelTwo.monsters.push(new Gnoll)
+                levelTwo.monsters.push(new Gnoll())
             }
         } else if (d100 > 20) {
             for (let i = 0; i < 3; i++) {
-                levelTwo.monsters.push(new Armor)
+                levelTwo.monsters.push(new Armor())
             }
         } else {
             for (let i = 0; i < 2; i++) {
-                const elemental = new Elemental
+                const elemental = new Elemental()
 
                 elemental.setImage()
 

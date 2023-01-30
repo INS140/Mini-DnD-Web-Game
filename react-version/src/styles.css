@@ -5,7 +5,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url('./images/menu-background.jpg') center/cover no-repeat;
+    background: url('../public/images/menu-background.jpg') center/cover no-repeat;
 }
 
 hr { border: 0.0625rem solid brown; }
@@ -22,7 +22,7 @@ button:hover { cursor: pointer; }
     height: 20rem;
     padding: 3.25rem 2.25rem 2.5rem 1.875rem;
     text-align: center;
-    background: url('./images/menu-scroll.png') center/100% 100% no-repeat;
+    background: url('../public/images/menu-scroll.png') center/100% 100% no-repeat;
     box-sizing: border-box;
 }
 
@@ -63,7 +63,7 @@ button:hover { cursor: pointer; }
 
 #display {
     height: 60%;
-    background: url('./images/combat-background.jpg') center/100% 100% no-repeat;
+    background: url('../public/images/combat-background.jpg') center/100% 100% no-repeat;
     background-position: center;
 }
 
@@ -71,7 +71,7 @@ button:hover { cursor: pointer; }
     color: white;
     height: 40%;
     padding: 10px;
-    background: grey url('./images/controls-background.jpg') center/cover;
+    background: grey url('../public/images/controls-background.jpg') center/cover;
     box-sizing: border-box;
     border-top: 0.15625rem double white;
 }
@@ -87,7 +87,7 @@ button:hover { cursor: pointer; }
     display: grid;
     grid: 1fr 1fr/ 1fr 9fr;
     color: white;
-    background: url('./images/controls-background.jpg');
+    background: url('../public/images/controls-background.jpg');
     border: 0.15625rem double white;
     border-top: none;
     border-right: none;
@@ -173,7 +173,7 @@ button:hover { cursor: pointer; }
     color: white;
     width: 19rem;
     height: auto;
-    background: url('./images/controls-background.jpg');
+    background: url('../public/images/controls-background.jpg');
     box-sizing: border-box;
     border: 0.15625rem double white;
     padding: 10px;
@@ -205,7 +205,7 @@ button:hover { cursor: pointer; }
     color: white;
     font-size: 1rem;
     padding: 10px;
-    background: url('./images/controls-background.jpg');
+    background: url('../public/images/controls-background.jpg');
     border: 0.15625rem double white;
     visibility: hidden;
 }
@@ -217,7 +217,7 @@ button:hover { cursor: pointer; }
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background: url('./images/win-background.webp') center/cover no-repeat;
+    background: url('../public/images/win-background.webp') center/cover no-repeat;
 }
 
 #win-screen h2 {
@@ -229,7 +229,7 @@ button:hover { cursor: pointer; }
     color: white;
     font-size: 1rem;
     padding: 10px;
-    background: url('./images/controls-background.jpg');
+    background: url('../public/images/controls-background.jpg');
     border: 0.15625rem double white;
     visibility: hidden;
 }

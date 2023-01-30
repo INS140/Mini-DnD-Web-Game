@@ -101,27 +101,27 @@ class SpellCaster extends Player {
 
 class Fighter extends Player {
     constructor(name) {
-        super(name, 100, 16, 0, 7, 4, new Greatsword)
+        super(name, 100, 16, 0, 7, 4, new Greatsword())
         this.inventory = [
-            new HealingPotion,
-            new HealingPotion,
-            new HealingPotion
+            new HealingPotion(),
+            new HealingPotion(),
+            new HealingPotion()
         ]
     }
 }
 
 class Wizard extends SpellCaster {
     constructor(name) {
-        super(name, 60, 12, 35, 3, -1, 7, new Quarterstaff)
+        super(name, 60, 12, 35, 3, -1, 7, new Quarterstaff())
         this.inventory = [
-            new HealingPotion,
-            new SpellPotion,
-            new SpellPotion
+            new HealingPotion(),
+            new SpellPotion(),
+            new SpellPotion()
         ]
         this.spells = [
-            new Frostbolt,
-            new Fireball,
-            new LightningBolt
+            new Frostbolt(),
+            new Fireball(),
+            new LightningBolt()
         ]
     }
 
@@ -130,15 +130,15 @@ class Wizard extends SpellCaster {
 
 class Paladin extends SpellCaster {
     constructor(name) {
-        super(name, 80, 15, 15, 7, 3, 7, new Warhammer)
+        super(name, 80, 15, 15, 7, 3, 7, new Warhammer())
         this.inventory = [
-            new HealingPotion,
-            new HealingPotion,
-            new SpellPotion
+            new HealingPotion(),
+            new HealingPotion(),
+            new SpellPotion()
         ]
         this.spells = [
-            new Smite,
-            new HolyFire
+            new Smite(),
+            new HolyFire()
         ]
     }
 }

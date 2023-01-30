@@ -14,11 +14,11 @@ const bossFight = {
         let d200 = game.rollDice(1, 200)
 
         if (d200 > 100) {
-            bossFight.monsters.push(new Lich)
+            bossFight.monsters.push(new Lich())
         } else if (d200 > 1) {
-            bossFight.monsters.push(new Dragon)
+            bossFight.monsters.push(new Dragon())
         } else {
-            bossFight.monsters.push(new Tarrasque)
+            bossFight.monsters.push(new Tarrasque())
         }
 
         bossFight.numberOfEnemies = bossFight.monsters.length
