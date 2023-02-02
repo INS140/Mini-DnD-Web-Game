@@ -1,5 +1,5 @@
 // React Imports
-import React from "react"
+import React, { useState, useEffect } from "react"
 import components from "./react-components.js"
 import root from "./index.js"
 
@@ -51,7 +51,7 @@ const game = {
 
         root.render(
           <React.StrictMode>
-            <components.mainMenu />
+            <components.MainMenu />
           </React.StrictMode>
         )
     },
@@ -96,7 +96,7 @@ const game = {
 
         root.render(
             <React.StrictMode>
-                <components.newGameMenu />
+                <components.NewGameMenu />
             </React.StrictMode>
         )
     },
@@ -669,4 +669,105 @@ const game = {
     }
 }
 
-export default game
+function Game() {
+    const [gameDisplay, setGameDisplay] = useState(<MainMenu />)
+
+    const [combatDisplay, setCombatDisplay] = useState(null)
+
+    const [controls, setControls] = useState(null)
+
+    const [playerStatsBlock, setPlayerStatsBlock] = useState(null)
+
+    let player = null,
+        cuurentLevel = null
+
+    function MainMenu() {
+        return (
+            <div className="menu">
+                <h1>Dungeon Crawl</h1>
+                <hr />
+                <button id="play-now" onClick={game.playNow}>Play Now</button><br />
+                <button id="new-game" onClick={loadNewGameMenu}>New Game</button><br />
+                <button id="load-game">Load Game</button><br />
+                <button id="options">Options</button>
+            </div>
+        )
+    }
+
+    function LoadMainMenu() { setGameDisplay(<MainMenu />) }
+
+    function NewGameMenu() {
+        const [inputs, setInputs] = useState({
+            name: '',
+            classSelect: 'fighter'
+        })
+
+        useEffect(() => {
+            document.querySelector('input#name').focus()
+        }, [])
+
+        function handleChange(event) {
+            const value = event.target.value
+            const name = event.target.name
+            setInputs(values => ({...values, [name]: value}))
+        }
+
+        return (
+            <div className="menu new-game">
+                <h2>New Game</h2>
+                <hr />
+                <form>
+                    <label>Character Name<br />
+                        <input 
+                            type="text" 
+                            name="name" 
+                            id="name"
+                            value={inputs.name}
+                            onChange={handleChange}
+                        />
+                    </label><br />
+                    <label>Select Class<br />
+                        <select 
+                            value={inputs.classSelect} 
+                            id="class-select" 
+                            name="classSelect"
+                            onChange={handleChange}
+                        >
+                            <option value="fighter">Fighter</option>
+                            <option value="wizard">Wizard</option>
+                            <option value="paladin">Paladin</option>
+                        </select>
+                    </label><br />
+                </form>
+                <hr />
+                <button id="cancel" onClick={LoadMainMenu}>Cancel</button>
+                <button id="start" onClick={() => {startNewGame(inputs)}}>Start Game</button>
+            </div>
+        )
+    }
+
+    function loadNewGameMenu() { setGameDisplay(<NewGameMenu />) }
+
+    function startNewGame(inputs) {
+        setPlayer(inputs)
+    }
+
+    function setPlayer(inputs) {
+        const { name, classSelect } = inputs
+
+        switch (classSelect) {
+            case 'paladin':
+                player = new Paladin(name)
+                break
+            case 'wizard':
+                player = new Wizard(name)
+                break
+            default:
+                player = new Fighter(name)
+        }
+    }
+
+    return gameDisplay
+}
+
+export { game, Game }

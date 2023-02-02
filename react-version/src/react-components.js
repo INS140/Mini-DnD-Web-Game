@@ -1,9 +1,9 @@
 import React from "react"
-import game from "./game.js"
+import {game} from "./game.js"
 import './styles.css'
 
 const components = {
-    mainMenu: () => {
+    MainMenu: () => {
         return (
             <div className="menu">
                 <h1>Dungeon Crawl</h1>
@@ -16,7 +16,7 @@ const components = {
         )
     },
 
-    newGameMenu: () => {
+    NewGameMenu: () => {
         return (
             <div className="menu new-game">
                 <h2>New Game</h2>

@@ -1,4 +1,4 @@
-import game from "./game.js"
+import {game} from "./game.js"
 import { Kobold, Slime, Skeleton, Zombie } from "./monster-types.js"
 
 const levelOne = {

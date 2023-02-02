@@ -1,4 +1,4 @@
-import game from "./game.js"
+import {game} from "./game.js"
 import { HealingPotion, SpellPotion } from "./items.js"
 import { Frostbolt, Fireball, LightningBolt, Smite, HolyFire } from "./spells.js"
 import { Greatsword, Quarterstaff, Warhammer } from "./weapons.js"

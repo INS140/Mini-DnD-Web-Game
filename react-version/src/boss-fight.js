@@ -1,4 +1,4 @@
-import game from "./game.js"
+import {game} from "./game.js"
 import { Lich, Dragon, Tarrasque } from "./monster-types.js"
 
 const bossFight = {

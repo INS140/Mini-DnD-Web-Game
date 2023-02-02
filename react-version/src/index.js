@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals'
-import components from './react-components.js';
+import { Game } from './game.js';
 import './styles.css'
 
 const root = ReactDOM.createRoot(document.querySelector('#root'));
+
 root.render(
   <React.StrictMode>
-    <components.mainMenu />
+    <Game />
   </React.StrictMode>
 );
 
