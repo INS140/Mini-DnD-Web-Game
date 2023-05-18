@@ -1,0 +1,266 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url('../images/menu-background.jpg') center/cover no-repeat;
+}
+
+hr { border: 0.0625rem solid brown; }
+
+h1 { margin-bottom: 0.9375rem; }
+
+p { margin: 0 0 5px; }
+
+button:hover { cursor: pointer; }
+
+.menu {
+  color: black;
+  width: 100%;
+  height: 20rem;
+  padding: 3.25rem 2.25rem 2.5rem 1.875rem;
+  text-align: center;
+  background: url('../images/menu-scroll.png') center/100% 100% no-repeat;
+  box-sizing: border-box;
+}
+
+.menu button {
+  color: black; /* Fixes blue buttons on ios15 */
+  width: 100%;
+  margin-bottom: 0.3125rem;
+  border: 0.15625rem double brown;
+  background-color: transparent;
+}
+
+.menu input, .menu select {
+  color: black;
+  border: none;
+  border-bottom: 1px solid brown;
+  text-align: center;
+  background: transparent;
+  outline: none;
+}
+
+#submit {
+  width: 49%;
+  margin-bottom: 0.3125rem;
+  border: 0.15625rem double brown;
+  background-color: transparent;
+}
+
+.new-game button {
+  width: 48%;
+  margin: 0 1px;
+}
+
+.combat-window {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+}
+
+#display {
+  height: 60%;
+  background: url('../images/combat-background.jpg') center/100% 100% no-repeat;
+  background-position: center;
+}
+
+#controls {
+  color: white;
+  height: 40%;
+  padding: 10px;
+  background: grey url('../images/controls-background.jpg') center/cover;
+  box-sizing: border-box;
+  border-top: 0.15625rem double white;
+}
+
+#controls button {
+  color: white;
+  background: transparent;
+  border: 0.15625rem double white;
+  font-size: 2rem;
+}
+
+#player-stats {
+  display: grid;
+  grid: 1fr 1fr/ 1fr 9fr;
+  color: white;
+  background: url('../images/controls-background.jpg');
+  border: 0.15625rem double white;
+  border-top: none;
+  border-right: none;
+  padding: 10px 10px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+#player-stats h3, #player-stats span { margin: 10px 10px 10px 0; }
+
+#player-stats span {
+  display: inline-block;
+  align-self: center;
+  text-align: center;
+}
+
+#continue {
+  position: absolute;
+  right: 10px;
+  font-size: 1rem !important;
+}
+
+.grid-4 {
+  height: 100%;
+  display: grid;
+  grid: 1fr 1fr/1fr 1fr;
+  gap: 10px;
+}
+
+.grid-2 {
+  width: 100%;
+  padding: 10px;
+  display: grid;
+  grid: 1fr / 1fr 1fr;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.fixed-center {
+  position: fixed;
+  left: 50%;
+  bottom: 41%;
+  transform: translate(-50%, 0);
+}
+
+#spell-h2 { margin: 10px 0 0; }
+
+.monster-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 41%;
+}
+
+.monster-images div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 5px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.monster-images span {
+  visibility: hidden;
+  color: white;
+  background: green;
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.monster-images img { width: 100%; }
+
+.display-box {
+  color: white;
+  width: 19rem;
+  height: auto;
+  background: url('../images/controls-background.jpg');
+  box-sizing: border-box;
+  border: 0.15625rem double white;
+  padding: 10px;
+}
+
+.display-box div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.15625rem double white;
+  padding: 10px;
+}
+
+.display-box img { width: 35%;}
+
+.spell-card h2 { margin: 0 0 5px; }
+
+.spell-card h4 { margin: 0; }
+
+.game-over {
+  color: black;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.game-over #continue {
+  position: static;
+  color: white;
+  font-size: 1rem;
+  padding: 10px;
+  background: url('../images/controls-background.jpg');
+  border: 0.15625rem double white;
+  visibility: hidden;
+}
+
+#win-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: url('../images/win-background.webp') center/cover no-repeat;
+}
+
+#win-screen h2 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+#win-screen button {
+  color: white;
+  font-size: 1rem;
+  padding: 10px;
+  background: url('../images/controls-background.jpg');
+  border: 0.15625rem double white;
+  visibility: hidden;
+}
+
+#win-screen div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* fixes an error on mobile when displaying the inventory button */
+@media screen and (max-width: 600px) { #inventory { padding: 0 5px; } }
+
+@media screen and (min-width: 400px) {
+  .menu { width: 25rem; }
+
+  #win-screen h2 { font-size: 3rem;}
+}
+
+@media screen and (min-width: 450px) {
+  #display { height: 75%; }
+
+  #controls { height: 25%; }
+
+  .monster-images { bottom: 26%; }
+
+  .fixed-center {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+  }
+
+  .display-box { width: 20rem; }
+}

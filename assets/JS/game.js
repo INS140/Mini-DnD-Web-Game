@@ -25,14 +25,7 @@ const game = {
         root.innerHTML = null
         const menu = document.createElement('div')
         menu.classList.add('menu')
-        menu.innerHTML = `
-            <h1>Dungeon Crawl</h1>
-            <hr>
-            <button id="play-now">Play Now</button><br>
-            <button id="new-game">New Game</button><br>
-            <button id="load-game">Load Game</button><br>
-            <button id="options">Options</button>
-        `
+        menu.innerHTML = ``
         root.append(menu)
 
         document.querySelector('#play-now').onclick = () => {
@@ -50,19 +43,7 @@ const game = {
         const menu = document.createElement('div')
         menu.classList.add('menu', 'new-game')
         menu.innerHTML = `
-            <h2>New Game</h2>
-            <hr>
-            <label for="name">Character Name</label><br>
-            <input type="text" name="name" id="name" /><br>
-            <label for="class-select">Select Class</label><br>
-            <select id="class-select" name="class-select">
-                <option value="fighter">Fighter</option>
-                <option value="wizard">Wizard</option>
-                <option value="paladin">Paladin</option>
-            </select><br>
-            <hr>
-            <button id="cancel">Cancel</button>
-            <button id="start">Start Game</button>
+            
         `
         root.append(menu)
         document.querySelector('#cancel').onclick = game.loadMainMenu
