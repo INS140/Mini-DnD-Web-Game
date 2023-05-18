@@ -1,21 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { ControlsContext } from '../../contexts/ControlsContext'
+import { DisplayContext } from '../../contexts/DisplayContext'
+import useTextDisplay from '../../custom-hooks/useTextDisplay'
 
 export default function StartGameTextBox() {
-  const [ text, setText ] = useState('')
+  const { ChangeControls } = useContext(ControlsContext)
+  const { ChangeDisplay } = useContext(DisplayContext)
 
-  const str = `You come across an old abandoned tomb that smells of adventure. 
-  Of course you cannot resist the temptation of riches, so you brave the deep unknown . . .`
+  const { text, stopTimer } = useTextDisplay(
+    `You come across an old abandoned tomb that smells of adventure. 
+    Of course you cannot resist the temptation of riches, so you brave the deep unknown . . .`
+  )
 
-  let timer
-
-  useEffect(() => {
-    (async () => {
-      for (const char of str.split('')) {
-        await Promise(res => setTimeout(res, 30)).then(() => setText(prev => prev += char))
-      }
-      await Promise(res => setTimeout(res, 250))
-    })()
-  }, [])
+  function handleClick(e) {
+    stopTimer()
+    // ChangeControls('') temporary
+    ChangeDisplay('menu')
+  }
 
   return <>
     <p>{ text }</p>

@@ -1,7 +1,10 @@
-
+import { useContext } from 'react'
+import { ControlsContext } from '../../contexts/ControlsContext'
 
 export default function CombatDisplay() {
-  let monsters, controls
+  const { control } = useContext(ControlsContext)
+
+  let monsters
 
   return <div className="combat-display">
     <div className="display">
@@ -9,7 +12,7 @@ export default function CombatDisplay() {
       { monsters }
     </div>
     <div className="controls">
-      { controls }
+      { control }
     </div>
   </div>
 }

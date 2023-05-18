@@ -200,7 +200,7 @@ button:hover { cursor: pointer; }
   font-size: 2rem;
 }
 
-.game-over #continue {
+.game-over .continue {
   position: static;
   color: white;
   font-size: 1rem;
@@ -251,9 +251,9 @@ button:hover { cursor: pointer; }
 }
 
 @media screen and (min-width: 450px) {
-  #display { height: 75%; }
+  .display { height: 75%; }
 
-  #controls { height: 25%; }
+  .controls { height: 25%; }
 
   .monster-images { bottom: 26%; }
 

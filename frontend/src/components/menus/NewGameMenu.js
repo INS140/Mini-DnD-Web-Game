@@ -1,7 +1,9 @@
 import { useContext, useState } from "react"
+import { MenuContext } from "../../contexts/MenuContext"
 import { DisplayContext } from "../../contexts/DisplayContext"
 
 export default function NewGameMenu() {
+  const { ChangeMenu } = useContext(MenuContext)
   const { ChangeDisplay } = useContext(DisplayContext)
 
   const [ inputs, setInputs ] = useState({
@@ -23,6 +25,8 @@ export default function NewGameMenu() {
 
   function handleSubmit(e) {
     e.preventDefault()
+    ChangeDisplay('combat')
+    ChangeMenu('main')
   }
 
   return <div className="menu new-game">
@@ -53,7 +57,7 @@ export default function NewGameMenu() {
       </label>
     </form>
     <hr />
-    <button onClick={() => ChangeDisplay('main')}>Cancel</button>
+    <button onClick={() => ChangeMenu('main')}>Cancel</button>
     <button type="submit" form="charForm">Start Game</button>
   </div>
 }
