@@ -55,19 +55,19 @@ button:hover { cursor: pointer; }
   margin: 0 1px;
 }
 
-.combat-window {
+.combat-display {
   background-color: black;
   width: 100vw;
   height: 100vh;
 }
 
-#display {
+.display {
   height: 60%;
   background: url('../images/combat-background.jpg') center/100% 100% no-repeat;
   background-position: center;
 }
 
-#controls {
+.controls {
   color: white;
   height: 40%;
   padding: 10px;
@@ -76,7 +76,7 @@ button:hover { cursor: pointer; }
   border-top: 0.15625rem double white;
 }
 
-#controls button {
+.controls button {
   color: white;
   background: transparent;
   border: 0.15625rem double white;
@@ -107,7 +107,7 @@ button:hover { cursor: pointer; }
   text-align: center;
 }
 
-#continue {
+.continue {
   position: absolute;
   right: 10px;
   font-size: 1rem !important;
