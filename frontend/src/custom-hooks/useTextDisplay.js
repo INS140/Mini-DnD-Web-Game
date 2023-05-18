@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 export default function useTextDisplay(str) {
   const [ text, setText ] = useState('')
-  const [ , setTimer ] = useState()
+  const timer = useRef()
 
   function stopTimer() {
-    setTimer(prev => clearTimeout(prev))
+    clearTimeout(timer.current)
   }
 
   useEffect(() => {
     (async () => {
       for (const char of str.split('')) {
-        await new Promise(res => setTimer(setTimeout(res, 30)))
+        await new Promise(res => timer.current = setTimeout(res, 30))
           .then(() => setText(prev => prev += char))
       }
-      await new Promise(res => setTimer(setTimeout(res, 250)))
+      await new Promise(res => timer.current = setTimeout(res, 250))
 
       return stopTimer
     })()

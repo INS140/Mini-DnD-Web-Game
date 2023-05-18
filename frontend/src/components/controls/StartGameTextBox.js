@@ -15,7 +15,7 @@ export default function StartGameTextBox() {
   function handleClick(e) {
     stopTimer()
     // ChangeControls('') temporary
-    ChangeDisplay('menu')
+    // ChangeDisplay('menu')
   }
 
   return <>
