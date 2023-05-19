@@ -6,11 +6,11 @@ export const MenuContext = createContext()
 export default function MenuProvider({ children }) {
   const [ menu, setMenu ] = useState(menus['main'])
 
-  function ChangeMenu(newMenu) {
+  function changeMenu(newMenu) {
     setMenu(menus[newMenu])
   }
 
-  return <MenuContext.Provider value={{ menu, ChangeMenu }}>
+  return <MenuContext.Provider value={{ menu, changeMenu }}>
     { children }
   </MenuContext.Provider>
 }

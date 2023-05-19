@@ -108,12 +108,7 @@ const game = {
 
     loadControls: () => {
         game.controls.innerHTML = `
-            <div class="grid-4">
-                <button id="actions">Actions</button>
-                <button id="inventory">Inventory</button>
-                <button id="options">Options</button>
-                <button id="quit">Quit</button>
-            </div>
+            
         `
 
         document.querySelector('#actions').onclick = game.loadActions
@@ -274,9 +269,7 @@ const game = {
 
     quitGame: async () => {
         game.controls.innerHTML = `
-            <h2></h2>
-            <button id="quit">Quit</button>
-            <button id="cancel">Cancel</button>
+            
         `
 
         document.querySelector('#quit').onclick = () => {

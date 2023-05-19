@@ -6,11 +6,11 @@ export const ControlsContext = createContext()
 export default function ControlsProvider({ children }) {
   const [ control, setControl ] = useState(controls['startGame'])
 
-  function ChangeControls(newControls) {
+  function changeControls(newControls) {
     setControl(controls[newControls])
   }
 
-  return <ControlsContext.Provider value={{ control, ChangeControls }}>
+  return <ControlsContext.Provider value={{ control, changeControls }}>
     { children }
   </ControlsContext.Provider>
 }

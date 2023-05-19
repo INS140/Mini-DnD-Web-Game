@@ -1,5 +1,3 @@
-import game from "./game.js"
-
 class Monster {
     constructor(name, hp, ac, atkMod, dmgMod, url, imgWidth) {
         //combat properties

@@ -1,5 +1,11 @@
-import StartGameTextBox from "./StartGameTextBox"
+import StartGame from "./StartGame"
+import StartLevelOne from "./StartLevelOne"
+import Controls from "./Controls"
+import QuitGame from "./QuitGame"
 
 export const controls = {
-  startGame: <StartGameTextBox />
+  controls: <Controls />,
+  startGame: <StartGame />,
+  startLevelOne: <StartLevelOne />,
+  quit: <QuitGame />
 }
