@@ -3,12 +3,16 @@ import useTextDisplay from "../../custom-hooks/useTextDisplay"
 import { ControlsContext } from "../../contexts/ControlsContext"
 import { WindowContext } from '../../contexts/WindowContext'
 import { MonsterContext } from "../../contexts/MonsterContext"
+import { CharacterContext } from "../../contexts/CharacterContext"
+import { CombatElementsContext } from "../../contexts/CombatElementsContext"
 
 
 export default function QuitGame() {
   const { changeControls } = useContext(ControlsContext)
   const { changeWindow } = useContext(WindowContext)
   const { setMonsters } = useContext(MonsterContext)
+  const { resetCharacter } = useContext(CharacterContext)
+  const { setVisibility } = useContext(CombatElementsContext)
 
   const { text, stopTimer } = useTextDisplay('Are you sure you want to quit?')
 
@@ -17,6 +21,8 @@ export default function QuitGame() {
     changeWindow('menu')
     changeControls('startGame')
     setMonsters([])
+    resetCharacter()
+    setVisibility(false)
   }
 
   function handleCancel() {

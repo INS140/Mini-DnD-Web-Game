@@ -1,6 +1,4 @@
-import GameFunctions from "./custom-hooks/GameFunctions"
-
-const { rollDice } = GameFunctions()
+import { rollDice } from "./GameFunctions"
 
 class Monster {
     constructor(name, hp, ac, atkMod, dmgMod, url, imgWidth) {
@@ -136,4 +134,4 @@ class Tarrasque extends Monster {
     // }
 }
 
-export const MonsterTypes = {Kobold, Slime, Skeleton, Zombie, Elemental, Armor, Gnoll, Lich, Dragon, Tarrasque}
+export {Kobold, Slime, Skeleton, Zombie, Elemental, Armor, Gnoll, Lich, Dragon, Tarrasque}

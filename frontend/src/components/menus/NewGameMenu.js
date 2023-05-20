@@ -1,14 +1,16 @@
 import { useContext, useState } from "react"
 import { MenuContext } from "../../contexts/MenuContext"
 import { WindowContext } from "../../contexts/WindowContext"
+import { CharacterContext } from "../../contexts/CharacterContext"
 
 export default function NewGameMenu() {
   const { changeMenu } = useContext(MenuContext)
   const { changeWindow } = useContext(WindowContext)
+  const { selectCharacter } = useContext(CharacterContext)
 
   const [ inputs, setInputs ] = useState({
     name: '',
-    fightClass: 'fighter'
+    classType: 'fighter'
   })
 
   const [ errorMessage, setErrorMessage ] = useState('')
@@ -25,6 +27,7 @@ export default function NewGameMenu() {
 
   function handleSubmit(e) {
     e.preventDefault()
+    selectCharacter(inputs)
     changeWindow('combat')
     changeMenu('main')
   }
@@ -46,8 +49,8 @@ export default function NewGameMenu() {
       <label>
         Select Class <br />
         <select
-          name="fightClass"
-          value={inputs.fightClass}
+          name="classType"
+          value={inputs.classType}
           onChange={handleChange}
         >
           <option value="fighter">Fighter</option>

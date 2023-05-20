@@ -1,4 +1,4 @@
-import game from "./game.js"
+import { rollDice } from "./GameFunctions"
 
 class Spell {
     constructor(name, spCost, numOfDice, diceSides) {
@@ -9,11 +9,11 @@ class Spell {
     }
 
     getDmg() {
-        return game.rollDice(this.numOfDice, this.diceSides)
+        return rollDice(this.numOfDice, this.diceSides)
     }
 
     getCritDmg() {
-        return game.rollDice(this.numOfDice*2, this.diceSides)
+        return rollDice(this.numOfDice*2, this.diceSides)
     }
 }
 
@@ -46,13 +46,13 @@ class Smite extends Spell {
         super('Smite', 2, 2, 8)
     }
 
-    getDmg() {
-        return game.rollDice(this.numOfDice, this.diceSides) + game.player.getDmg()
-    }
+    // getDmg() {
+    //     return rollDice(this.numOfDice, this.diceSides) + player.getDmg()
+    // }
 
-    getCritDmg() {
-        return game.rollDice(this.numOfDice*2, this.diceSides) + game.player.getCritDmg()
-    }
+    // getCritDmg() {
+    //     return rollDice(this.numOfDice*2, this.diceSides) + player.getCritDmg()
+    // }
 }
 
 class HolyFire extends Spell {

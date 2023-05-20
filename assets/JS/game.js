@@ -1,4 +1,4 @@
-import { Fighter, Wizard, Paladin, SpellCaster } from "./class-options.js"
+import { Fighter, Wizard, Paladin, SpellCaster } from "../../frontend/src/class-options.js"
 import levelOne from "./level-one.js"
 import levelTwo from "./level-two.js"
 import bossFight from "./boss-fight.js"
@@ -117,14 +117,14 @@ const game = {
     //     document.querySelector('#quit').onclick = game.quitGame
     // },
 
-    loadPlayerStats: () => {
-        game.playerStatsBlock = document.createElement('div')
-        game.playerStatsBlock.id = 'player-stats'
+    // loadPlayerStats: () => {
+    //     game.playerStatsBlock = document.createElement('div')
+    //     game.playerStatsBlock.id = 'player-stats'
 
-        document.querySelector('.combat-window').append(game.playerStatsBlock)
+    //     document.querySelector('.combat-window').append(game.playerStatsBlock)
 
-        game.setPlayerStats()
-    },
+    //     game.setPlayerStats()
+    // },
 
     loadActions: () => {
         game.controls.innerHTML = `
@@ -171,16 +171,16 @@ const game = {
         await game.textDisplay(`${game.player.name}'s Inventory`, document.querySelector('h2'))
     },
 
-    loadCombatDisplayElements: () => {
-        game.loadControls()
+    // loadCombatDisplayElements: () => {
+    //     game.loadControls()
 
-        game.currentLevel.monsters.forEach((monster, index) => {
-            const hpBar = document.querySelector(`#${monster.name}${index}-hp-bar`)
-            hpBar.style.visibility = 'visible'
-        })
+    //     game.currentLevel.monsters.forEach((monster, index) => {
+    //         const hpBar = document.querySelector(`#${monster.name}${index}-hp-bar`)
+    //         hpBar.style.visibility = 'visible'
+    //     })
 
-        document.querySelector('#player-stats').style.visibility = 'visible'
-    },
+    //     document.querySelector('#player-stats').style.visibility = 'visible'
+    // },
 
     intermissionOne: async () => {
         document.querySelector('#player-stats').style.visibility = 'hidden'
@@ -308,13 +308,13 @@ const game = {
 
     setPlayerStats: () => {
         if (game.player instanceof Fighter) {
-            game.playerStatsBlock.innerHTML = `
-                <h3 id="player-hp">HP:</h3><span id="hp-bar">${game.player.hp}/${game.player.hpMax}</span>
-            `
+            // game.playerStatsBlock.innerHTML = `
+            //     <h3 id="player-hp">HP:</h3><span id="hp-bar">${game.player.hp}/${game.player.hpMax}</span>
+            // `
             
-            document.querySelector('#player-stats').style.grid = '1fr / 1fr 9fr'
+            // document.querySelector('#player-stats').style.grid = '1fr / 1fr 9fr'
 
-            game.setHpBar(game.player, document.querySelector('#hp-bar'))
+            // game.setHpBar(game.player, document.querySelector('#hp-bar'))
         } else {
             game.playerStatsBlock.innerHTML = `
                 <h3 id="player-hp">HP:</h3>
@@ -360,23 +360,23 @@ const game = {
         })
     },
 
-    setHpBar: (object, element) => {
-        const hpBar = element
+    // setHpBar: (object, element) => {
+    //     const hpBar = element
 
-        const {hp, hpMax} = object
+    //     const {hp, hpMax} = object
 
-        hpBar.style.width = Math.floor(hp/hpMax*100) + '%'
+    //     hpBar.style.width = Math.floor(hp/hpMax*100) + '%'
 
-        if (hp > hpMax*60/100) {
-            hpBar.style.backgroundColor = 'green'
-        } else if (hp > hpMax*20/100) {
-            hpBar.style.backgroundColor = 'yellow'
-            hpBar.style.color = 'black'
-        } else {
-            hpBar.style.backgroundColor = 'red'
-            hpBar.style.color = 'white'
-        }
-    },
+    //     if (hp > hpMax*60/100) {
+    //         hpBar.style.backgroundColor = 'green'
+    //     } else if (hp > hpMax*20/100) {
+    //         hpBar.style.backgroundColor = 'yellow'
+    //         hpBar.style.color = 'black'
+    //     } else {
+    //         hpBar.style.backgroundColor = 'red'
+    //         hpBar.style.color = 'white'
+    //     }
+    // },
 
     setSpBar: () => {
         const spBar = document.querySelector('#sp-bar')

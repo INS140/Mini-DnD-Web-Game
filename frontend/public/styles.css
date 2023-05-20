@@ -83,7 +83,7 @@ button:hover { cursor: pointer; }
   font-size: 2rem;
 }
 
-.player-stats {
+.character-stats {
   display: grid;
   grid: 1fr 1fr/ 1fr 9fr;
   color: white;
@@ -99,9 +99,9 @@ button:hover { cursor: pointer; }
   box-sizing: border-box;
 }
 
-.player-stats h3, .player-stats span { margin: 10px 10px 10px 0; }
+.character-stats h3, .character-stats span { margin: 10px 10px 10px 0; }
 
-.player-stats span {
+.character-stats span {
   display: inline-block;
   align-self: center;
   text-align: center;

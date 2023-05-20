@@ -1,9 +1,9 @@
 import MonsterDisplay from './monsters/MonsterDisplay'
-import PlayerStats from './PlayerStats'
+import CharacterStats from './CharacterStats'
 
 export default function CombatDisplay() {
   return <div className="display">
-    <PlayerStats />
+    <CharacterStats />
     <MonsterDisplay />
   </div>
 }

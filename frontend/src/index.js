@@ -5,7 +5,7 @@ import ContextProvider from './contexts'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-    <ContextProvider>
-      <Game />
-    </ContextProvider>
+  <ContextProvider>
+    <Game />
+  </ContextProvider>
 )

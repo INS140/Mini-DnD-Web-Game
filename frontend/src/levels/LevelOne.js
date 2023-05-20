@@ -1,11 +1,7 @@
-import { MonsterTypes } from '../monster-types'
-import GameFunctions from '../custom-hooks/GameFunctions'
+import { Kobold, Skeleton, Slime, Zombie } from '../monster-types'
+import { rollDice, populateMonsters } from '../GameFunctions'
 
 export default function LevelOne() {
-  const { rollDice, populateMonsters } = GameFunctions()
-
-  const { Kobold, Skeleton, Slime, Zombie } = MonsterTypes
-
   let d100 = rollDice(1, 100),
     arr = []
 

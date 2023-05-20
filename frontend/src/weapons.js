@@ -1,4 +1,4 @@
-import game from "./game.js"
+import { rollDice } from "./GameFunctions"
 
 class Weapon {
     constructor(name, numOfDice, diceSides) {
@@ -8,11 +8,11 @@ class Weapon {
     }
 
     getWeaponDmg() {
-        return game.rollDice(this.numOfDice, this.diceSides)
+        return rollDice(this.numOfDice, this.diceSides)
     }
 
     getWeaponCrit() {
-        return game.rollDice(this.numOfDice*2, this.diceSides)
+        return rollDice(this.numOfDice*2, this.diceSides)
     }
 }
 
