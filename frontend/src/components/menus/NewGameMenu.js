@@ -1,10 +1,10 @@
 import { useContext, useState } from "react"
 import { MenuContext } from "../../contexts/MenuContext"
-import { DisplayContext } from "../../contexts/DisplayContext"
+import { WindowContext } from "../../contexts/WindowContext"
 
 export default function NewGameMenu() {
   const { changeMenu } = useContext(MenuContext)
-  const { changeDisplay } = useContext(DisplayContext)
+  const { changeWindow } = useContext(WindowContext)
 
   const [ inputs, setInputs ] = useState({
     name: '',
@@ -25,7 +25,7 @@ export default function NewGameMenu() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    changeDisplay('combat')
+    changeWindow('combat')
     changeMenu('main')
   }
 

@@ -55,7 +55,7 @@ button:hover { cursor: pointer; }
   margin: 0 1px;
 }
 
-.combat-display {
+.combat-window {
   background-color: black;
   width: 100vw;
   height: 100vh;
@@ -83,7 +83,7 @@ button:hover { cursor: pointer; }
   font-size: 2rem;
 }
 
-#player-stats {
+.player-stats {
   display: grid;
   grid: 1fr 1fr/ 1fr 9fr;
   color: white;
@@ -99,9 +99,9 @@ button:hover { cursor: pointer; }
   box-sizing: border-box;
 }
 
-#player-stats h3, #player-stats span { margin: 10px 10px 10px 0; }
+.player-stats h3, .player-stats span { margin: 10px 10px 10px 0; }
 
-#player-stats span {
+.player-stats span {
   display: inline-block;
   align-self: center;
   text-align: center;

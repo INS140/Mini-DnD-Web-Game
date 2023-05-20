@@ -21,101 +21,101 @@ const game = {
     ///////////////////
     //Display Methods//
     ///////////////////
-    loadMainMenu: () => {
-        root.innerHTML = null
-        const menu = document.createElement('div')
-        menu.classList.add('menu')
-        menu.innerHTML = ``
-        root.append(menu)
+    // loadMainMenu: () => {
+    //     root.innerHTML = null
+    //     const menu = document.createElement('div')
+    //     menu.classList.add('menu')
+    //     menu.innerHTML = ``
+    //     root.append(menu)
 
-        document.querySelector('#play-now').onclick = () => {
-            game.player = new Fighter('Butcher')
-            game.startNewGame()
-        }
+    //     document.querySelector('#play-now').onclick = () => {
+    //         game.player = new Fighter('Butcher')
+    //         game.startNewGame()
+    //     }
 
-        document.querySelector('#new-game').onclick = game.loadNewGameMenu
-        // document.querySelector('#load-game').onclick = game.loadLoadGameMenu
-        // document.querySelector('#options').onclick = game.loadGameOptions
-    },
+    //     document.querySelector('#new-game').onclick = game.loadNewGameMenu
+    //     // document.querySelector('#load-game').onclick = game.loadLoadGameMenu
+    //     // document.querySelector('#options').onclick = game.loadGameOptions
+    // },
 
-    loadNewGameMenu: () => {
-        root.innerHTML = null
-        const menu = document.createElement('div')
-        menu.classList.add('menu', 'new-game')
-        menu.innerHTML = `
+    // loadNewGameMenu: () => {
+    //     root.innerHTML = null
+    //     const menu = document.createElement('div')
+    //     menu.classList.add('menu', 'new-game')
+    //     menu.innerHTML = `
             
-        `
-        root.append(menu)
-        document.querySelector('#cancel').onclick = game.loadMainMenu
+    //     `
+    //     root.append(menu)
+    //     document.querySelector('#cancel').onclick = game.loadMainMenu
 
-        let input = document.querySelector('#name'),
-            select = document.querySelector('#class-select')
+    //     let input = document.querySelector('#name'),
+    //         select = document.querySelector('#class-select')
         
-        document.querySelector('#start').onclick = () => {
-            if (input.value !== '') {
-                game.setPlayer(input.value, select.value)
-                game.startNewGame()
-            } else {
-                menu.innerHTML = `
-                    <p style="margin-top: 80px;"><b>Please enter a name for your character</b></p>
-                    <button id="okay">Okay</button>
-                `
-                document.querySelector('#okay').onclick = game.loadNewGameMenu
-            }
-        }
-    },
+    //     document.querySelector('#start').onclick = () => {
+    //         if (input.value !== '') {
+    //             game.setPlayer(input.value, select.value)
+    //             game.startNewGame()
+    //         } else {
+    //             menu.innerHTML = `
+    //                 <p style="margin-top: 80px;"><b>Please enter a name for your character</b></p>
+    //                 <button id="okay">Okay</button>
+    //             `
+    //             document.querySelector('#okay').onclick = game.loadNewGameMenu
+    //         }
+    //     }
+    // },
 
-    loadCombatWindow: () => {
-        root.innerHTML = null
-        const combatWindow = document.createElement('div')
-        combatWindow.classList.add('combat-window')
-        combatWindow.innerHTML = `
-            <div id="display"></div>
-            <div id="controls"></div>
-        `
-        root.append(combatWindow)
+    // loadCombatWindow: () => {
+    //     root.innerHTML = null
+    //     const combatWindow = document.createElement('div')
+    //     combatWindow.classList.add('combat-window')
+    //     combatWindow.innerHTML = `
+    //         <div id="display"></div>
+    //         <div id="controls"></div>
+    //     `
+    //     root.append(combatWindow)
 
-        game.display = document.querySelector('#display')
-        game.controls = document.querySelector('#controls')
-    },
+    //     game.display = document.querySelector('#display')
+    //     game.controls = document.querySelector('#controls')
+    // },
 
-    loadMonsterImages: () => {
-        game.currentLevel.getMonsters()
+    // loadMonsterImages: () => {
+    //     game.currentLevel.getMonsters()
         
-        let monsterImages = document.createElement('div')
+    //     let monsterImages = document.createElement('div')
         
-        monsterImages.classList.add('monster-images')
+    //     monsterImages.classList.add('monster-images')
 
-        game.display.append(monsterImages)
+    //     game.display.append(monsterImages)
 
-        game.setMonsterImgMaxHeight()
+    //     game.setMonsterImgMaxHeight()
 
-        game.setMonsterImgWidth()
+    //     game.setMonsterImgWidth()
 
-        game.currentLevel.monsters.forEach((monster, index) => {
-            monster.img = document.createElement('div')
+    //     game.currentLevel.monsters.forEach((monster, index) => {
+    //         monster.img = document.createElement('div')
 
-            monster.img.style.width = monster.imgWidth
+    //         monster.img.style.width = monster.imgWidth
 
-            monster.img.innerHTML = `
-                <span id="${monster.name}${index}-hp-bar">${monster.hp}/${monster.hpMax}</span>
-                <img id="${monster.name}${index}" src="${monster.url}" alt="${monster.name}"/>
-            `
+    //         monster.img.innerHTML = `
+    //             <span id="${monster.name}${index}-hp-bar">${monster.hp}/${monster.hpMax}</span>
+    //             <img id="${monster.name}${index}" src="${monster.url}" alt="${monster.name}"/>
+    //         `
 
-            monsterImages.append(monster.img)
-        })
-    },
+    //         monsterImages.append(monster.img)
+    //     })
+    // },
 
-    loadControls: () => {
-        game.controls.innerHTML = `
+    // loadControls: () => {
+    //     game.controls.innerHTML = `
             
-        `
+    //     `
 
-        document.querySelector('#actions').onclick = game.loadActions
-        document.querySelector('#inventory').onclick = game.loadInventory
-        // document.querySelector('#options').onclick = game.loadCombatOptions
-        document.querySelector('#quit').onclick = game.quitGame
-    },
+    //     document.querySelector('#actions').onclick = game.loadActions
+    //     document.querySelector('#inventory').onclick = game.loadInventory
+    //     // document.querySelector('#options').onclick = game.loadCombatOptions
+    //     document.querySelector('#quit').onclick = game.quitGame
+    // },
 
     loadPlayerStats: () => {
         game.playerStatsBlock = document.createElement('div')
@@ -215,23 +215,23 @@ const game = {
     //////////////////////
     //Game Functionality//
     //////////////////////
-    startNewGame: async () => {
-        game.loadCombatWindow()
+    // startNewGame: async () => {
+    //     game.loadCombatWindow()
 
-        game.setLevel()
+    //     game.setLevel()
 
-        let text = `You come across an old abandoned tomb that smells of adventure. 
-        Of course you can not resist the temptation of riches, so you brave the deep unknown . . .`
+    //     let text = `You come across an old abandoned tomb that smells of adventure. 
+    //     Of course you can not resist the temptation of riches, so you brave the deep unknown . . .`
 
-        document.querySelector('#controls').innerHTML = `
-            <p></p>
-            <button id="continue">Continue</button>
-        `
+    //     document.querySelector('#controls').innerHTML = `
+    //         <p></p>
+    //         <button id="continue">Continue</button>
+    //     `
 
-        document.querySelector('#continue').onclick = game.currentLevel.start
+    //     document.querySelector('#continue').onclick = game.currentLevel.start
 
-        await game.textDisplay(text, document.querySelector('p'))
-    },
+    //     await game.textDisplay(text, document.querySelector('p'))
+    // },
 
     setLevel: () => {
         switch (game.currentLevel) {
@@ -267,20 +267,20 @@ const game = {
         }
     },
 
-    quitGame: async () => {
-        game.controls.innerHTML = `
+    // quitGame: async () => {
+    //     game.controls.innerHTML = `
             
-        `
+    //     `
 
-        document.querySelector('#quit').onclick = () => {
-            game.loadMainMenu()
-            game.resetGame()
-        }
+    //     document.querySelector('#quit').onclick = () => {
+    //         game.loadMainMenu()
+    //         game.resetGame()
+    //     }
 
-        document.querySelector('#cancel').onclick = game.loadControls
+    //     document.querySelector('#cancel').onclick = game.loadControls
 
-        await game.textDisplay('Are you sure you want to quit?', document.querySelector('h2'))
-    },
+    //     await game.textDisplay('Are you sure you want to quit?', document.querySelector('h2'))
+    // },
 
     resetGame: () => {
         levelOne.monsters = []
@@ -394,23 +394,23 @@ const game = {
             }
     },
 
-    rollDice: (numOfRolls, sides) => {
-        let total = 0
-        for (let i = 0; i < numOfRolls; i++) {
-            total += Math.floor(Math.random()*sides) + 1
-        }
-        return total
-    },
+    // rollDice: (numOfRolls, sides) => {
+    //     let total = 0
+    //     for (let i = 0; i < numOfRolls; i++) {
+    //         total += Math.floor(Math.random()*sides) + 1
+    //     }
+    //     return total
+    // },
 
-    textDisplay: async (text, element, time=30) => {
-        element.innerHTML = null
+    // textDisplay: async (text, element, time=30) => {
+    //     element.innerHTML = null
 
-        for (const char of text.split('')) {
-            await new Promise(res => setTimeout(res, time)).then(() => element.innerHTML += char)
-        }
+    //     for (const char of text.split('')) {
+    //         await new Promise(res => setTimeout(res, time)).then(() => element.innerHTML += char)
+    //     }
 
-        await new Promise(res => setTimeout(res, 250))
-    },
+    //     await new Promise(res => setTimeout(res, 250))
+    // },
 
     //////////////////
     //Combat Methods//

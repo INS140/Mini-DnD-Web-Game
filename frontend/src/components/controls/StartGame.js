@@ -1,5 +1,4 @@
 import useTextDisplay from '../../custom-hooks/useTextDisplay'
-import Continue from '../ui-kit/Continue'
 import LevelOne from '../../levels/LevelOne'
 import { useContext } from 'react'
 import { MonsterContext } from '../../contexts/MonsterContext'
@@ -22,6 +21,6 @@ export default function StartGame() {
 
   return <>
     <p>{ text }</p>
-    <Continue onClick={handleClick} />
+    <button className="continue" onClick={handleClick}>Continue</button>
   </>
 }

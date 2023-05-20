@@ -1,10 +1,10 @@
 import { useContext } from "react"
-import { DisplayContext } from "./contexts/DisplayContext"
+import { WindowContext } from "./contexts/WindowContext"
 
 export default function Game() {
-  const { display } = useContext(DisplayContext)
+  const { window } = useContext(WindowContext)
 
   return <>
-    { display }
+    { window }
   </>
 }
