@@ -1,17 +1,23 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { CombatElementsContext } from "../../contexts/CombatElementsContext"
 import { CharacterContext } from "../../contexts/CharacterContext"
 import useHealthColors from "../../custom-hooks/useHealthColors"
+import { Fighter, SpellCaster } from "../../class-options"
+import useSpellColors from "../../custom-hooks/useSpellColors"
 
 export default function CharacterStats() {
-  const { character, hp, takeDamage } = useContext(CharacterContext)
+  const { character, hp, sp } = useContext(CharacterContext)
   const { visible } = useContext(CombatElementsContext)
 
   const colors = useHealthColors(hp, character.hpMax)
+  const spellColor = useSpellColors(sp, character?.spMax)
 
   return <div
     className="character-stats"
-    style={{ visibility: visible ? 'visible' : 'hidden' }}
+    style={{
+      visibility: visible ? 'visible' : 'hidden',
+      grid: character instanceof Fighter ? '1fr / 1fr 9fr' : ''
+    }}
   >
     <h3>HP:</h3>
     <span
@@ -23,6 +29,16 @@ export default function CharacterStats() {
     >
       {hp}/{character.hpMax}
     </span>
-    <button onClick={() => takeDamage(10)}> - </button>
+    { character instanceof SpellCaster && <>
+      <h3>SP:</h3>
+      <span
+        style={{
+          backgroundColor: spellColor,
+          width: Math.floor(sp/character.spMax*100) + '%'
+        }}
+      >
+        {character.sp}/{character.spMax}
+      </span>
+    </>}
   </div>
 }

@@ -126,21 +126,16 @@ const game = {
     //     game.setPlayerStats()
     // },
 
-    loadActions: () => {
-        game.controls.innerHTML = `
-            <div class="grid-4">
-                <button id="attack">Attack</button>
-                <button id="defend">Defend</button>
-                <button id="item">Item</button>
-                <button id="cancel">Cancel</button>
-            </div>
-        `
-        document.querySelector('#attack').onclick = (game.player instanceof Fighter) ? game.attack : game.player.loadAttackOptions
+    // loadActions: () => {
+    //     game.controls.innerHTML = `
+            
+    //     `
+    //     document.querySelector('#attack').onclick = (game.player instanceof Fighter) ? game.attack : game.player.loadAttackOptions
         
-        document.querySelector('#defend').onclick = game.defend
-        document.querySelector('#item').onclick = game.useItem
-        document.querySelector('#cancel').onclick = game.loadControls
-    },
+    //     document.querySelector('#defend').onclick = game.defend
+    //     document.querySelector('#item').onclick = game.useItem
+    //     document.querySelector('#cancel').onclick = game.loadControls
+    // },
 
     loadInventory: async () => {
         game.controls.innerHTML = `
@@ -282,73 +277,73 @@ const game = {
     //     await game.textDisplay('Are you sure you want to quit?', document.querySelector('h2'))
     // },
 
-    resetGame: () => {
-        levelOne.monsters = []
-        levelTwo.monsters = []
-        bossFight.monsters = []
+    // resetGame: () => {
+    //     levelOne.monsters = []
+    //     levelTwo.monsters = []
+    //     bossFight.monsters = []
 
-        game.currentLevel = null
-        game.controls = null
-        game.display = null 
-    },
+    //     game.currentLevel = null
+    //     game.controls = null
+    //     game.display = null 
+    // },
 
-    setPlayer: (name, classType) => {
-        switch (classType) {
-            case 'fighter':
-                game.player = new Fighter(name)
-                break;
-            case 'wizard':
-                game.player = new Wizard(name)
-                break;
-            case 'paladin':
-                game.player = new Paladin(name)
-                break;
-        }
-    },
+    // setPlayer: (name, classType) => {
+    //     switch (classType) {
+    //         case 'fighter':
+    //             game.player = new Fighter(name)
+    //             break;
+    //         case 'wizard':
+    //             game.player = new Wizard(name)
+    //             break;
+    //         case 'paladin':
+    //             game.player = new Paladin(name)
+    //             break;
+    //     }
+    // },
 
-    setPlayerStats: () => {
-        if (game.player instanceof Fighter) {
-            // game.playerStatsBlock.innerHTML = `
-            //     <h3 id="player-hp">HP:</h3><span id="hp-bar">${game.player.hp}/${game.player.hpMax}</span>
-            // `
+    // setPlayerStats: () => {
+    //     if (game.player instanceof Fighter) {
+    //         // game.playerStatsBlock.innerHTML = `
+    //         //     <h3 id="player-hp">HP:</h3><span id="hp-bar">${game.player.hp}/${game.player.hpMax}</span>
+    //         // `
             
-            // document.querySelector('#player-stats').style.grid = '1fr / 1fr 9fr'
+    //         // document.querySelector('#player-stats').style.grid = '1fr / 1fr 9fr'
 
-            // game.setHpBar(game.player, document.querySelector('#hp-bar'))
-        } else {
-            game.playerStatsBlock.innerHTML = `
-                <h3 id="player-hp">HP:</h3>
-                <span id="hp-bar">${game.player.hp}/${game.player.hpMax}</span>
-                <h3 id="player-sp">SP:</h3>
-                <span id="sp-bar">${game.player.sp}/${game.player.spMax}</span>
-            `
+    //         // game.setHpBar(game.player, document.querySelector('#hp-bar'))
+    //     } else {
+    //         game.playerStatsBlock.innerHTML = `
+    //             <h3 id="player-hp">HP:</h3>
+    //             <span id="hp-bar">${game.player.hp}/${game.player.hpMax}</span>
+    //             <h3 id="player-sp">SP:</h3>
+    //             <span id="sp-bar">${game.player.sp}/${game.player.spMax}</span>
+    //         `
 
-            game.setHpBar(game.player, document.querySelector('#hp-bar'))
-            game.setSpBar()
-        }
-    },
+    //         game.setHpBar(game.player, document.querySelector('#hp-bar'))
+    //         game.setSpBar()
+    //     }
+    // },
 
-    setMonsterImgWidth: () => {
-        game.currentLevel.monsters.forEach(monster => {
-            monster.setImgWidth()
-        })
-    },
+    // setMonsterImgWidth: () => {
+    //     game.currentLevel.monsters.forEach(monster => {
+    //         monster.setImgWidth()
+    //     })
+    // },
 
-    setMonsterImgMaxHeight: () => {
-        const monsterImages = document.querySelector('.monster-images')
+    // setMonsterImgMaxHeight: () => {
+    //     const monsterImages = document.querySelector('.monster-images')
 
-        if (monsterImages !== null) {
-            if (window.innerWidth < 450) {
-                monsterImages.style.height = (game.player instanceof Fighter) 
-                                            ? `${window.innerHeight*3/5 - 75}px`
-                                            : `${window.innerHeight*3/5 - 116}px`
-            } else {
-                monsterImages.style.height = (game.player instanceof Fighter) 
-                                            ? `${window.innerHeight*3/4 - 75}px`
-                                            : `${window.innerHeight*3/4 - 116}px`
-            }
-        }
-    },
+    //     if (monsterImages !== null) {
+    //         if (window.innerWidth < 450) {
+    //             monsterImages.style.height = (game.player instanceof Fighter) 
+    //                                         ? `${window.innerHeight*3/5 - 75}px`
+    //                                         : `${window.innerHeight*3/5 - 116}px`
+    //         } else {
+    //             monsterImages.style.height = (game.player instanceof Fighter) 
+    //                                         ? `${window.innerHeight*3/4 - 75}px`
+    //                                         : `${window.innerHeight*3/4 - 116}px`
+    //         }
+    //     }
+    // },
 
     setMonsterHp: () => {
         game.currentLevel.monsters.forEach((monster, index) => {
@@ -378,21 +373,21 @@ const game = {
     //     }
     // },
 
-    setSpBar: () => {
-        const spBar = document.querySelector('#sp-bar')
+    // setSpBar: () => {
+    //     const spBar = document.querySelector('#sp-bar')
 
-            const {sp, spMax} = game.player
+    //         const {sp, spMax} = game.player
 
-            spBar.style.width = Math.floor(sp/spMax*100) + '%'
+    //         spBar.style.width = Math.floor(sp/spMax*100) + '%'
 
-            if (sp > spMax*60/100) {
-                spBar.style.backgroundColor = 'blue'
-            } else if (sp > spMax*20/100) {
-                spBar.style.backgroundColor = 'purple'
-            } else {
-                spBar.style.backgroundColor = 'red'
-            }
-    },
+    //         if (sp > spMax*60/100) {
+    //             spBar.style.backgroundColor = 'blue'
+    //         } else if (sp > spMax*20/100) {
+    //             spBar.style.backgroundColor = 'purple'
+    //         } else {
+    //             spBar.style.backgroundColor = 'red'
+    //         }
+    // },
 
     // rollDice: (numOfRolls, sides) => {
     //     let total = 0

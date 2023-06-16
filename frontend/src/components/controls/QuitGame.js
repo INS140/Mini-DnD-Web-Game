@@ -12,7 +12,7 @@ export default function QuitGame() {
   const { changeWindow } = useContext(WindowContext)
   const { setMonsters } = useContext(MonsterContext)
   const { resetCharacter } = useContext(CharacterContext)
-  const { setVisibility } = useContext(CombatElementsContext)
+  const { toggleVisibility } = useContext(CombatElementsContext)
 
   const { text, stopTimer } = useTextDisplay('Are you sure you want to quit?')
 
@@ -22,7 +22,7 @@ export default function QuitGame() {
     changeControls('startGame')
     setMonsters([])
     resetCharacter()
-    setVisibility(false)
+    toggleVisibility()
   }
 
   function handleCancel() {

@@ -7,7 +7,7 @@ import { CombatElementsContext } from "../../contexts/CombatElementsContext"
 export default function StartLevelOne() {
   const { changeControls } = useContext(ControlsContext)
   const { monsters } = useContext(MonsterContext)
-  const { setVisibility } = useContext(CombatElementsContext)
+  const { toggleVisibility } = useContext(CombatElementsContext)
 
   const { text, stopTimer } = useTextDisplay(
     `After a short venture into the tomb, you are attacked by a group of ${monsters[0].name}s! Prepare for battle!`
@@ -16,7 +16,7 @@ export default function StartLevelOne() {
   function handleClick() {
     stopTimer()
     changeControls('controls')
-    setVisibility(true)
+    toggleVisibility()
   }
 
   return <>

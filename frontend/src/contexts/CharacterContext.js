@@ -6,8 +6,12 @@ export const CharacterContext = createContext()
 export default function CharacterProvider({ children }) {
   const [ character, setCharacter ] = useState({})
   const [ hp, setHp ] = useState(0)
+  const [ sp, setSp ] = useState(0)
 
-  useEffect(() => setHp(character?.hp), [character])
+  useEffect(() => {
+    setHp(character?.hp)
+    setSp(character?.sp)
+  }, [character])
 
   function selectCharacter({ name, classType }) {
     switch (classType) {
@@ -32,7 +36,7 @@ export default function CharacterProvider({ children }) {
     setHp(prev => prev -= dmg)
   }
 
-  return <CharacterContext.Provider value={{ character, hp, selectCharacter, resetCharacter, takeDamage }}>
+  return <CharacterContext.Provider value={{ character, hp, sp, selectCharacter, resetCharacter, takeDamage }}>
     { children }
   </CharacterContext.Provider>
 }

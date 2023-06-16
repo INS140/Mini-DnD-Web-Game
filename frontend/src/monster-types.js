@@ -1,7 +1,7 @@
 import { rollDice } from "./GameFunctions"
 
 class Monster {
-    constructor(name, hp, ac, atkMod, dmgMod, url, imgWidth) {
+    constructor(name, hp, ac, atkMod, dmgMod, url, imgHeight) {
         //combat properties
         this.name = name
         this.hp = hp
@@ -14,7 +14,7 @@ class Monster {
         //display properties
         this.img = null
         this.url = url
-        this.imgWidth = imgWidth + 'px'
+        this.imgHeight = imgHeight + '%'
     }
 
     getDmg() {
@@ -24,34 +24,30 @@ class Monster {
     getCritDmg() {
         return rollDice(2, 6) + this.dmgMod
     }
-
-    // setImgWidth() {
-    //     if (window.innerWidth <= 400) this.imgWidth = Math.floor(100/currentLevel.monsters.length) + '%'
-    // }
 }
 
 // Low level
 class Kobold extends Monster {
     constructor() {
-        super('Kobold', Math.max(rollDice(2, 6) -2, 5), 12, 2, 2, '../images/kobold.png', 80)
+        super('Kobold', Math.max(rollDice(2, 6) -2, 5), 12, 2, 2, '../images/kobold.png', 35)
     }
 }
 
 class Slime extends Monster {
     constructor() {
-        super('Slime', Math.max(rollDice(3, 8) + 9, 22), 8, 3, 1, '../images/slime.png', 200)
+        super('Slime', Math.max(rollDice(3, 8) + 9, 22), 8, 3, 1, '../images/slime.png', 50)
     }
 }
 
 class Skeleton extends Monster {
     constructor() {
-        super('Skeleton', Math.max(rollDice(2, 8) + 4, 13), 13, 4, 2, '../images/skeleton.png', 150)
+        super('Skeleton', Math.max(rollDice(2, 8) + 4, 13), 13, 4, 2, '../images/skeleton.png', 75)
     }
 }
 
 class Zombie extends Monster{
     constructor() {
-        super('Zombie', Math.max(rollDice(3, 8) + 9, 22), 8, 3, 1, '../images/zombie.png', 150)
+        super('Zombie', Math.max(rollDice(3, 8) + 9, 22), 8, 3, 1, '../images/zombie.png', 90)
     }
 }
 
