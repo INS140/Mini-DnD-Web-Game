@@ -14,15 +14,11 @@ class Player {
         this.dmgMod = dmgMod
         this.defBoost = 2
         this.defending = false
-        this.weapon = weapon
+        this.weapon = new weapon()
     }
 
-    getDmg() {
-        return Math.max(this.weapon.getWeaponDmg() + this.dmgMod, 1) // Ensures player does at least 1 damage on hit
-    }
-
-    getCritDmg() {
-        return this.weapon.getWeaponCrit() + this.dmgMod
+    getDmg(atkRoll) {
+        return Math.max(this.weapon.getWeaponDmg(atkRoll) + this.dmgMod, 1) // Ensures player does at least 1 damage on hit
     }
 }
 
@@ -100,27 +96,27 @@ class SpellCaster extends Player {
 
 class Fighter extends Player {
     constructor(name) {
-        super(name, 100, 16, 0, 7, 4, new Greatsword)
+        super(name, 100, 16, 0, 7, 4, Greatsword)
         this.inventory = [
-            new HealingPotion,
-            new HealingPotion,
-            new HealingPotion
+            new HealingPotion(),
+            new HealingPotion(),
+            new HealingPotion()
         ]
     }
 }
 
 class Wizard extends SpellCaster {
     constructor(name) {
-        super(name, 60, 12, 35, 3, -1, 7, new Quarterstaff)
+        super(name, 60, 12, 35, 3, -1, 7, Quarterstaff)
         this.inventory = [
-            new HealingPotion,
-            new SpellPotion,
-            new SpellPotion
+            new HealingPotion(),
+            new SpellPotion(),
+            new SpellPotion()
         ]
         this.spells = [
-            new Frostbolt,
-            new Fireball,
-            new LightningBolt
+            new Frostbolt(),
+            new Fireball(),
+            new LightningBolt()
         ]
     }
 
@@ -129,15 +125,15 @@ class Wizard extends SpellCaster {
 
 class Paladin extends SpellCaster {
     constructor(name) {
-        super(name, 80, 15, 15, 7, 3, 7, new Warhammer)
+        super(name, 80, 15, 15, 7, 3, 7, Warhammer)
         this.inventory = [
-            new HealingPotion,
-            new HealingPotion,
-            new SpellPotion
+            new HealingPotion(),
+            new HealingPotion(),
+            new SpellPotion()
         ]
         this.spells = [
-            new Smite,
-            new HolyFire
+            new Smite(),
+            new HolyFire()
         ]
     }
 }

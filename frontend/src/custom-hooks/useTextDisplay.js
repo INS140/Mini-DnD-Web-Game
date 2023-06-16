@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 
-export default function useTextDisplay(str, time=30) {
+export default function useTextDisplay(str, time=30, pause=250) {
   const [ text, setText ] = useState('')
   const [ finished, setFinished ] = useState(false)
   const timer = useRef()
@@ -15,7 +15,7 @@ export default function useTextDisplay(str, time=30) {
         await new Promise(res => timer.current = setTimeout(res, time))
           .then(() => setText(prev => prev += char))
       }
-      await new Promise(res => timer.current = setTimeout(res, 250))
+      await new Promise(res => timer.current = setTimeout(res, pause))
 
       setFinished(true)
 

@@ -7,12 +7,9 @@ class Weapon {
         this.diceSides = diceSides
     }
 
-    getWeaponDmg() {
-        return rollDice(this.numOfDice, this.diceSides)
-    }
-
-    getWeaponCrit() {
-        return rollDice(this.numOfDice*2, this.diceSides)
+    getWeaponDmg(atkRoll) {
+        const numOfDice = atkRoll === 20 ? this.numOfDice*2 : this.numOfDice
+        return rollDice(numOfDice, this.diceSides)
     }
 }
 

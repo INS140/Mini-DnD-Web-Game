@@ -4,6 +4,7 @@ export const CombatElementsContext = createContext()
 
 export default function CombatElementsProvider({ children }) {
   const [ visible, setVisibility ] = useState(false)
+  const [ target, setTarget ] = useState({})
   const [ targetSelect, setTargetSelect ] = useState(false)
 
   function toggleVisibility() {
@@ -14,7 +15,7 @@ export default function CombatElementsProvider({ children }) {
     setTargetSelect(prev => !prev)
   }
 
-  return <CombatElementsContext.Provider value={{ visible, toggleVisibility, targetSelect, toggleTargetSelect }}>
+  return <CombatElementsContext.Provider value={{ visible, toggleVisibility, target, setTarget, targetSelect, toggleTargetSelect }}>
     { children }
   </CombatElementsContext.Provider>
 }

@@ -4,7 +4,7 @@ import Controls from "./Controls"
 import QuitGame from "./QuitGame"
 import Actions from "./Actions"
 import SelectTarget from "./SelectTarget"
-import RollingDice from "./RollingDice"
+import RollingDice from "./combat-dialogue/RollingDice"
 
 export const controls = {
   actions: <Actions />,
@@ -13,5 +13,5 @@ export const controls = {
   startGame: <StartGame />,
   startLevelOne: <StartLevelOne />,
   quit: <QuitGame />,
-  rollingPlayerAttack: <RollingDice next="actions" />
+  rollingPlayerAttack: <RollingDice />
 }

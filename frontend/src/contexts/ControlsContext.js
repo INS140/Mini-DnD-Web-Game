@@ -7,7 +7,9 @@ export default function ControlsProvider({ children }) {
   const [ control, setControl ] = useState(controls['startGame'])
 
   function changeControls(newControls) {
-    setControl(controls[newControls])
+    typeof newControls === "string"
+    ? setControl(controls[newControls])
+    : setControl(newControls)
   }
 
   return <ControlsContext.Provider value={{ control, changeControls }}>

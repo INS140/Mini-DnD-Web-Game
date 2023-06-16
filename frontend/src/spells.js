@@ -8,12 +8,9 @@ class Spell {
         this.diceSides = diceSides
     }
 
-    getDmg() {
-        return rollDice(this.numOfDice, this.diceSides)
-    }
-
-    getCritDmg() {
-        return rollDice(this.numOfDice*2, this.diceSides)
+    getDmg(atkRoll) {
+        const numOfDice = atkRoll === 20 ? this.numOfDice*2 : this.numOfDice
+        return rollDice(numOfDice, this.diceSides)
     }
 }
 

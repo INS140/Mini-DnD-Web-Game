@@ -1,25 +1,23 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { CombatElementsContext } from "../../../contexts/CombatElementsContext"
 import useHealthColors from "../../../custom-hooks/useHealthColors"
 import { ControlsContext } from "../../../contexts/ControlsContext"
-import RollingDice from "../../controls/RollingDice"
 
 export default function Monster({ monster }) {
-  const [ hp, setHp ] = useState(monster.hp)
-
   const { changeControls } = useContext(ControlsContext)
-  const { visible, targetSelect, toggleTargetSelect } = useContext(CombatElementsContext)
+  const { visible, setTarget, targetSelect, toggleTargetSelect } = useContext(CombatElementsContext)
 
-  const colors = useHealthColors(hp, monster.hpMax)
+  const colors = useHealthColors(monster.hp, monster.hpMax)
 
   function handleAttackTarget() {
     toggleTargetSelect()
-    setHp(prev => prev-=10)
+    setTarget(monster)
     changeControls('rollingPlayerAttack')
   }
 
   return <div
-    style={{ display: hp <= 0 ? 'none' : '' }}
+    className="monster"
+    style={{ display: monster.hp <= 0 ? 'none' : '' }}
     onClick={() => targetSelect ? handleAttackTarget() : null}
   >
     <span
@@ -29,14 +27,11 @@ export default function Monster({ monster }) {
         visibility: visible ? 'visible' : 'hidden'
       }}
     >
-      {hp}/{monster.hpMax}
+      {monster.hp}/{monster.hpMax}
     </span>
     <img
       src={monster.url}
       alt={monster.name}
-      style={{
-        height: monster.imgHeight
-      }}
     />
   </div>
 }

@@ -1,7 +1,7 @@
 import { rollDice } from "./GameFunctions"
 
 class Monster {
-    constructor(name, hp, ac, atkMod, dmgMod, url, imgHeight) {
+    constructor(name, hp, ac, atkMod, dmgMod, url) {
         //combat properties
         this.name = name
         this.hp = hp
@@ -12,9 +12,7 @@ class Monster {
         this.dead = false
 
         //display properties
-        this.img = null
         this.url = url
-        this.imgHeight = imgHeight + '%'
     }
 
     getDmg() {
@@ -29,25 +27,25 @@ class Monster {
 // Low level
 class Kobold extends Monster {
     constructor() {
-        super('Kobold', Math.max(rollDice(2, 6) -2, 5), 12, 2, 2, '../images/kobold.png', 35)
+        super('Kobold', Math.max(rollDice(2, 6) -2, 5), 12, 2, 2, '../images/kobold.png')
     }
 }
 
 class Slime extends Monster {
     constructor() {
-        super('Slime', Math.max(rollDice(3, 8) + 9, 22), 8, 3, 1, '../images/slime.png', 50)
+        super('Slime', Math.max(rollDice(3, 8) + 9, 22), 8, 3, 1, '../images/slime.png')
     }
 }
 
 class Skeleton extends Monster {
     constructor() {
-        super('Skeleton', Math.max(rollDice(2, 8) + 4, 13), 13, 4, 2, '../images/skeleton.png', 75)
+        super('Skeleton', Math.max(rollDice(2, 8) + 4, 13), 13, 4, 2, '../images/skeleton.png')
     }
 }
 
 class Zombie extends Monster{
     constructor() {
-        super('Zombie', Math.max(rollDice(3, 8) + 9, 22), 8, 3, 1, '../images/zombie.png', 90)
+        super('Zombie', Math.max(rollDice(3, 8) + 9, 22), 8, 3, 1, '../images/zombie.png')
     }
 }
 
@@ -55,7 +53,7 @@ class Zombie extends Monster{
 
 class Elemental extends Monster {
     constructor() {
-        super('Elemental', Math.max(rollDice(8, 10) + 20, 64), 14, 6, 3, null, 200)
+        super('Elemental', Math.max(rollDice(8, 10) + 20, 64), 14, 6, 3, null)
     }
 
     setImage() {
@@ -84,13 +82,13 @@ class Elemental extends Monster {
 
 class Armor extends Monster {
     constructor() {
-        super('Animated-Armor', Math.max(rollDice(6, 8) + 6, 33), 18, 4, 2, './assets/images/armor.png', 150)
+        super('Animated-Armor', Math.max(rollDice(6, 8) + 6, 33), 18, 4, 2, './assets/images/armor.png')
     }
 }
 
 class Gnoll extends Monster {
     constructor() {
-        super('Gnoll', Math.max(rollDice(5, 8), 22), 12, 4, 2, './assets/images/gnoll.png', 150)
+        super('Gnoll', Math.max(rollDice(5, 8), 22), 12, 4, 2, './assets/images/gnoll.png')
     }
 }
 
@@ -98,7 +96,7 @@ class Gnoll extends Monster {
 
 class Lich extends Monster{
     constructor() {
-        super('Lich', Math.max(rollDice(18, 8) + 54, 135), 17, 12, 0, './assets/images/lich.png', 300)
+        super('Lich', Math.max(rollDice(18, 8) + 54, 135), 17, 12, 0, './assets/images/lich.png')
     }
 
     // setImgWidth() {
@@ -112,13 +110,13 @@ class Lich extends Monster{
 
 class Dragon extends Monster{
     constructor() {
-        super('Dragon', Math.max(rollDice(17, 12) + 85, 195), 19, 11, 6, './assets/images/dragon.png', 500)
+        super('Dragon', Math.max(rollDice(17, 12) + 85, 195), 19, 11, 6, './assets/images/dragon.png')
     }
 }
 
 class Tarrasque extends Monster {
     constructor() {
-        super('Tarrasque', Math.max(rollDice(33, 20) + 330, 676), 25, 19, 10, './assets/images/tarrasque.png', 350)
+        super('Tarrasque', Math.max(rollDice(33, 20) + 330, 676), 25, 19, 10, './assets/images/tarrasque.png')
     }
 
     // setImgWidth() {
