@@ -1,0 +1,28 @@
+@use 'config' as c;
+@use 'flex' as f;
+
+#spell-h2 { margin: 10px 0 0; }
+
+.display-box {
+  color: white;
+  width: 19rem;
+  height: auto;
+  background: url('../images/controls-background.jpg');
+  box-sizing: border-box;
+  border: c.$white-border;
+  padding: 10px;
+
+  div {
+    @include f.flex();
+
+    border: c.$white-border;
+    padding: 10px;
+  }
+
+  img { width: 35%;}
+}
+
+.spell-card {
+  h2 { margin: 0 0 5px; }
+  h4 { margin: 0; }
+}

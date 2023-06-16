@@ -1,0 +1,44 @@
+@use 'config' as c;
+@use 'flex' as f;
+
+.game-over {
+  color: black;
+  text-align: center;
+  font-size: 2rem;
+
+  #continue {
+    position: static;
+    color: white;
+    font-size: 1rem;
+    padding: 10px;
+    background: url('../images/controls-background.jpg');
+    border: c.$white-border;
+    visibility: hidden;
+  }
+}
+
+#win-screen {
+  @include f.flex();
+
+  width: 100vw;
+  height: 100vh;
+  background: url('../images/win-background.webp') center/cover no-repeat;
+
+  h2 {
+    font-size: 2rem;
+    margin-top: 0;
+  }
+
+  button {
+    color: white;
+    font-size: 1rem;
+    padding: 10px;
+    background: url('../images/controls-background.jpg');
+    border: c.$white-border;
+    visibility: hidden;
+  }
+
+  div {
+    @include f.flex();
+  }
+}

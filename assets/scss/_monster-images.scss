@@ -1,0 +1,29 @@
+@use 'flex' as f;
+
+.monster-images {
+  @include f.flex(row, space-around, auto);
+
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 41%;
+
+  div {
+    @include f.flex(column, flex-end);
+
+    padding: 0 5px;
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  span {
+    visibility: hidden;
+    color: white;
+    background: green;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  img { width: 100%; }
+}

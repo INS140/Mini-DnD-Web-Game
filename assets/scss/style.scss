@@ -1,0 +1,98 @@
+@use 'config' as c;
+@use 'flex' as f;
+@use 'menu';
+@use 'player-stats';
+@use 'monster-images';
+@use 'grids';
+@use 'display-box';
+@use 'win-or-lose';
+
+body {
+  @include f.flex();
+
+  min-height: 100vh;
+  margin: 0;
+  background: url('../images/menu-background.jpg') center/cover no-repeat;
+}
+
+hr { border: 0.0625rem solid brown; }
+
+h1 { margin-bottom: 0.9375rem; }
+
+p { margin: 0 0 5px; }
+
+button:hover { cursor: pointer; }
+
+#submit {
+  width: 49%;
+  margin-bottom: 0.3125rem;
+  border: c.$brown-border;
+  background-color: transparent;
+}
+
+.new-game {
+  button {
+    width: 48%;
+    padding: 1px 0;
+  }
+}
+
+.combat-window {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+}
+
+#display {
+  height: 60%;
+  background: url('../images/combat-background.jpg') center/100% 100% no-repeat;
+  background-position: center;
+}
+
+#controls {
+  color: white;
+  height: 40%;
+  padding: 10px;
+  background: grey url('../images/controls-background.jpg') center/cover;
+  box-sizing: border-box;
+  border-top: c.$white-border;
+
+  button {
+    color: white;
+    background: transparent;
+    border: c.$white-border;
+    font-size: 2rem;
+  }
+}
+
+#continue {
+  position: absolute;
+  right: 10px;
+  font-size: 1rem !important;
+}
+
+/* fixes an error on mobile when displaying the inventory button */
+@media screen and (max-width: 600px) {
+  #inventory { padding: 0 5px; }
+}
+
+@media screen and (min-width: 400px) {
+  .menu { width: 25rem; }
+
+  #win-screen h2 { font-size: 3rem;}
+}
+
+@media screen and (min-width: 450px) {
+  #display { height: 75%; }
+
+  #controls { height: 25%; }
+
+  .monster-images { bottom: 26%; }
+
+  .fixed-center {
+      bottom: 50%;
+      transform: translate(-50%, 50%);
+  }
+
+  .display-box { width: 20rem; }
+}

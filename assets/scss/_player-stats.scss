@@ -1,0 +1,25 @@
+@use 'config' as c;
+
+#player-stats {
+  display: grid;
+  grid: 1fr 1fr/ 1fr 9fr;
+  color: white;
+  background: url('../images/controls-background.jpg');
+  border: c.$white-border;
+  border-top: none;
+  border-right: none;
+  padding: 10px 10px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 50%;
+  box-sizing: border-box;
+
+  h3, span { margin: 10px 10px 10px 0; }
+
+  span {
+    display: inline-block;
+    align-self: center;
+    text-align: center;
+  }
+}
